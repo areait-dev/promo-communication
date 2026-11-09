@@ -30,6 +30,8 @@ body {
   will-change: transform;
   clip-path: circle(50% at 50% 50%);
   backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transform: translateZ(0);
 }
 
 .star svg {
@@ -39,10 +41,7 @@ body {
 }
 
 @keyframes rotate {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  from { transform: translateZ(0) rotate(0deg); }
+  to { transform: translateZ(0) rotate(360deg); }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .star { animation: none; }
-}
