@@ -4,6 +4,15 @@ const nextConfig: NextConfig = {
   /* config options here */
   cacheComponents: true,
   partialPrefetching: true,
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "wp.promocommunication.it",
+        pathname: "/wp-content/uploads/**",
+      },
+    ],
+  },
   turbopack: {
     rules: {
       "*.css": {
