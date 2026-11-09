@@ -10,13 +10,19 @@ body {
   width: 100%;
   min-height: 100%;
   background: var(--brand-blue);
+  overflow: hidden;
+  scrollbar-width: none;
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  display: none;
 }
 
 body {
   min-height: 100svh;
   display: grid;
   place-items: center;
-  overflow-x: hidden;
 }
 
 .star {

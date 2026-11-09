@@ -4,8 +4,10 @@ export default function Home() {
   return (
     <main
       aria-label="Promo communication. Creative Agency by Promotergroup. Coming soon."
-      className="relative w-full leading-[0]"
+      className="w-full overflow-hidden leading-[0]"
     >
+      {/* Taglia 300px di blu in alto (300/2048 della larghezza) */}
+      <div className="relative -mt-[14.65%]">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 2048 1152"
@@ -21,6 +23,7 @@ export default function Home() {
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="663 789 84 84">
           <image href="/layout.jpg" width="2048" height="1152" />
         </svg>
+      </div>
       </div>
     </main>
   );
