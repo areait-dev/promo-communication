@@ -30,22 +30,32 @@ body {
   margin-top: -14.65%;
 }
 
-/* Mobile verticale: l'immagine tagliata (2048x852) riempie l'altezza
-   dello schermo e viene centrata, tagliando ai lati. */
+/* Mobile verticale: stessi elementi dell'immagine, ritagliati e impilati
+   a tutta larghezza (nulla viene tagliato, poco blu sopra). */
+.mob { display: none; }
 @media (orientation: portrait) {
-  main {
+  .desk { display: none; }
+  .mob {
     display: flex;
+    flex-direction: column;
     justify-content: center;
-    align-items: flex-end;
+    gap: 10vw;
     height: 100svh;
   }
-  .stage {
-    --w: calc(100svh * 2048 / 852);
-    flex: none;
-    width: var(--w);
-    margin-top: calc(var(--w) * -0.1465);
-  }
+  .mob svg { display: block; width: 100%; height: auto; }
 }
+.star-m {
+  position: absolute;
+  left: 3.0263157895%;
+  top: 78.0434782609%;
+  width: 11.0526315789%;
+  aspect-ratio: 1;
+  clip-path: circle(50% at 50% 50%);
+  animation: rotate 3s linear infinite;
+  will-change: transform;
+  transform: translateZ(0);
+}
+.star-m svg { display: block; width: 100%; height: auto; }
 
 .star {
   position: absolute;
