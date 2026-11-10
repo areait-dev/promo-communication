@@ -26,6 +26,7 @@ export default function Home() {
       </div>
       </div>
       <div className="mob" aria-hidden="true">
+        <div className="mob-top">
         <div className="relative">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="640 430 760 460">
             <image href="/layout.jpg" width="2048" height="1152" />
@@ -36,6 +37,7 @@ export default function Home() {
               <image href="/layout.jpg" width="2048" height="1152" />
             </svg>
           </div>
+        </div>
         </div>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 940 2048 212">
           <image href="/layout.jpg" width="2048" height="1152" />

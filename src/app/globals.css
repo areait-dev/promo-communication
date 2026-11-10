@@ -38,10 +38,16 @@ body {
   .mob {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    gap: 10vw;
+    justify-content: flex-end;
     height: 100svh;
   }
+  /* il blocco logo occupa lo spazio sopra e si centra; "Coming Soon" resta a filo del bordo inferiore */
+  .mob-top {
+    flex: 1;
+    display: flex;
+    align-items: center;
+  }
+  .mob-top > div { width: 100%; }
   .mob svg { display: block; width: 100%; height: auto; }
 }
 .star-m {
