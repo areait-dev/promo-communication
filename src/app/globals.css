@@ -25,6 +25,28 @@ body {
   place-items: end center;
 }
 
+/* Taglia 300px di blu in alto (300/2048 della larghezza) */
+.stage {
+  margin-top: -14.65%;
+}
+
+/* Mobile verticale: l'immagine tagliata (2048x852) riempie l'altezza
+   dello schermo e viene centrata, tagliando ai lati. */
+@media (orientation: portrait) {
+  main {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    height: 100svh;
+  }
+  .stage {
+    --w: calc(100svh * 2048 / 852);
+    flex: none;
+    width: var(--w);
+    margin-top: calc(var(--w) * -0.1465);
+  }
+}
+
 .star {
   position: absolute;
   left: 32.373046875%;

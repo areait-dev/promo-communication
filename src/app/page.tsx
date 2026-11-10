@@ -7,7 +7,7 @@ export default function Home() {
       className="w-full overflow-hidden leading-[0]"
     >
       {/* Taglia 300px di blu in alto (300/2048 della larghezza) */}
-      <div className="relative -mt-[14.65%]">
+      <div className="stage relative">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 2048 1152"
