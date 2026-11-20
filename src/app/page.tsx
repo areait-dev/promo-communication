@@ -1,48 +1,87 @@
-// Pagina "coming soon": immagine di layout + stella che ruota.
-// Le coordinate della stella (663,789 84x84) sono riferite all'immagine 2048x1152.
+import Link from "next/link";
+import { Boost } from "@/components/Boost";
+import { ContactForm } from "@/components/ContactForm";
+import { ElasticGrid } from "@/components/ElasticGrid";
+import { Slider } from "@/components/Slider";
+import { Star } from "@/components/Star";
+import { Head, JoinCard, Marquee, SvcList, TeamCard } from "@/components/blocks";
+import { HOME_ORDER } from "@/data/services";
+import { TEAM } from "@/data/team";
+import { vars } from "@/lib/ui";
+
 export default function Home() {
   return (
-    <main
-      aria-label="Promo communication. Creative Agency by Promotergroup. Coming soon."
-      className="w-full overflow-hidden leading-[0]"
-    >
-      {/* Taglia 300px di blu in alto (300/2048 della larghezza) */}
-      <div className="stage desk relative">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 2048 1152"
-        role="img"
-        aria-labelledby="title"
-        className="block h-auto w-full"
-      >
-        <title id="title">Promo communication — il nuovo sito è in arrivo</title>
-        <image href="/layout.jpg" width="2048" height="1152" />
-        <rect x="663" y="789" width="84" height="84" fill="#001a6f" />
-      </svg>
-      <div className="star" aria-hidden="true">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="663 789 84 84">
-          <image href="/layout.jpg" width="2048" height="1152" />
-        </svg>
-      </div>
-      </div>
-      <div className="mob" aria-hidden="true">
-        <div className="mob-top">
-        <div className="relative">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="640 430 760 460">
-            <image href="/layout.jpg" width="2048" height="1152" />
-            <rect x="663" y="789" width="84" height="84" fill="#001a6f" />
-          </svg>
-          <div className="star-m">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="663 789 84 84">
-              <image href="/layout.jpg" width="2048" height="1152" />
-            </svg>
+    <>
+      <section className="hero hero-elastic">
+        <ElasticGrid />
+        <Star className="pc-star--spin bigstar" />
+        <div className="wrap" style={{ position: "relative" }}>
+          <div className="pc-reveal" style={vars({ "--i": 1 })}>
+            <Boost words={["Brand", "Reputation", "Idea", "Event", "Business"]} tag="h1" />
+          </div>
+          <p className="lead hero-lead pc-reveal" style={vars({ "--i": 2 })}>
+            Diamo forma, voce e spazio a quello che la tua impresa fa ogni giorno.
+          </p>
+          <div className="ctas pc-reveal" style={vars({ "--i": 3 })}>
+            <Link className="pc-btn pc-btn--accent" href="/contatti">
+              Raccontaci la tua idea <span className="pc-btn__arrow">→</span>
+            </Link>
           </div>
         </div>
+      </section>
+      <Marquee />
+      <section className="sec alt sec-story">
+        <div className="wrap split">
+          <div className="pc-bubble pc-bubble--lg big-bubble pc-reveal">
+            <p className="q">
+              La nostra storia comincia <em>inside</em>
+            </p>
+          </div>
+          <div className="pc-reveal" style={vars({ "--i": 1 })}>
+            <p className="p-lg">
+              Prima di raccontarle le imprese, le abbiamo viste lavorare. Arriviamo da <strong>Promotergroup Spa.</strong>, un gruppo
+              di consulenza che ogni giorno affianca centinaia di organizzazioni, e da lì ci portiamo dietro una cosa preziosa:
+              sappiamo quanta fatica c’è dietro un buon risultato. Nel 2026 abbiamo deciso di metterla in vetrina.
+            </p>
+            <Link className="pc-btn" href="/chi-siamo">
+              Leggi di più: Chi siamo <span className="pc-btn__arrow">→</span>
+            </Link>
+          </div>
         </div>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 940 2048 212">
-          <image href="/layout.jpg" width="2048" height="1152" />
-        </svg>
-      </div>
-    </main>
+      </section>
+      <section className="sec">
+        <div className="wrap">
+          <Head title="Progetti che abbiamo fatto (e che rifaremmo domani)" />
+          <Slider />
+        </div>
+      </section>
+      <section className="sec alt">
+        <div className="wrap">
+          <Head title="Cosa mettiamo in boost" />
+          <SvcList ids={HOME_ORDER} />
+        </div>
+      </section>
+      <section className="sec">
+        <div className="wrap">
+          <Head title="Il team" />
+          <div className="team-grid">
+            {TEAM.map((t, i) => (
+              <TeamCard key={t.n} t={t} i={i} />
+            ))}
+            <JoinCard />
+          </div>
+        </div>
+      </section>
+      <section className="sec alt">
+        <div className="wrap contact contact-home">
+          <div>
+            <Head title="Raccontaci la tua idea, noi mettiamo il boost!" />
+          </div>
+          <div className="form">
+            <ContactForm kind="home" />
+          </div>
+        </div>
+      </section>
+    </>
   );
 }
