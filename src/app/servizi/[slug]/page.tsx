@@ -9,6 +9,10 @@ import { PROJECTS } from "@/data/projects";
 import { svcHref, vars } from "@/lib/ui";
 import { PageFx } from "@/components/PageFx";
 
+// Tutti gli slug sono noti in fase di build (generateStaticParams): la pagina e' statica, niente Suspense con fallback
+// (farebbe comparire un fallback prima del contenuto e romperebbe l'elemento condiviso voce -> hero).
+export const instant = false;
+
 export function generateStaticParams() {
   return SERVICES.map((s) => ({ slug: s.id }));
 }

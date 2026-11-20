@@ -8,6 +8,10 @@ import { projHref, vars } from "@/lib/ui";
 import { PageFx } from "@/components/PageFx";
 
 // Solo i progetti pubblicati (con anteprima): gli altri danno 404.
+// Tutti gli slug sono noti in fase di build (generateStaticParams): la pagina e' statica, niente Suspense con fallback
+// (farebbe comparire un fallback prima del contenuto e romperebbe l'elemento condiviso card -> hero).
+export const instant = false;
+
 export function generateStaticParams() {
   return PROJECTS.map((p) => ({ slug: p.id }));
 }

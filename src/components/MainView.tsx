@@ -55,10 +55,10 @@ export function MainView({ children }: { children: ReactNode }) {
   // senza dover catturare come immagine l'intera pagina (che puo' essere alta migliaia di pixel).
   return (
     <>
-      <ViewTransition key={pathname} enter="pc-vt-marker" exit="pc-vt-marker" default="none">
+      <ViewTransition key={"vt:" + pathname} enter="pc-vt-marker" exit="pc-vt-marker" default="none">
         <span className="pc-vt-marker" aria-hidden="true" />
       </ViewTransition>
-      <main id="main" tabIndex={-1} ref={ref} key={pathname} data-view={viewOf(pathname)}>
+      <main id="main" tabIndex={-1} ref={ref} key={"main:" + pathname} data-view={viewOf(pathname)}>
         {children}
       </main>
     </>
