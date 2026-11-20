@@ -281,13 +281,6 @@ a { color: inherit; }
 
 /* transizione di pagina */
 main { min-height: 60vh; position: relative; }
-.view-enter { animation: viewIn 940ms var(--ease-out) both; }
-@keyframes viewIn { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: none; } }
-.wipe { position: fixed; inset: 0; z-index: 70; pointer-events: none; visibility: hidden; background: var(--surface-brand); transform: translateY(100%); border-radius: 0 0 0 0; }
-.wipe.go { visibility: visible; animation: wipe 1060ms var(--ease-in-out) both; }
-@keyframes wipe { 0% { transform: translateY(100%); border-radius: 0 50% 0 0 / 0 120px 0 0; } 45%, 55% { transform: translateY(0); border-radius: 0; } 100% { transform: translateY(-100%); border-radius: 0 0 50% 0 / 0 0 120px 0; } }
-.wipe .pc-star { position: absolute; left: 50%; top: 50%; font-size: 120px; margin: -60px 0 0 -60px; animation: pc-spin 1060ms linear; }
-.wipe .pc-star path { stroke: var(--bianco); stroke-width: 2; }
 
 /* hero */
 .hero { position: relative; overflow: hidden; padding: var(--space-24) 0 var(--space-32); }
@@ -422,8 +415,6 @@ main { min-height: 60vh; position: relative; }
   .tgl span { display: none; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .wipe { display: none; }
-  .view-enter { animation: none; }
 }
 
 /* ===== v2: testi definitivi, niente giallo, stelle piene su blu, full width, animazioni +0,3s ===== */
@@ -443,7 +434,7 @@ main { min-height: 60vh; position: relative; }
 
 /* stelle piene su blu */
 .pc-marquee .pc-star path, .svc-hero .bigstar path, .mmenu .bigstar path { fill: var(--Red); stroke: none; }
-.wipe .pc-star path, .pc-index a:hover .pc-star path, .pc-index a:focus-visible .pc-star path, .svc-card:hover .pc-star path { fill: #fff; stroke: none; }
+.pc-index a:hover .pc-star path, .pc-index a:focus-visible .pc-star path, .svc-card:hover .pc-star path { fill: #fff; stroke: none; }
 [data-theme="dark"] .pc-star path { fill: var(--Red); stroke: none; }
 [data-theme="dark"] .pc-cta .pc-star path, [data-theme="dark"] .bubble-star path { fill: none; stroke: #fff; }
 [data-theme="dark"] .pc-index a:hover .pc-star path, [data-theme="dark"] .svc-card:hover .pc-star path { fill: #fff; }
@@ -1675,7 +1666,6 @@ html.motion-off .pc-boost__word::before,
 html.motion-off .scroll-hint i::after, html.motion-off .sh-a,
 html.motion-off .bulb *, html.motion-off .wand *, html.motion-off .teamico *,
 html.motion-off .svc-ill, html.motion-off .svc-ill * { animation-play-state: paused !important; }
-html.motion-off .wipe .pc-star, html.motion-off .wipe .pc-star * { animation-play-state: running !important; }
 html.motion-off .pc-boost__word { transition: none !important; }
 
 /* light mode: i bottoni d'azione diventano blu (bianco sul blu 15:1, a norma a qualsiasi dimensione) */
@@ -1883,3 +1873,26 @@ html .mmenu .bigstar path, html[data-theme] .mmenu .bigstar path { fill: none !i
   [data-view="portfolio"] .pf-hero2 .bigstar { font-size: 200px !important; bottom: -70px; }
 }
 [data-view="portfolio"] .pl-filters { margin-top: 8px; margin-bottom: 24px; }
+
+/* ===== Cambio pagina: View Transitions ===== */
+/* Pagina: cross-fade di .35s, la nuova entra con un leggero translateY di 8px */
+::view-transition-old(root) { animation: pc-vt-out .35s var(--ease-out) both; }
+::view-transition-new(root) { animation: pc-vt-in .35s var(--ease-out) both; }
+@keyframes pc-vt-out { to { opacity: 0; } }
+@keyframes pc-vt-in { from { opacity: 0; translate: 0 8px; } }
+/* L'intestazione resta ferma: si muove solo il contenuto */
+.hdr { view-transition-name: pc-header; }
+::view-transition-group(pc-header) { animation: none; z-index: 100; }
+::view-transition-old(pc-header) { display: none; }
+::view-transition-new(pc-header) { animation: none; }
+/* Elementi condivisi (card progetto / voce servizio -> hero della pagina di dettaglio) */
+::view-transition-group(.pc-morph) { animation-duration: .6s; animation-timing-function: var(--ease-out); }
+::view-transition-old(.pc-morph), ::view-transition-new(.pc-morph) { animation-duration: .6s; animation-timing-function: var(--ease-out); }
+/* Marcatore che avvia la transizione: invisibile */
+.pc-vt-marker { position: fixed; top: 0; left: 0; width: 1px; height: 1px; pointer-events: none; }
+::view-transition-group(.pc-vt-marker), ::view-transition-old(.pc-vt-marker), ::view-transition-new(.pc-vt-marker) { animation: none; display: none; }
+/* Durante la transizione i clic passano alla pagina */
+::view-transition { pointer-events: none; }
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation-duration: 0s !important; animation-delay: 0s !important; }
+}

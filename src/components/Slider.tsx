@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, ViewTransition } from "react";
 import { REAL, pImg } from "@/data/projects";
 import { motionOff, prefersReduced, projHref } from "@/lib/ui";
 
@@ -37,8 +37,10 @@ export function Slider() {
             className={"slide " + (i % 3 === 1 ? "slide-r" : i % 3 === 2 ? "slide-l" : "")}
             href={projHref(p.id)}
           >
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img className="slide-img" src={pImg(p.img!)} alt={p.name} loading="lazy" />
+            <ViewTransition name={`pf-img-${p.id}`} share="pc-morph" default="none">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img className="slide-img" src={pImg(p.img!)} alt={p.name} loading="lazy" />
+            </ViewTransition>
             <span className="slide-cap">
               <b>{p.name}</b>
               <small>{p.kind}</small>

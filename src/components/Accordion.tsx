@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, ViewTransition } from "react";
 import { ACC, ILL, SERVICES } from "@/data/services";
 import { motionOff, prefersReduced, svcHref, vars } from "@/lib/ui";
 
@@ -168,7 +168,9 @@ export function Accordion() {
                     <span>{big}</span>
                   </div>
                 </div>
-                <h3 className="acc-name">{s.name}</h3>
+                <ViewTransition name={`svc-title-${s.id}`} share="pc-morph" default="none">
+                  <h3 className="acc-name">{s.name}</h3>
+                </ViewTransition>
                 <div className="acc-bottom">
                   {ILL[s.id] ? (
                     <div className="acc-img acc-img--ill" dangerouslySetInnerHTML={{ __html: ILL[s.id] }} />

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { ViewTransition } from "react";
 import { notFound } from "next/navigation";
 import { ProjectList } from "@/components/ProjectList";
 import { Cta, Head, Pager } from "@/components/blocks";
@@ -34,9 +35,10 @@ export default async function Servizio({ params }: { params: Promise<{ slug: str
       <section className="svc-hero on-brand ctl-host">
         <div className="wrap">
           <div>
-            <h1 className="pc-reveal" style={vars({ "--i": 1 })}>
-              {s.name}
-            </h1>
+            {/* destinazione dell'elemento condiviso: niente reveal, deve esserci subito */}
+            <ViewTransition name={`svc-title-${s.id}`} share="pc-morph" default="none">
+              <h1>{s.name}</h1>
+            </ViewTransition>
             <p className="lead pc-reveal" style={vars({ "--i": 2 })}>
               {s.p1}
             </p>

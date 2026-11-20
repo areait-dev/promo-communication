@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useRef, useState, useSyncExternalStore } from "react";
+import { useEffect, useRef, useState, useSyncExternalStore, ViewTransition } from "react";
 import { createPortal } from "react-dom";
 import { PROJECTS, pImg, type Project } from "@/data/projects";
 import { prefersReduced, projHref, vars } from "@/lib/ui";
@@ -184,10 +184,14 @@ export function ProjectList({ list, mode }: { list: Project[]; mode: "portfolio"
             <li key={p.id} className={out ? "is-out" : undefined} inert={out}>
               <Link className="pl-row" href={projHref(p.id)} data-i={i}>
                 <span className="pl-thumb">
-                  <Image src={pImg(p.img!)} alt={alt(p)} width={THUMB_W} height={THUMB_H} sizes={`${THUMB_W}px`} />
+                  <ViewTransition name={`pf-img-${p.id}`} share="pc-morph" default="none">
+                    <Image src={pImg(p.img!)} alt={alt(p)} width={THUMB_W} height={THUMB_H} sizes={`${THUMB_W}px`} />
+                  </ViewTransition>
                 </span>
                 <span className="pl-info">
-                  <Heading className="pl-name">{p.name}</Heading>
+                  <ViewTransition name={`pf-title-${p.id}`} share="pc-morph" default="none">
+                    <Heading className="pl-name">{p.name}</Heading>
+                  </ViewTransition>
                   {p.settore && <span className="pl-sector">{p.settore}</span>}
                 </span>
                 <span className="pl-cats">

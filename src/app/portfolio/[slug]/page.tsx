@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { ViewTransition } from "react";
 import { notFound } from "next/navigation";
 import { Cta, Pager } from "@/components/blocks";
 import { PROJECTS, pImg, projById } from "@/data/projects";
@@ -58,15 +59,18 @@ export default async function Progetto({ params }: { params: Promise<{ slug: str
         <div className="wrap">
           {back}
           <p className="pj-cat pc-reveal">{p.kind}</p>
-          <h1 className="pj-title pc-reveal" style={vars({ "--i": 1 })}>
-            {p.name}
-          </h1>
+          {/* titolo e cover sono la destinazione dell'elemento condiviso: niente reveal, devono esserci subito */}
+          <ViewTransition name={`pf-title-${p.id}`} share="pc-morph" default="none">
+            <h1 className="pj-title">{p.name}</h1>
+          </ViewTransition>
           {meta}
         </div>
         <div className="wrap">
-          <div className="pj-cover pc-reveal" style={vars({ "--i": 3 })}>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={pImg(p.cover!)} alt={p.name} />
+          <div className="pj-cover">
+            <ViewTransition name={`pf-img-${p.id}`} share="pc-morph" default="none">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={pImg(p.cover!)} alt={p.name} />
+            </ViewTransition>
           </div>
         </div>
         <PageFx />

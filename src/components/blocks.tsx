@@ -1,5 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import Link from "next/link";
+import { ViewTransition } from "react";
 import { Star } from "./Star";
 import { SERVICES, svcById } from "@/data/services";
 import type { Member } from "@/data/team";
@@ -24,7 +25,9 @@ export function SvcList({ ids }: { ids: string[] }) {
           <li key={id} className="pc-reveal" style={vars({ "--i": Math.min(i, 3) })}>
             <Link href={svcHref(s.id)}>
               <span className="pc-index__k">boost your</span>
-              <span className="pc-index__t">{s.name}</span>
+              <ViewTransition name={`svc-title-${s.id}`} share="pc-morph" default="none">
+                <span className="pc-index__t">{s.name}</span>
+              </ViewTransition>
             </Link>
           </li>
         );
