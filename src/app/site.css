@@ -238,7 +238,7 @@
 
 
 /* ===== sito ===== */
-html { scroll-behavior: smooth; }
+/* Niente scroll-behavior: smooth globale: rendeva animato il ripristino dello scroll con "Indietro" (vedi Behaviors.tsx per le ancore). */
 body { margin: 0; }
 body.pc { min-height: 100vh; transition: background var(--dur-base) linear, color var(--dur-base) linear; }
 a { color: inherit; }
