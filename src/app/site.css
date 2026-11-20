@@ -1635,21 +1635,7 @@ html[data-theme="dark"] .svc-hero .bb, html[data-theme="dark"] .svc-hero .bb.pc-
 html[data-theme="dark"] .svc-hero .bb::after { background: #00051A !important; }
 html[data-theme="dark"] .svc-hero .bb *, html[data-theme="dark"] .svc-hero .bb p, html[data-theme="dark"] .svc-hero .bb .pc-boost { color: #fff !important; }
 
-/* ===== Pausa delle animazioni ===== */
-.mo { position: relative; width: 34px; height: 34px; padding: 0; border: 1.5px solid var(--ink); border-radius: 0 17px 17px 0; background: transparent; cursor: pointer; flex: none; display: grid; place-items: center; transition: background var(--dur-fast) linear; }
-.mo:hover { background: var(--blu-100); }
-.mo-i { position: absolute; width: 16px; height: 16px; fill: none; stroke: var(--ink); stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
-.mo-play { display: none; }
-.mo[aria-pressed="true"] .mo-pause { display: none; }
-.mo[aria-pressed="true"] .mo-play { display: block; }
-.mo[aria-pressed="true"] { background: var(--Red); border-color: var(--Red); }
-.mo[aria-pressed="true"] .mo-i { stroke: #fff; }
-.mo:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; }
-[data-theme="dark"] .mo { border-color: #fff; }
-[data-theme="dark"] .mo .mo-i { stroke: #fff; }
-[data-theme="dark"] .mo:hover { background: var(--blu-700); }
-nav .mo { margin-left: 8px; }
-/* in pausa: tutte le animazioni CSS si fermano dove sono */
+/* html.motion-off (impostato solo con prefers-reduced-motion): le animazioni decorative si fermano dove sono */
 /* in pausa si fermano SOLO le animazioni decorative: stelle, nastri, claim, illustrazioni. Restano attivi cambi pagina, comparse, filtri, form e hover */
 html.motion-off .pc-star--spin, html.motion-off .pc-star--spin *,
 html.motion-off .pc-marquee__track, html.motion-off .acc-mq-t,
@@ -1770,7 +1756,7 @@ html.pv-inframe .pv-sw, html.pv-inframe .badge { display: none !important; }
 
 @media (max-width: 960px) { .svc-hero .ctl-m { --ink: #fff; color: #fff; } }
 
-@media (max-width: 960px) { html:not([data-theme="dark"]) .svc-hero .ctl-m .sw-k { background: #fff; } .svc-hero .ctl-m .mo, .svc-hero .ctl-m .sw { border-color: #fff; } }
+@media (max-width: 960px) { html:not([data-theme="dark"]) .svc-hero .ctl-m .sw-k { background: #fff; } .svc-hero .ctl-m .sw { border-color: #fff; } }
 
 html .mmenu .bigstar path, html[data-theme] .mmenu .bigstar path { fill: none !important; stroke: #fff !important; stroke-width: 1.5 !important; }
 

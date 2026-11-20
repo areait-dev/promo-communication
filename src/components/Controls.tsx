@@ -4,7 +4,7 @@ import { useSyncExternalStore } from "react";
 
 const MOBILE = "(max-width: 960px)";
 
-/** Legge uno stato dall'elemento <html> (tema, pausa animazioni), impostato prima del paint dallo script in <head>. */
+/** Legge uno stato dall'elemento <html> (il tema), impostato prima del paint dallo script in <head>. */
 function useHtml(get: () => boolean) {
   return useSyncExternalStore(
     (cb) => {
@@ -35,34 +35,18 @@ function store(key: string, value: string) {
   } catch {}
 }
 
-/** Pulsante pausa animazioni + interruttore tema. */
+/** Interruttore tema giorno/notte. */
 export function Controls() {
   const dark = useHtml(() => document.documentElement.getAttribute("data-theme") === "dark");
-  const paused = useHtml(() => document.documentElement.classList.contains("motion-off"));
 
   function toggleTheme() {
     const next = !dark;
     document.documentElement.setAttribute("data-theme", next ? "dark" : "light");
     store("pc-theme", next ? "dark" : "light");
   }
-  function toggleMotion() {
-    const next = !paused;
-    document.documentElement.classList.toggle("motion-off", next);
-    store("pc-motion", next ? "off" : "on");
-  }
 
-  // L'etichetta dice sempre cosa farà il pulsante; aria-pressed resta solo per lo stile (icona play rossa).
-  const label = paused ? "Riprendi le animazioni" : "Metti in pausa le animazioni";
   return (
     <>
-      <button className="mo" type="button" aria-pressed={paused} aria-label={label} title={label} onClick={toggleMotion}>
-        <svg className="mo-i mo-pause" viewBox="0 0 24 24" aria-hidden="true">
-          <path d="M9 6v12M15 6v12" />
-        </svg>
-        <svg className="mo-i mo-play" viewBox="0 0 24 24" aria-hidden="true">
-          <path d="M8 5.5v13l10.5-6.5z" />
-        </svg>
-      </button>
       <button className="sw" type="button" role="switch" aria-checked={dark} aria-label="Tema notte" onClick={toggleTheme}>
         <svg className="sw-i sw-sun" viewBox="0 0 24 24" aria-hidden="true">
           <circle cx="12" cy="12" r="4" />
