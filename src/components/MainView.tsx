@@ -2,7 +2,6 @@
 
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, type ReactNode } from "react";
-import { RevealObserver } from "./RevealObserver";
 
 function viewOf(pathname: string) {
   const [first, second] = pathname.split("/").filter(Boolean);
@@ -29,7 +28,6 @@ export function MainView({ children }: { children: ReactNode }) {
   return (
     <main id="main" tabIndex={-1} ref={ref} key={pathname} data-view={viewOf(pathname)} className="view-enter">
       {children}
-      <RevealObserver />
     </main>
   );
 }

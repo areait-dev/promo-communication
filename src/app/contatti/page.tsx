@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { ContactForm } from "@/components/ContactForm";
 import { vars } from "@/lib/ui";
-import { MobileControls } from "@/components/Controls";
+import { PageFx } from "@/components/PageFx";
 
 export const metadata: Metadata = { title: "Contatti" };
 
@@ -14,7 +14,7 @@ export default function Contatti() {
             Raccontaci il tuo progetto
           </h1>
         </div>
-        <MobileControls />
+        <PageFx />
       </section>
       <section className="sec" style={{ paddingTop: 0 }}>
         <div className="wrap contact">

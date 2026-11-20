@@ -5,7 +5,7 @@ import { Ill } from "@/components/Ill";
 import { Star } from "@/components/Star";
 import { Cta, Marquee } from "@/components/blocks";
 import { vars } from "@/lib/ui";
-import { MobileControls } from "@/components/Controls";
+import { PageFx } from "@/components/PageFx";
 
 export const metadata: Metadata = { title: "Chi siamo" };
 
@@ -29,7 +29,7 @@ export default function ChiSiamo() {
             <strong>sappiamo di cosa parliamo</strong>.
           </p>
         </div>
-        <MobileControls />
+        <PageFx />
       </section>
       <section className="sec alt">
         <div className="wrap split">

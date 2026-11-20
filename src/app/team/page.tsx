@@ -3,7 +3,7 @@ import { Stickers } from "@/components/Stickers";
 import { TeamScroll } from "@/components/TeamScroll";
 import { Cta } from "@/components/blocks";
 import { vars } from "@/lib/ui";
-import { MobileControls } from "@/components/Controls";
+import { PageFx } from "@/components/PageFx";
 
 export const metadata: Metadata = { title: "Team" };
 
@@ -21,7 +21,7 @@ export default function Team() {
             dà del tu.
           </p>
         </div>
-        <MobileControls />
+        <PageFx />
       </section>
       <TeamScroll />
       <Cta />

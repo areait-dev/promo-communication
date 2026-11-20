@@ -172,8 +172,50 @@
 .pc-cta .pc-star--big path { stroke: var(--bianco); stroke-width: 1.5; }
 
 /* ---------- Reveal allo scroll ---------- */
-.pc-reveal { opacity: 0; transform: translateY(24px); transition: opacity var(--dur-slow) var(--ease-out), transform var(--dur-slow) var(--ease-out); transition-delay: calc(var(--i, 0) * 80ms); }
-.pc-reveal.is-in { opacity: 1; transform: none; }
+/* Lo stato iniziale "nascosto" esiste solo con JS attivo (classe .js su <html>): senza JS il contenuto e' sempre visibile.
+   Le varianti vengono assegnate in automatico da src/lib/reveal.ts dopo l'idratazione. Si animano solo
+   opacity, translate, filter, clip-path e scale (proprieta' individuali: non toccano il transform degli hover).
+   Lo stagger (--i) e' limitato a 6 elementi. */
+.js .pc-reveal {
+  opacity: 0; translate: 0 12px; filter: blur(6px);
+  transition: opacity .7s var(--ease-out), translate .7s var(--ease-out), filter .7s var(--ease-out), transform var(--dur-base) var(--ease-out);
+  transition-delay: calc(min(var(--i, 0), 6) * 80ms), calc(min(var(--i, 0), 6) * 80ms), calc(min(var(--i, 0), 6) * 80ms), 0s;
+}
+.js .pc-reveal.is-in { opacity: 1; translate: 0 0; filter: none; }
+
+/* Titoli: il contenitore e' sempre visibile, si muovono le righe dentro la loro maschera */
+.js .pc-reveal--title { opacity: 1; translate: none; filter: none; transition: none; }
+.pc-line { display: block; overflow: hidden; padding: 0 .06em .12em 0; margin: 0 -.06em -.12em 0; }
+.pc-line__in { display: block; white-space: nowrap; translate: 0 105%; transition: translate .9s var(--ease-out); transition-delay: calc(min(var(--i, 0), 6) * 80ms + var(--l, 0) * 70ms); }
+.pc-reveal--title.is-in .pc-line__in { translate: 0 0; }
+
+/* Media: la tendina si apre dal basso e l'immagine scende da scale 1.08 a 1 */
+.js .pc-reveal--media {
+  opacity: 1; translate: none; filter: none; clip-path: inset(100% 0 0 0);
+  transition: clip-path 1s var(--ease-out), transform var(--dur-base) var(--ease-out);
+  transition-delay: calc(min(var(--i, 0), 6) * 80ms), 0s;
+}
+.js .pc-reveal--media.is-in { clip-path: inset(0); }
+.js .pc-reveal--media.is-done { clip-path: none; transition: transform var(--dur-base) var(--ease-out); }
+.js .pc-reveal--media:is(figure, .pj-cover, .pj-img, .slider) img { scale: 1.08; transition: scale 1s var(--ease-out); transition-delay: calc(min(var(--i, 0), 6) * 80ms); }
+.js .pc-reveal--media.is-in:is(figure, .pj-cover, .pj-img, .slider) img { scale: 1; }
+
+/* Testi e blocchi generici: guidati dallo scroll dove il browser lo supporta; altrimenti IntersectionObserver (regole sopra).
+   Si attiva solo dopo l'avvio (data-reveal="ready"), quando gli elementi gia' visibili sono marcati .is-intro: prima restano
+   nascosti, cosi' non c'e' un lampo "visibile -> nascosto -> animato". I titoli sono esclusi: li gestisce la maschera. */
+@supports (animation-timeline: view()) {
+  .js[data-reveal="ready"] .pc-reveal:not(.pc-reveal--title, .pc-reveal--media, .is-intro, h1, h2, h3, h4, h5, h6, .pc-section-head) {
+    opacity: 1; translate: none; filter: none; transition: transform var(--dur-base) var(--ease-out);
+    animation: pc-reveal-in linear both;
+    animation-timeline: view();
+    animation-range: entry calc(min(var(--i, 0), 6) * 4%) entry calc(60% + min(var(--i, 0), 6) * 4%);
+  }
+}
+@keyframes pc-reveal-in { from { opacity: 0; translate: 0 12px; filter: blur(6px); } to { opacity: 1; translate: 0 0; filter: none; } }
+
+/* Rete di sicurezza: se i reveal non partono entro 5 s (JS rotto) il contenuto si mostra comunque */
+.js.no-reveal .pc-reveal, .js.no-reveal .pc-reveal--media { opacity: 1 !important; translate: none !important; filter: none !important; clip-path: none !important; animation: none !important; }
+.js.no-reveal .pc-line__in, .js.no-reveal .pc-reveal--media img { translate: none !important; scale: none !important; }
 
 /* ---------- Footer ---------- */
 .pc-footer { background: var(--blu-notte); color: var(--bianco); padding: var(--space-16) var(--space-16) var(--space-8); }
@@ -188,7 +230,8 @@
 @media (prefers-reduced-motion: reduce) {
   .pc *, .pc *::before, .pc *::after { animation-duration: 1ms !important; animation-iteration-count: 1 !important; transition-duration: 1ms !important; }
   .pc-star--spin, .pc-marquee__track { animation: none !important; }
-  .pc-reveal { opacity: 1; transform: none; }
+  .js .pc-reveal, .js .pc-reveal--title, .js .pc-reveal--media { opacity: 1; translate: none; filter: none; clip-path: none; animation: none !important; }
+  .pc-line__in, .js .pc-reveal--media img { translate: none; scale: none; }
 }
 
 
@@ -386,7 +429,6 @@ main { min-height: 60vh; position: relative; }
 /* ===== v2: testi definitivi, niente giallo, stelle piene su blu, full width, animazioni +0,3s ===== */
 :root { --dur-fast: 460ms; --dur-base: 500ms; --dur-slow: 800ms; --dur-word: 2700ms; --dur-star: 3.3s; --dur-marquee: 32.3s; }
 .pc-typing span { animation-duration: 1.5s; }
-.pc-reveal { transition-delay: calc(var(--i, 0) * 110ms); }
 
 /* full width */
 .wrap { max-width: none; padding: 0 clamp(20px, 5vw, 96px); }

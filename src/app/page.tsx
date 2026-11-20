@@ -8,7 +8,7 @@ import { Head, JoinCard, Marquee, SvcList, TeamCard } from "@/components/blocks"
 import { HOME_ORDER } from "@/data/services";
 import { TEAM } from "@/data/team";
 import { vars } from "@/lib/ui";
-import { MobileControls } from "@/components/Controls";
+import { PageFx } from "@/components/PageFx";
 
 export default function Home() {
   return (
@@ -29,7 +29,7 @@ export default function Home() {
             </Link>
           </div>
         </div>
-        <MobileControls />
+        <PageFx />
       </section>
       <Marquee />
       <section className="sec alt sec-story">

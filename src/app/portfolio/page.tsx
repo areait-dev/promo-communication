@@ -4,7 +4,7 @@ import { ProjectList } from "@/components/ProjectList";
 import { Star } from "@/components/Star";
 import { Cta } from "@/components/blocks";
 import { PROJECTS } from "@/data/projects";
-import { MobileControls } from "@/components/Controls";
+import { PageFx } from "@/components/PageFx";
 
 export const metadata: Metadata = { title: "Portfolio" };
 
@@ -21,7 +21,7 @@ export default function Portfolio() {
             <span>(e che rifaremmo domani)</span>
           </h1>
         </div>
-        <MobileControls />
+        <PageFx />
       </section>
       <section className="pl-sec">
         <div className="wrap">

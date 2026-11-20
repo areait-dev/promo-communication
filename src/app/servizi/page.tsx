@@ -5,7 +5,7 @@ import { ElasticGrid } from "@/components/ElasticGrid";
 import { Star } from "@/components/Star";
 import { Cta } from "@/components/blocks";
 import { vars } from "@/lib/ui";
-import { MobileControls } from "@/components/Controls";
+import { PageFx } from "@/components/PageFx";
 
 export const metadata: Metadata = { title: "Servizi" };
 
@@ -20,7 +20,7 @@ export default function Servizi() {
             <Boost words={["Strategy", "Brand", "Digital", "Social", "Reputation", "Event", "Consensus"]} tag="h1" />
           </div>
         </div>
-        <MobileControls />
+        <PageFx />
       </section>
       <Accordion />
       <Cta />

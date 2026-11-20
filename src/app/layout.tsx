@@ -22,8 +22,8 @@ export const viewport: Viewport = {
   themeColor: "#001a6f",
 };
 
-// Imposta tema e pausa animazioni prima del primo paint, per evitare lampi.
-const initScript = `try{var d=document.documentElement,t=localStorage.getItem('pc-theme');if(t)d.setAttribute('data-theme',t);var m=localStorage.getItem('pc-motion');if(m?m==='off':matchMedia('(prefers-reduced-motion: reduce)').matches)d.classList.add('motion-off')}catch(e){}`;
+// Prima del primo paint: classe .js (abilita lo stato iniziale dei reveal), tema e pausa animazioni; evita lampi.
+const initScript = `var d=document.documentElement;d.classList.add('js');setTimeout(function(){if(!window.__pcReveal)d.classList.add('no-reveal')},5000);try{var t=localStorage.getItem('pc-theme');if(t)d.setAttribute('data-theme',t);var m=localStorage.getItem('pc-motion');if(m?m==='off':matchMedia('(prefers-reduced-motion: reduce)').matches)d.classList.add('motion-off')}catch(e){}`;
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
