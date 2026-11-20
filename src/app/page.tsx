@@ -4,7 +4,8 @@ import { ContactForm } from "@/components/ContactForm";
 import { ElasticGrid } from "@/components/ElasticGrid";
 import { Slider } from "@/components/Slider";
 import { Star } from "@/components/Star";
-import { Head, JoinCard, Marquee, SvcList, TeamCard } from "@/components/blocks";
+import { Head, JoinCard, Marquee, TeamCard } from "@/components/blocks";
+import { SvcIndex } from "@/components/SvcIndex";
 import { HOME_ORDER } from "@/data/services";
 import { TEAM } from "@/data/team";
 import { vars } from "@/lib/ui";
@@ -60,7 +61,7 @@ export default function Home() {
       <section className="sec alt">
         <div className="wrap">
           <Head title="Cosa mettiamo in boost" />
-          <SvcList ids={HOME_ORDER} />
+          <SvcIndex ids={HOME_ORDER} />
         </div>
       </section>
       <section className="sec">

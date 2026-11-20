@@ -1,10 +1,9 @@
 /* eslint-disable @next/next/no-img-element */
 import Link from "next/link";
-import { ViewTransition } from "react";
 import { Star } from "./Star";
-import { SERVICES, svcById } from "@/data/services";
+import { SERVICES } from "@/data/services";
 import type { Member } from "@/data/team";
-import { vars, svcHref } from "@/lib/ui";
+import { vars } from "@/lib/ui";
 
 export function Head({ title, tag: Tag = "h2" }: { title: string; tag?: "h1" | "h2" }) {
   return (
@@ -13,26 +12,6 @@ export function Head({ title, tag: Tag = "h2" }: { title: string; tag?: "h1" | "
         <Tag>{title}</Tag>
       </div>
     </header>
-  );
-}
-
-export function SvcList({ ids }: { ids: string[] }) {
-  return (
-    <ul className="pc-index">
-      {ids.map((id, i) => {
-        const s = svcById(id)!;
-        return (
-          <li key={id} className="pc-reveal" style={vars({ "--i": Math.min(i, 3) })}>
-            <Link href={svcHref(s.id)}>
-              <span className="pc-index__k">boost your</span>
-              <ViewTransition name={`svc-title-${s.id}`} share="pc-morph" default="none">
-                <span className="pc-index__t">{s.name}</span>
-              </ViewTransition>
-            </Link>
-          </li>
-        );
-      })}
-    </ul>
   );
 }
 
