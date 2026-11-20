@@ -6,6 +6,7 @@ import { Cta, Head, Pager } from "@/components/blocks";
 import { FEAT, ICONS, SERVICES, SVC_CAT, svcById } from "@/data/services";
 import { PROJECTS } from "@/data/projects";
 import { svcHref, vars } from "@/lib/ui";
+import { MobileControls } from "@/components/Controls";
 
 export function generateStaticParams() {
   return SERVICES.map((s) => ({ slug: s.id }));
@@ -30,7 +31,7 @@ export default async function Servizio({ params }: { params: Promise<{ slug: str
 
   return (
     <>
-      <section className="svc-hero on-brand">
+      <section className="svc-hero on-brand ctl-host">
         <div className="wrap">
           <div>
             <h1 className="pc-reveal" style={vars({ "--i": 1 })}>
@@ -44,6 +45,7 @@ export default async function Servizio({ params }: { params: Promise<{ slug: str
             <p className="bb-t">{s.p2 || s.boost}</p>
           </div>
         </div>
+        <MobileControls />
       </section>
       <section className="sec feat-sec">
         <div className="wrap">

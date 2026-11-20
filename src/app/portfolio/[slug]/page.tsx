@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { Cta, Pager } from "@/components/blocks";
 import { PROJECTS, pImg, projById } from "@/data/projects";
 import { projHref, vars } from "@/lib/ui";
+import { MobileControls } from "@/components/Controls";
 
 // Solo i progetti pubblicati (con anteprima): gli altri danno 404.
 export function generateStaticParams() {
@@ -53,7 +54,7 @@ export default async function Progetto({ params }: { params: Promise<{ slug: str
 
   return (
     <>
-      <section className="pj-hero">
+      <section className="pj-hero ctl-host">
         <div className="wrap">
           {back}
           <p className="pj-cat pc-reveal">{p.kind}</p>
@@ -68,6 +69,7 @@ export default async function Progetto({ params }: { params: Promise<{ slug: str
             <img src={pImg(p.cover!)} alt={p.name} />
           </div>
         </div>
+        <MobileControls />
       </section>
       <section className="sec pj-body">
         <div className="wrap pj-cols2">

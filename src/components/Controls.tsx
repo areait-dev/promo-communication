@@ -1,8 +1,6 @@
 "use client";
 
-import { usePathname } from "next/navigation";
-import { useEffect, useState, useSyncExternalStore } from "react";
-import { createPortal } from "react-dom";
+import { useSyncExternalStore } from "react";
 
 const MOBILE = "(max-width: 960px)";
 
@@ -81,32 +79,15 @@ export function Controls() {
 }
 
 /**
- * Su mobile i controlli stanno nella prima sezione della pagina.
- * Va montato dentro <main>: così la classe `ctl-host` viene aggiunta solo dopo che il contenuto è idratato.
+ * Su mobile i controlli (animazioni / tema) stanno nella prima sezione di ogni pagina.
+ * È JSX normale, senza modifiche manuali al DOM: sul server non rende nulla, sul client appare dopo l'idratazione.
  */
 export function MobileControls() {
   const mobile = useMobile();
-  const pathname = usePathname();
-  const [host, setHost] = useState<HTMLElement | null>(null);
-
-  useEffect(() => {
-    if (!mobile) return;
-    const section = document.querySelector("#main section");
-    if (!section) return;
-    const box = document.createElement("div");
-    box.className = "ctl-m";
-    box.setAttribute("role", "group");
-    box.setAttribute("aria-label", "Animazioni e tema");
-    section.classList.add("ctl-host");
-    section.appendChild(box);
-    const show = () => setHost(box);
-    show();
-    return () => {
-      box.remove();
-      section.classList.remove("ctl-host");
-      setHost(null);
-    };
-  }, [mobile, pathname]);
-
-  return mobile && host ? createPortal(<Controls />, host) : null;
+  if (!mobile) return null;
+  return (
+    <div className="ctl-m" role="group" aria-label="Animazioni e tema">
+      <Controls />
+    </div>
+  );
 }

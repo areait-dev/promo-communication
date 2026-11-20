@@ -1,18 +1,20 @@
 import type { Metadata } from "next";
 import { ContactForm } from "@/components/ContactForm";
 import { vars } from "@/lib/ui";
+import { MobileControls } from "@/components/Controls";
 
 export const metadata: Metadata = { title: "Contatti" };
 
 export default function Contatti() {
   return (
     <>
-      <section className="hero" style={{ paddingBottom: "var(--space-12)" }}>
+      <section className="hero ctl-host" style={{ paddingBottom: "var(--space-12)" }}>
         <div className="wrap">
           <h1 className="pc-reveal page-h1" style={vars({ "--i": 1 })}>
             Raccontaci il tuo progetto
           </h1>
         </div>
+        <MobileControls />
       </section>
       <section className="sec" style={{ paddingTop: 0 }}>
         <div className="wrap contact">

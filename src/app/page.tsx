@@ -8,11 +8,12 @@ import { Head, JoinCard, Marquee, SvcList, TeamCard } from "@/components/blocks"
 import { HOME_ORDER } from "@/data/services";
 import { TEAM } from "@/data/team";
 import { vars } from "@/lib/ui";
+import { MobileControls } from "@/components/Controls";
 
 export default function Home() {
   return (
     <>
-      <section className="hero hero-elastic">
+      <section className="hero hero-elastic ctl-host">
         <ElasticGrid />
         <Star className="pc-star--spin bigstar" />
         <div className="wrap" style={{ position: "relative" }}>
@@ -28,6 +29,7 @@ export default function Home() {
             </Link>
           </div>
         </div>
+        <MobileControls />
       </section>
       <Marquee />
       <section className="sec alt sec-story">

@@ -5,13 +5,14 @@ import { Ill } from "@/components/Ill";
 import { Star } from "@/components/Star";
 import { Cta, Marquee } from "@/components/blocks";
 import { vars } from "@/lib/ui";
+import { MobileControls } from "@/components/Controls";
 
 export const metadata: Metadata = { title: "Chi siamo" };
 
 export default function ChiSiamo() {
   return (
     <>
-      <section className="about-hero">
+      <section className="about-hero ctl-host">
         <ElasticGrid />
         <Star className="pc-star--spin bigstar" />
         <div className="wrap" style={{ position: "relative" }}>
@@ -28,6 +29,7 @@ export default function ChiSiamo() {
             <strong>sappiamo di cosa parliamo</strong>.
           </p>
         </div>
+        <MobileControls />
       </section>
       <section className="sec alt">
         <div className="wrap split">

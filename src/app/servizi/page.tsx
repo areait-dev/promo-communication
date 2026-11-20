@@ -5,13 +5,14 @@ import { ElasticGrid } from "@/components/ElasticGrid";
 import { Star } from "@/components/Star";
 import { Cta } from "@/components/blocks";
 import { vars } from "@/lib/ui";
+import { MobileControls } from "@/components/Controls";
 
 export const metadata: Metadata = { title: "Servizi" };
 
 export default function Servizi() {
   return (
     <>
-      <section className="hero" style={{ paddingTop: 246, paddingBottom: 326 }}>
+      <section className="hero ctl-host" style={{ paddingTop: 246, paddingBottom: 326 }}>
         <ElasticGrid />
         <Star className="pc-star--spin bigstar" />
         <div className="wrap" style={{ position: "relative" }}>
@@ -19,6 +20,7 @@ export default function Servizi() {
             <Boost words={["Strategy", "Brand", "Digital", "Social", "Reputation", "Event", "Consensus"]} tag="h1" />
           </div>
         </div>
+        <MobileControls />
       </section>
       <Accordion />
       <Cta />

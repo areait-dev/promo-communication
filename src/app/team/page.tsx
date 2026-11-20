@@ -3,6 +3,7 @@ import { Stickers } from "@/components/Stickers";
 import { TeamScroll } from "@/components/TeamScroll";
 import { Cta } from "@/components/blocks";
 import { vars } from "@/lib/ui";
+import { MobileControls } from "@/components/Controls";
 
 export const metadata: Metadata = { title: "Team" };
 
@@ -10,7 +11,7 @@ export default function Team() {
   return (
     <>
       <Stickers />
-      <section className="hero" style={{ paddingBottom: "var(--space-12)" }}>
+      <section className="hero ctl-host" style={{ paddingBottom: "var(--space-12)" }}>
         <div className="wrap">
           <h1 className="pc-reveal page-h1" style={vars({ "--i": 1 })}>
             Il team
@@ -20,6 +21,7 @@ export default function Team() {
             dà del tu.
           </p>
         </div>
+        <MobileControls />
       </section>
       <TeamScroll />
       <Cta />

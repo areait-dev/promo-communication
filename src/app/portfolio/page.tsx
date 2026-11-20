@@ -4,13 +4,14 @@ import { ProjectList } from "@/components/ProjectList";
 import { Star } from "@/components/Star";
 import { Cta } from "@/components/blocks";
 import { PROJECTS } from "@/data/projects";
+import { MobileControls } from "@/components/Controls";
 
 export const metadata: Metadata = { title: "Portfolio" };
 
 export default function Portfolio() {
   return (
     <>
-      <section className="about-hero pf-hero2">
+      <section className="about-hero pf-hero2 ctl-host">
         <ElasticGrid />
         <Star className="pc-star--spin bigstar" />
         <div className="wrap" style={{ position: "relative" }}>
@@ -20,6 +21,7 @@ export default function Portfolio() {
             <span>(e che rifaremmo domani)</span>
           </h1>
         </div>
+        <MobileControls />
       </section>
       <section className="pl-sec">
         <div className="wrap">
