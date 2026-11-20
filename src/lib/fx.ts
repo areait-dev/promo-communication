@@ -110,3 +110,27 @@ export function initMarquee(): () => void {
     apply(1, 0);
   };
 }
+
+/**
+ * Illustrazioni e stelle decorative: aggiunge/toglie .is-live quando entrano/escono dallo schermo.
+ * Il CSS tiene in pausa (animation-play-state) quelle senza .is-live e fa partire il giro d'ingresso delle stelle.
+ */
+export function initLive(): () => void {
+  const els = Array.from(document.querySelectorAll<HTMLElement>(".acc-img--ill, .big-bubble, .pc-star--spin"));
+  if (!els.length) return () => {};
+  if (!("IntersectionObserver" in window)) {
+    els.forEach((e) => e.classList.add("is-live"));
+    return () => {};
+  }
+  const io = new IntersectionObserver(
+    (entries) => {
+      for (const e of entries) e.target.classList.toggle("is-live", e.isIntersecting);
+    },
+    { threshold: 0.15 },
+  );
+  els.forEach((e) => io.observe(e));
+  return () => {
+    io.disconnect();
+    els.forEach((e) => e.classList.remove("is-live"));
+  };
+}
