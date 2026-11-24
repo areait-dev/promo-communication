@@ -9,14 +9,36 @@
 | Team | tipo di contenuto | `membro` | `src/data/team.ts` |
 | Servizi | tipo di contenuto | `servizio` | `src/data/services.ts` |
 | Posizioni aperte | tipo di contenuto | `posizione` | `OPEN_ROLES` in `src/data/careers.ts` |
+| Pagine | tipo di contenuto | `pagina` | tutti i testi scritti nelle pagine e nei componenti, più contatti, menu, footer, moduli, banner cookie e SEO |
 
-Ogni tipo ha il suo gruppo di campi (11 elementi in tutto, 120 chiavi). Il titolo del contenuto è il nome (progetto, persona, servizio, ruolo) e lo **slug** è l'identificativo usato negli URL del sito (es. `pure-red`, `social-media`).
+Ogni tipo ha il suo gruppo di campi (17 elementi in tutto, circa 320 campi). Il titolo del contenuto è il nome (progetto, persona, servizio, ruolo) e lo **slug** è l'identificativo usato negli URL del sito (es. `pure-red`, `social-media`).
 
 ## Plugin da installare
 
 1. **Advanced Custom Fields** (gratuito, versione 6.1 o successiva: serve per importare tipi di contenuto e tassonomie)
 2. **WPGraphQL**
 3. **WPGraphQL for ACF** (espone i campi nello schema GraphQL)
+
+## Pagine e impostazioni (tutti i testi del sito)
+
+ACF gratuito non ha le "pagine opzioni", quindi i testi del sito vivono in un tipo di contenuto **Pagine**. Si crea **una voce per pagina**, si sceglie quale dal menu "Quale pagina" e compaiono solo i campi di quella pagina.
+
+| Voce | Cosa si modifica |
+| --- | --- |
+| Home | parole del titolo "Boost your...", frase e pulsante, sezione "La nostra storia", titoli delle sezioni |
+| Chi siamo | titolo, introduzione, le tre sezioni con le frasi nei fumetti |
+| Servizi | parole del titolo, testi della pagina del singolo servizio |
+| Portfolio | titolo, filtri e ordinamento, etichette della pagina del progetto |
+| Team | titolo, frase, scheda "Lavora con noi" |
+| Contatti | titolo e frase |
+| Lavora con noi | titolo, frase, aree di interesse del modulo |
+| Privacy e Cookie policy | titolo, data di aggiornamento e tutto il testo dell'informativa |
+| Pagina non trovata | titolo e pulsante |
+| Impostazioni del sito | menu, recapiti e orari, social, footer, blocco finale, banner cookie, testi e messaggi dei moduli, nome del sito, immagine di condivisione, codice Google Search Console, ID Google Tag Manager |
+
+Ogni pagina, progetto e servizio ha anche un riquadro **SEO** (titolo, descrizione e immagine di condivisione).
+
+Dove un testo ha una parola in corsivo si scrive `<em>parola</em>` nei campi di una riga. Nei campi con barra degli strumenti si usano grassetto, corsivo e link.
 
 ## Come importare
 
@@ -35,7 +57,7 @@ Il file segue il formato di esportazione di ACF 6, ma non l'ho potuto provare su
 ## Cosa non c'è, perché ACF gratuito non lo ha
 
 - **Ripetitore:** le liste sono campi fissi. La galleria di un progetto ha 8 blocchi, le voci "Cosa facciamo" di un servizio ne hanno 8 (oggi il massimo è 8 e 8). Etichette dei progetti e dei servizi sono un testo con una voce per riga, da dividere nel sito.
-- **Galleria e pagine opzioni:** non ci sono. Contatti, orari, social, testi di "Lavora con noi" e le illustrazioni dei servizi restano nel codice.
+- **Galleria e pagine opzioni:** non ci sono, per questo i testi del sito stanno nel tipo "Pagine". Restano nel codice solo le illustrazioni dei servizi e l'aspetto (colori, animazioni).
 - **Illustrazioni e icone SVG dei servizi:** restano nel codice, legate allo slug del servizio. Nel campo "Icona" si sceglie solo il nome dell'icona (come oggi in `ICONS`).
 
 ## Come mappano i campi
