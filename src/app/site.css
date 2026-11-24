@@ -2487,3 +2487,14 @@ html:not([data-theme="dark"]) .bi-book .bi-lo p, html:not([data-theme="dark"]) .
   [data-view="home"] .hero .hero-lead { font-size: clamp(17px, 4.6vw, 22px); margin: 20px 0 24px; max-width: 32ch; }
   [data-view="home"] .hero .ctas .pc-btn { min-height: 48px; }
 }
+
+/* --- 3. Nastro dei servizi --- contenuto sempre tagliato nel proprio riquadro (mai scroll orizzontale della pagina), voci piu' compatte */
+.pc-marquee { overflow-x: clip; max-width: 100vw; }
+@media (max-width: 960px) {
+  .pc-marquee { padding: var(--space-3) 0; }
+  .pc-marquee__item { font-size: clamp(22px, 6.2vw, 30px); gap: var(--space-4); padding-right: var(--space-4); }
+  .pc-marquee__item .pc-star { font-size: clamp(18px, 5vw, 24px); }
+}
+@media (max-width: 960px) and (prefers-reduced-motion: reduce) {
+  .pc-marquee__track { padding: 0 var(--space-4); column-gap: 0; }
+}
