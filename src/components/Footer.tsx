@@ -17,8 +17,6 @@ export function Footer() {
           PromoCommunication è un brand di Promotergroup S.p.a.
           <br />
           Promotergroup S.p.A. · P.IVA 13178771005
-          <br />
-          <a href="#" data-soon>Company Profile</a>
         </div>
         <div>
           <h4>Servizi</h4>
