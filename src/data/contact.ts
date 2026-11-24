@@ -9,15 +9,12 @@ export const PHONE = { label: "+39 0932 862613", href: "tel:+390932862613" };
 export const ADDRESS = ["Via del Carrubo sn", "Vittoria (RG)"] as const;
 
 /**
- * Profili social.
- * TODO: sostituire "#" con gli URL reali (https://...). Finché l'href è "#" il link mostra l'avviso
- * "Collegamento da inserire"; con un URL vero si apre in una nuova scheda.
+ * Profili social (si aprono in una nuova scheda).
  */
 export const SOCIALS = [
-  { id: "facebook", name: "Facebook", href: "#" },
-  { id: "instagram", name: "Instagram", href: "#" },
-  { id: "linkedin", name: "LinkedIn", href: "#" },
-  { id: "youtube", name: "YouTube", href: "#" },
+  { id: "facebook", name: "Facebook", href: "https://www.facebook.com/madroomagency?locale=it_IT" },
+  { id: "instagram", name: "Instagram", href: "https://www.instagram.com/promo.communication" },
+  { id: "linkedin", name: "LinkedIn", href: "https://www.linkedin.com/company/promo-communication-agency/" },
 ] as const;
 export type SocialId = (typeof SOCIALS)[number]["id"];
 
