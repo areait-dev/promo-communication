@@ -1385,7 +1385,9 @@ html:not([data-theme="dark"]) #main .ssr-name { color: var(--blu-700); }
 .ssr-ph--m.has-img { position: relative; overflow: hidden; }
 
 /* Home, team: fumetti in outline blu Promo */
-.tm .pc-team__photo, .tm .pc-team__ph { background: transparent !important; }
+.tm .pc-team__ph { background: transparent !important; }
+/* Foto del team: sfondo grigio chiaro di palette, uguale in tema chiaro e scuro (nasconde i bordi dei ritagli) */
+.tm .pc-team__photo { background: var(--grigio-chiaro) !important; }
 .tm-outline { position: absolute; left: 0; top: 0; width: 100%; aspect-ratio: 4 / 5.5; height: auto; overflow: visible; pointer-events: none; z-index: 2; }
 .tm-outline path { fill: none; stroke: var(--blu-700); stroke-width: 2; vector-effect: non-scaling-stroke; stroke-linejoin: round; }
 [data-theme="dark"] .tm-outline path { stroke: #fff; }
@@ -2639,3 +2641,12 @@ html:not([data-theme="dark"]) .bi-book .bi-lo p, html:not([data-theme="dark"]) .
 [data-theme="dark"] .legal a { color: #fff; }
 .legal code { font: 500 .92em/1 ui-monospace, SFMono-Regular, Menlo, monospace; background: color-mix(in srgb, var(--ink) 8%, transparent); padding: 2px 6px; border-radius: 4px; }
 @media (max-width: 600px) { .legal p, .legal li { font-size: 16px; } }
+
+/* Pagina Team: le foto stanno su un grigio chiaro di palette in entrambi i temi (nasconde i bordi dei ritagli) */
+html[data-theme="dark"] .ssr-card .ssr-ph.has-img,
+html:not([data-theme="dark"]) .ssr-card .ssr-ph.has-img,
+html[data-theme="dark"] .ssr-ph--m.has-img,
+html:not([data-theme="dark"]) .ssr-ph--m.has-img { background: var(--grigio-chiaro) !important; }
+/* coda del fumetto con la foto: riempita dello stesso grigio (il bordo resta quello del tema) */
+html[data-theme="dark"] .ssr-card .ssr-ph.has-img::before,
+html:not([data-theme="dark"]) .ssr-card .ssr-ph.has-img::before { width: 56px; height: 41px; background: var(--grigio-chiaro); clip-path: polygon(0 0, 100% 0, 0 100%); z-index: 1; }
