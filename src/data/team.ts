@@ -18,18 +18,21 @@ export const TEAM: Member[] = [
   "n": "Ausilia Ippolito",
   "r": "Social Media Manager & Content Specialist",
   "c": "b",
+  "img": "/img/team/ausilia-ippolito.webp",
   "b": "Puntuale, meticolosa, sempre sul pezzo! In grado di saltare da un account all’altro mantenendo la lucidità e la freddezza di una serial ‘skroller’. Tra le sue skills, la capacità di disinnescare crisi diplomatiche e ideare piani editoriali in grado di prevedere il futuro come nessun altro. In PromoCommunication, la social media manager su cui poter contare."
  },
  {
   "n": "Valentina Brafa",
   "r": "Graphic Designer & Social Media Manager",
   "c": "r",
+  "img": "/img/team/valentina-brafa.webp",
   "b": "Tra le palazzine a fuoco riuscirebbe a scontornare anche la scritta al neon di un sexy shop. La più giovane del team, entra in punta di piedi in PromoCommunication apportando creatività, talento e intraprendenza. SMM e Graphic Designer, veneta d’adozione e siciliana d’origine, è la fu-sio-ne perfetta per affrontare le sfide d’agenzia. Tra i suoi hobby sollevare bilancieri e consigliare acquisti impulsivi."
  },
  {
   "n": "Giorgio Candiano",
   "r": "Full Stack Developer | Performance Marketing Specialist",
   "c": "b",
+  "img": "/img/team/giorgio-candiano.webp",
   "b": "Tra i gadget speciali di Doraemon c’è la sua calcolatrice magica, sempre pronta ad analizzare dati per dare senso e valore ai numeri del web. Perso nel chill delle campagne adv e del linguaggio in codice, è sempre alla ricerca delle keywords giuste, per non offendere l’algoritmo."
  }
 ] as Member[];
