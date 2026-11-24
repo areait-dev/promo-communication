@@ -33,7 +33,7 @@ export const TEAM: Member[] = [
   "r": "Full Stack Developer | Performance Marketing & SEO Specialist",
   "c": "b",
   "img": "/img/team/giorgio-candiano.webp",
-  "b": "Tra i gadget speciali di Doraemon c’è la sua calcolatrice magica, sempre pronta ad analizzare dati per dare senso e valore ai numeri del web. Perso nel chill delle campagne adv e del linguaggio in codice, è sempre a caccia delle keywords giuste per non offendere l’algoritmo. Spento il monitor, accende il giradischi: niente codice, niente debug. <strong><em>“It’s literally just frequencies.”</em></strong>"
+  "b": "Tra i gadget speciali di Doraemon c’è la sua calcolatrice magica, sempre pronta ad analizzare dati per dare senso e valore ai numeri del web. Perso nel chill delle campagne adv e del linguaggio in codice, è sempre a caccia delle keywords giuste per non offendere l’algoritmo. Spento il monitor, accende il giradischi: niente codice, niente debug. <strong><em>“It’s just literally frequencies.”</em></strong>"
  }
 ] as Member[];
 export const initials = (n: string) => n.split(' ').map((x) => x[0]).join('');
