@@ -103,14 +103,14 @@ export function CareersForm() {
             <label className="ct-label" htmlFor="cr-e">
               Email
             </label>
-            <input className="ct-input" id="cr-e" name="email" type="email" autoComplete="email" required {...invalid("e")} />
+            <input className="ct-input" id="cr-e" name="email" type="email" inputMode="email" autoCapitalize="none" spellCheck={false} autoComplete="email" required {...invalid("e")} />
             {err("e")}
           </div>
           <div className="ct-field">
             <label className="ct-label" htmlFor="cr-t">
               Telefono
             </label>
-            <input className="ct-input" id="cr-t" name="telefono" type="tel" autoComplete="tel" {...invalid("t")} />
+            <input className="ct-input" id="cr-t" name="telefono" type="tel" inputMode="tel" autoComplete="tel" {...invalid("t")} />
             {err("t")}
           </div>
         </div>

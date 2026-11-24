@@ -2552,3 +2552,25 @@ html:not([data-theme="dark"]) .bi-book .bi-lo p, html:not([data-theme="dark"]) .
   .tm-join__in small { font-size: 13px; }
 }
 @media (max-width: 700px) { .team-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-8) var(--space-4); } }
+
+/* --- 8. Contatti e form --- campi a tutta larghezza, font >= 16px (niente zoom su iOS), pulsanti e controlli >= 44px, indirizzi lunghi che vanno a capo */
+@media (max-width: 960px) {
+  .field input, .field textarea, .field select, .ct-input { font-size: 16px; }
+  .ct-input, .field input:not([type="checkbox"]):not([type="file"]) { min-height: 48px; }
+  .ct-submit, .cform .pc-btn[type="submit"] { width: 100%; min-height: 52px; justify-content: center; }
+  .ct-check, .check, .cform .check { align-items: flex-start; gap: 12px; min-height: 44px; padding: 6px 0; }
+  .ct-check input, .check input { width: 24px; height: 24px; flex: none; margin-top: 0; }
+  .contact-list a, .contact-list address { font-size: clamp(17px, 5vw, 21px); overflow-wrap: anywhere; }
+  .contact-list li { min-width: 0; }
+  .socials { gap: 12px; }
+  .socials a { width: 48px; height: 48px; }
+}
+@media (max-width: 600px) {
+  .row2, .ct-row { grid-template-columns: 1fr !important; }
+  .ct-form, .cform { padding-left: clamp(16px, 5vw, 28px); padding-right: clamp(16px, 5vw, 28px); }
+  .ct-panel { padding: clamp(20px, 6vw, 32px); }
+}
+@media (max-width: 960px) { .contact, .contact-home { grid-template-columns: minmax(0, 1fr); } .contact > *, .contact-home > * { min-width: 0; } .contact-home .pc-section-head h2 { font-size: clamp(28px, 8vw, 40px); } }
+@media (min-width: 961px) and (max-width: 1100px) { .contact > *, .contact-home > * { min-width: 0; } .contact-home .form, .contact-home .cform { max-width: 100%; } }
+.drop input[type="file"] { width: 100%; height: 100%; max-width: 100%; padding: 0; } /* il campo file e' invisibile: senza questo la sua larghezza intrinseca allargava la pagina */
+@media (min-width: 961px) and (max-width: 1100px) { .field input:not([type="checkbox"]):not([type="file"]), .field textarea { width: 100%; min-width: 0; box-sizing: border-box; } .row2 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }

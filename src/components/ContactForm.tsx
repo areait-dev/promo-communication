@@ -78,11 +78,11 @@ export function ContactForm({ kind }: { kind: Kind }) {
             <div className="row2">
               <div className="field">
                 <label htmlFor="h-e">Email</label>
-                <input id="h-e" name="e" type="email" autoComplete="email" required />
+                <input id="h-e" name="e" type="email" inputMode="email" autoCapitalize="none" spellCheck={false} autoComplete="email" required />
               </div>
               <div className="field">
                 <label htmlFor="h-t">Telefono</label>
-                <input id="h-t" name="t" type="tel" autoComplete="tel" />
+                <input id="h-t" name="t" type="tel" inputMode="tel" autoComplete="tel" />
               </div>
             </div>
           </>
@@ -95,11 +95,11 @@ export function ContactForm({ kind }: { kind: Kind }) {
             <div className="row2">
               <div className="field">
                 <label htmlFor="f-e">Email</label>
-                <input id="f-e" name="e" type="email" autoComplete="email" required />
+                <input id="f-e" name="e" type="email" inputMode="email" autoCapitalize="none" spellCheck={false} autoComplete="email" required />
               </div>
               <div className="field">
                 <label htmlFor="f-t">Telefono</label>
-                <input id="f-t" name="t" type="tel" autoComplete="tel" />
+                <input id="f-t" name="t" type="tel" inputMode="tel" autoComplete="tel" />
               </div>
             </div>
           </>

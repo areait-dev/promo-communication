@@ -119,14 +119,14 @@ export function ContactPageForm() {
             <label className="ct-label" htmlFor="ct-e">
               Email
             </label>
-            <input className="ct-input" id="ct-e" name="email" type="email" autoComplete="email" required {...invalid("e")} />
+            <input className="ct-input" id="ct-e" name="email" type="email" inputMode="email" autoCapitalize="none" spellCheck={false} autoComplete="email" required {...invalid("e")} />
             {err("e")}
           </div>
           <div className="ct-field">
             <label className="ct-label" htmlFor="ct-t">
               Telefono
             </label>
-            <input className="ct-input" id="ct-t" name="telefono" type="tel" autoComplete="tel" {...invalid("t")} />
+            <input className="ct-input" id="ct-t" name="telefono" type="tel" inputMode="tel" autoComplete="tel" {...invalid("t")} />
             {err("t")}
           </div>
         </div>
