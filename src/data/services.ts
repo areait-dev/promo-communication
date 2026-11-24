@@ -1,10 +1,5 @@
 export type Service = { id: string; name: string; boost: string; p1: string; p2: string; tags: string[] };
-/**
- * Servizi temporaneamente nascosti: spariscono da tutto il sito (pagine, menu, form, sitemap) ma restano nei dati.
- * Per riattivarne uno basta toglierlo da questo elenco (e rimettere la parola nei titoli "Boost your" di home e /servizi).
- */
-export const HIDDEN_SERVICES: string[] = ["comunicazione-politica"];
-const ALL_SERVICES: Service[] = [
+export const SERVICES: Service[] = [
  {
   "id": "brand-strategy",
   "name": "Brand Strategy",
@@ -124,9 +119,8 @@ const ALL_SERVICES: Service[] = [
  }
 ];
 /** Parola dopo "boost your" nell'elenco della home, dove deve essere diversa dal nome del servizio (il nastro dei servizi usa sempre il nome). */
-export const SERVICES: Service[] = ALL_SERVICES.filter((s) => !HIDDEN_SERVICES.includes(s.id));
 export const BOOST_WORD: Record<string, string> = { "comunicazione-politica": "Political Campaign" };
-const HOME_ORDER_ALL: string[] = [
+export const HOME_ORDER: string[] = [
  "brand-strategy",
  "brand-identity",
  "digital-web",
@@ -136,7 +130,6 @@ const HOME_ORDER_ALL: string[] = [
  "personal-branding",
  "event-management"
 ];
-export const HOME_ORDER: string[] = HOME_ORDER_ALL.filter((id) => !HIDDEN_SERVICES.includes(id));
 export const ACC: Record<string, [string, string]> = {
  "brand-strategy": [
   "acc-red",

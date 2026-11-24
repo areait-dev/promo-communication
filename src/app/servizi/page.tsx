@@ -12,7 +12,7 @@ export const metadata: Metadata = pageMeta({
   title: "Servizi",
   path: "/servizi",
   description:
-    "Brand strategy, identity, digital & web, social media, reputation, personal branding ed eventi: i servizi di PromoCommunication.",
+    "Brand strategy, identity, digital & web, social media, reputation, personal branding, eventi e comunicazione politica: i servizi di PromoCommunication.",
 });
 
 export default function Servizi() {
@@ -23,7 +23,7 @@ export default function Servizi() {
         <Star className="pc-star--spin bigstar" />
         <div className="wrap" style={{ position: "relative" }}>
           <div className="pc-reveal" style={vars({ "--i": 1, marginTop: "24px" })}>
-            <Boost words={["Strategy", "Brand", "Digital", "Social", "Reputation", "Event"]} tag="h1" />
+            <Boost words={["Strategy", "Brand", "Digital", "Social", "Reputation", "Event", "Campaign"]} tag="h1" />
           </div>
         </div>
         <PageFx />
