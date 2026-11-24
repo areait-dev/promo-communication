@@ -118,7 +118,7 @@ export const SERVICES: Service[] = [
  }
 ];
 /** Parola dopo "boost your" nell'elenco della home, dove deve essere diversa dal nome del servizio (il nastro dei servizi usa sempre il nome). */
-export const BOOST_WORD: Record<string, string> = { "comunicazione-politica": "Campaign" };
+export const BOOST_WORD: Record<string, string> = { "comunicazione-politica": "Political Campaign" };
 export const HOME_ORDER: string[] = [
  "brand-strategy",
  "brand-identity",
