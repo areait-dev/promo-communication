@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { ViewTransition } from "react";
-import { svcById } from "@/data/services";
+import { BOOST_WORD, svcById } from "@/data/services";
 import { svcHref, vars } from "@/lib/ui";
 
 /**
@@ -17,7 +17,7 @@ export function SvcIndex({ ids }: { ids: string[] }) {
             <Link href={svcHref(s.id)}>
               <span className="pc-index__k">boost your</span>
               <ViewTransition name={`svc-title-${s.id}`} share="pc-morph" default="none">
-                <span className="pc-index__t">{s.name}</span>
+                <span className="pc-index__t">{BOOST_WORD[s.id] ?? s.name}</span>
               </ViewTransition>
             </Link>
           </li>

@@ -17,7 +17,7 @@ export default function Servizi() {
         <Star className="pc-star--spin bigstar" />
         <div className="wrap" style={{ position: "relative" }}>
           <div className="pc-reveal" style={vars({ "--i": 1, marginTop: "24px" })}>
-            <Boost words={["Strategy", "Brand", "Digital", "Social", "Reputation", "Event", "Consensus"]} tag="h1" />
+            <Boost words={["Strategy", "Brand", "Digital", "Social", "Reputation", "Event", "Campaign"]} tag="h1" />
           </div>
         </div>
         <PageFx />

@@ -107,7 +107,7 @@ export const SERVICES: Service[] = [
  {
   "id": "comunicazione-politica",
   "name": "Comunicazione Politica",
-  "boost": "Boost your Consensus",
+  "boost": "Boost your Campaign",
   "p1": "Il consenso si conquista una stretta di mano alla volta, in piazza come online. Affianchiamo candidati, amministratori e rappresentanti politici nel costruire una strategia che parta da quello che i cittadini pensano davvero, con sondaggi e focus group. Poi trasformiamo idee e programmi in messaggi chiari, e li portiamo dove le persone li leggono, li commentano e ne discutono.",
   "p2": "Prima si ascolta. Poi si parla.",
   "tags": [
@@ -117,6 +117,8 @@ export const SERVICES: Service[] = [
   ]
  }
 ];
+/** Parola dopo "boost your" nell'elenco della home, dove deve essere diversa dal nome del servizio (il nastro dei servizi usa sempre il nome). */
+export const BOOST_WORD: Record<string, string> = { "comunicazione-politica": "Campaign" };
 export const HOME_ORDER: string[] = [
  "brand-strategy",
  "brand-identity",
