@@ -5,10 +5,10 @@ import { useEffect, useRef, useState, type CSSProperties } from "react";
 import { onReducedMotionChange, vars } from "@/lib/ui";
 
 /**
- * WCAG 2.2.2: la sequenza delle parole dura al massimo 4 s (4 passaggi da 1 s) e poi si ferma sull'ultima.
+ * WCAG 2.2.2: la sequenza delle parole dura 3,6 s (4 passaggi da 0,9 s; l’ultima evidenziatura finisce a 4,4 s) e poi si ferma sull'ultima.
  * Riparte (sempre una sola volta, sempre <= 5 s) solo se il titolo esce dallo schermo e poi rientra.
  */
-const STEP = 1000;
+const STEP = 900;
 
 /**
  * Titolo "Boost your <parola>": all'ingresso nello schermo le parole scorrono UNA volta e si fermano sull'ultima.
