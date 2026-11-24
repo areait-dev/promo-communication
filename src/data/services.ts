@@ -35,8 +35,8 @@ export const SERVICES: Service[] = [
   "id": "digital-web",
   "name": "Digital & Web",
   "boost": "Boost your Digital",
-  "p1": "Un brand forte si riconosce anche di sfuggita, con la coda dell’occhio. Diamo forma a identità visive e verbali coerenti, fatte per distinguersi oggi e reggere bene il passare degli anni.",
-  "p2": "E quando un’identità comincia a starti stretta, ti accompagniamo nel rebranding senza perdere per strada chi ti conosce già.",
+  "p1": "Oggi il primo incontro con un brand avviene quasi sempre su uno schermo. Progettiamo e sviluppiamo siti, e-commerce e piattaforme digitali veloci, chiari e facili da trovare, partendo da chi li userà. Poi li facciamo lavorare con SEO, campagne ads e strategie di digital marketing misurate sui risultati.",
+  "p2": "Un sito che lavora per te, anche mentre dormi.",
   "tags": [
    "Siti web e landing page",
    "App",
