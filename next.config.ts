@@ -1,4 +1,5 @@
 import type { NextConfig } from "next";
+import { isPreview } from "./src/lib/env";
 
 const nextConfig: NextConfig = {
   /* config options here */
@@ -14,6 +15,10 @@ const nextConfig: NextConfig = {
         pathname: "/wp-content/uploads/**",
       },
     ],
+  },
+  // Stage (Preview di Vercel): header noindex su ogni risposta, oltre a robots.txt
+  async headers() {
+    return isPreview ? [{ source: "/:path*", headers: [{ key: "X-Robots-Tag", value: "noindex, nofollow" }] }] : [];
   },
   turbopack: {
     rules: {
