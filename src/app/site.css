@@ -2599,3 +2599,10 @@ html:not([data-theme="dark"]) .bi-book .bi-lo p, html:not([data-theme="dark"]) .
   .pc-marquee__track { flex-wrap: nowrap; width: max-content; row-gap: 0; padding: 0 var(--space-4); }
   .pc-marquee__item { flex: none; scroll-snap-align: start; }
 }
+
+/* Servizi (desktop): accordion fermo (sticky) mentre la pagina scorre; le schede si aprono una dopo l'altra (src/components/Accordion.tsx).
+   Solo su desktop alti almeno 880px e senza prefers-reduced-motion; altrove l'accordion e' quello di sempre. */
+@media (min-width: 961px) and (min-height: 880px) and (prefers-reduced-motion: no-preference) {
+  .acc-sec--pin { height: calc(790px + (var(--n) - 1) * 55vh); }
+  .acc-sec--pin .acc { position: sticky; top: 92px; }
+}

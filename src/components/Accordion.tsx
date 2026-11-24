@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useRef, useState, ViewTransition } from "react";
+import { useEffect, useRef, useState, ViewTransition, type CSSProperties } from "react";
 import { ACC, ILL, SERVICES } from "@/data/services";
 import { motionOff, prefersReduced, svcHref, vars } from "@/lib/ui";
 
@@ -41,7 +41,39 @@ export function Accordion() {
     return () => window.removeEventListener("resize", layout);
   }, [open]);
 
+  // Desktop: il riquadro resta fermo (sticky) e scorrendo la pagina le schede si aprono una dopo l'altra, da sinistra a destra.
+  // Si muove solo mentre l'utente scorre; il clic su una linguetta porta la pagina alla posizione corrispondente.
+  // Stessa condizione del CSS ".acc-sec--pin": desktop alto abbastanza e senza prefers-reduced-motion.
+  const sec = useRef<HTMLElement>(null);
+  const PIN = "(min-width: 961px) and (min-height: 880px) and (prefers-reduced-motion: no-preference)";
+  const pinStep = () => window.innerHeight * 0.55; // stesso valore del CSS (55vh)
+  const pinTop = () => sec.current!.getBoundingClientRect().top + window.scrollY - 92; // 92px = altezza dell'header
+
+  useEffect(() => {
+    const mq = window.matchMedia(PIN);
+    let raf = 0;
+    const onScroll = () => {
+      if (raf || !mq.matches) return;
+      raf = requestAnimationFrame(() => {
+        raf = 0;
+        const p = (window.scrollY - pinTop()) / pinStep();
+        const i = Math.min(SERVICES.length - 1, Math.max(0, Math.round(p)));
+        if (i !== openRef.current) setOpen(i);
+      });
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      cancelAnimationFrame(raf);
+    };
+  }, []);
+
   function select(i: number) {
+    if (window.matchMedia(PIN).matches) {
+      window.scrollTo({ top: pinTop() + i * pinStep(), behavior: "auto" });
+      setOpen(i);
+      return;
+    }
     if (!window.matchMedia("(min-width: 961px)").matches && i !== open) {
       setOpening(i);
       clearTimeout(openingTimer.current);
@@ -134,7 +166,7 @@ export function Accordion() {
   }
 
   return (
-    <section className="acc-sec">
+    <section className="acc-sec acc-sec--pin" ref={sec} style={{ "--n": SERVICES.length } as CSSProperties}>
       <div className="acc pc-reveal" style={vars({ "--i": 2 })} role="tablist" aria-label="Servizi" ref={root}>
         {SERVICES.map((s, i) => {
           const c = ACC[s.id];
