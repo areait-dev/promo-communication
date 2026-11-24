@@ -2479,3 +2479,11 @@ html:not([data-theme="dark"]) .bi-book .bi-lo p, html:not([data-theme="dark"]) .
   html:not([data-theme="dark"]) .mmenu .sw-i { stroke: var(--blu-notte); }
 }
 
+/* --- 2. Hero home --- stella dietro al titolo (opacita' ridotta), tutto fino all'inizio del nastro nella prima schermata */
+@media (max-width: 960px) {
+  [data-view="home"] .hero-elastic { padding-top: clamp(28px, 6vh, 56px); padding-bottom: clamp(36px, 7vh, 64px); }
+  [data-view="home"] .hero-elastic > .bigstar { right: -16vw !important; left: auto !important; top: 0 !important; bottom: auto !important; translate: none !important; font-size: min(86vw, 520px) !important; opacity: .17 !important; z-index: 0; }
+  [data-view="home"] .hero .pc-boost { --boost-size: clamp(44px, 14vw, 104px); }
+  [data-view="home"] .hero .hero-lead { font-size: clamp(17px, 4.6vw, 22px); margin: 20px 0 24px; max-width: 32ch; }
+  [data-view="home"] .hero .ctas .pc-btn { min-height: 48px; }
+}
