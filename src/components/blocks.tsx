@@ -60,7 +60,7 @@ export function JoinCard() {
       <Link className="pc-team__frame" href="/lavora-con-noi">
         <div className="pc-team__photo">
           <div className="pc-team__ph tm-join__in">
-            <span>Il prossimo fumetto potresti essere tu</span>
+            <span>La prossima vignetta potresti essere tu</span>
             <small>Posizioni aperte →</small>
           </div>
         </div>

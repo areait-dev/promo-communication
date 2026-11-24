@@ -1,7 +1,7 @@
 /** Pagina /lavora-con-noi. */
 
 /** Testi presi dal sito (card del Team): modificabili qui. */
-export const CAREERS_TITLE = "Il prossimo fumetto potresti essere tu";
+export const CAREERS_TITLE = "La prossima vignetta potresti essere tu";
 export const CAREERS_LEAD =
   "Cerchiamo persone curiose, con idee chiare e voglia di mettersi in gioco. Se pensi di poter dare una spinta al nostro team, mandaci il tuo CV e raccontaci chi sei.";
 

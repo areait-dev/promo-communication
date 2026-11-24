@@ -45,7 +45,7 @@ export function TeamScroll() {
             </article>
           ))}
           <article className={"ssr-item ssr-join" + on(n)} data-i={n} ref={(el) => { items.current[n] = el; }}>
-            <h2 className="ssr-name">Il prossimo fumetto potresti essere tu</h2>
+            <h2 className="ssr-name">La prossima vignetta potresti essere tu</h2>
             <p className="ssr-role">Posizioni aperte</p>
             <p className="ssr-desc">
               Cerchiamo persone curiose, con idee chiare e voglia di mettersi in gioco. Se pensi di poter dare una spinta al
@@ -57,7 +57,7 @@ export function TeamScroll() {
               </Link>
             </p>
             <div className="ssr-ph ssr-ph--m ssr-ph--join" aria-hidden="true">
-              <span>Il prossimo fumetto potresti essere tu</span>
+              <span>La prossima vignetta potresti essere tu</span>
             </div>
           </article>
         </div>
