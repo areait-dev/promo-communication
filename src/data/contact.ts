@@ -12,7 +12,7 @@ export const ADDRESS = ["Via del Carrubo sn", "Vittoria (RG)"] as const;
  * Profili social (si aprono in una nuova scheda).
  */
 export const SOCIALS = [
-  { id: "facebook", name: "Facebook", href: "https://www.facebook.com/madroomagency?locale=it_IT" },
+  { id: "facebook", name: "Facebook", href: "https://www.facebook.com/promocommunicationagency?locale=it_IT" },
   { id: "instagram", name: "Instagram", href: "https://www.instagram.com/promo.communication" },
   { id: "linkedin", name: "LinkedIn", href: "https://www.linkedin.com/company/promo-communication-agency/" },
 ] as const;
