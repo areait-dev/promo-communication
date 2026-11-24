@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { prefersReduced } from "@/lib/ui";
+import { onReducedMotionChange, prefersReduced } from "@/lib/ui";
 
 /**
  * Comportamenti globali:
@@ -11,6 +11,12 @@ import { prefersReduced } from "@/lib/ui";
 export function Behaviors() {
   const toast = useRef<HTMLDivElement>(null);
   const toastTimer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
+
+  // prefers-reduced-motion anche a runtime: tiene allineata la classe .motion-off (impostata all'avvio da layout.tsx)
+  useEffect(
+    () => onReducedMotionChange((r) => document.documentElement.classList.toggle("motion-off", r)),
+    [],
+  );
 
   useEffect(() => {
     let smoothTimer: ReturnType<typeof setTimeout> | undefined;
