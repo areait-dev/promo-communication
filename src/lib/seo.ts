@@ -4,7 +4,7 @@ import type { Metadata } from "next";
 export const SITE_URL = "https://promocommunication.it";
 export const SITE_NAME = "PromoCommunication";
 /** Immagine di condivisione (1200×630) in /public. */
-export const OG_IMAGE = { url: "/og.png", width: 1200, height: 630, alt: "PromoCommunication — Boost your brand" };
+export const OG_IMAGE = { url: "/og.png", width: 1200, height: 630, alt: "PromoCommunication, Boost your brand" };
 
 /** Accorcia un testo a max `n` caratteri, chiudendo a fine frase o, se non c'è, a fine parola. */
 export function snip(text: string, n = 158): string {
@@ -18,10 +18,10 @@ export function snip(text: string, n = 158): string {
 
 /**
  * Metadati di una pagina: titolo, descrizione, canonical, Open Graph e Twitter card.
- * `title` è il titolo breve (il template del layout aggiunge " — PromoCommunication").
+ * `title` è il titolo breve (il template del layout aggiunge " | PromoCommunication").
  */
 export function pageMeta({ title, description, path }: { title: string; description: string; path: string }): Metadata {
-  const full = `${title} — ${SITE_NAME}`;
+  const full = `${title} | ${SITE_NAME}`;
   return {
     title,
     description,

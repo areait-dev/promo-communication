@@ -13,15 +13,15 @@ import { isPreview } from "@/lib/env";
 const outfit = Outfit({ subsets: ["latin"], variable: "--f-outfit", display: "swap" });
 const funnel = Funnel_Display({ subsets: ["latin"], variable: "--f-funnel", display: "swap" });
 
-const HOME_TITLE = "Boost your brand — PromoCommunication";
+const HOME_TITLE = "Boost your brand | PromoCommunication";
 const HOME_DESC =
-  "PromoCommunication — la Unit di Comunicazione & Marketing di Promotergroup. Diamo forma, voce e spazio a quello che la tua impresa fa ogni giorno.";
+  "PromoCommunication, la Unit di Comunicazione & Marketing di Promotergroup. Diamo forma, voce e spazio a quello che la tua impresa fa ogni giorno.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
     default: HOME_TITLE,
-    template: "%s — PromoCommunication",
+    template: "%s | PromoCommunication",
   },
   description: HOME_DESC,
   alternates: { canonical: "/" },
