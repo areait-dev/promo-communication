@@ -2624,3 +2624,18 @@ html:not([data-theme="dark"]) .bi-book .bi-lo p, html:not([data-theme="dark"]) .
 .svc-proj .pl-filters { margin-top: var(--space-6); margin-bottom: var(--space-4); }
 /* Pagina del servizio: spazio tra hero e progetti */
 .svc-proj { padding-top: clamp(56px, 8vw, 112px); }
+
+/* Privacy e Cookie Policy: testo lungo, colonna stretta e leggibile */
+.wrap.legal { max-width: none; }
+.legal > * { max-width: 78ch; }
+.legal__meta { font: 600 13px/1 var(--font-display); letter-spacing: .12em; text-transform: uppercase; color: var(--ink-muted); margin: 0 0 var(--space-8); }
+.legal h2 { font: 700 clamp(28px, 3.4vw, 40px)/1.08 var(--font-display); letter-spacing: -.02em; margin: var(--space-16) 0 var(--space-4); color: var(--ink); }
+.legal h2:first-of-type { margin-top: 0; }
+.legal h3 { font: 700 clamp(19px, 1.8vw, 22px)/1.25 var(--font-display); margin: var(--space-8) 0 var(--space-3); color: var(--ink); }
+.legal p, .legal li { font: 400 17px/1.65 var(--font-body); color: var(--ink); }
+.legal p { margin: 0 0 var(--space-4); }
+.legal ul { margin: 0 0 var(--space-4); padding-left: 1.2em; display: grid; gap: var(--space-2); }
+.legal a { color: var(--blu-700); text-decoration: underline; text-underline-offset: .2em; overflow-wrap: anywhere; }
+[data-theme="dark"] .legal a { color: #fff; }
+.legal code { font: 500 .92em/1 ui-monospace, SFMono-Regular, Menlo, monospace; background: color-mix(in srgb, var(--ink) 8%, transparent); padding: 2px 6px; border-radius: 4px; }
+@media (max-width: 600px) { .legal p, .legal li { font-size: 16px; } }

@@ -1,8 +1,8 @@
 /**
- * Privacy e Cookie Policy: PromoCommunication e' la divisione marketing di Promotergroup S.p.a. e non ha una P.IVA propria,
- * quindi l'informativa e' quella di Promotergroup.
+ * Privacy e Cookie Policy: pagina del sito (src/app/privacy), adattata dall'informativa di Promotergroup S.p.a.
+ * (PromoCommunication e' la sua divisione marketing e non ha una P.IVA propria).
  */
-export const PRIVACY_URL = "https://www.promotergroup.eu/index.php/contattanoi/privacy-e-cookie-policy";
+export const PRIVACY_URL = "/privacy";
 
 /** Recapiti dell'agenzia (gli stessi del footer). */
 export const PHONE = { label: "+39 0932 862613", href: "tel:+390932862613" };

@@ -45,9 +45,7 @@ export function Footer() {
         </div>
       </div>
       <div className="pc-footer__legal">
-        <a href={PRIVACY_URL} target="_blank" rel="noopener noreferrer">
-          Privacy e Cookie Policy<span className="sr-only"> (si apre su promotergroup.eu, in una nuova scheda)</span>
-        </a>
+        <Link href={PRIVACY_URL}>Privacy e Cookie Policy</Link>
       </div>
     </footer>
   );
