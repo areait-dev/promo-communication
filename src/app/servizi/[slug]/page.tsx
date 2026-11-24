@@ -5,7 +5,7 @@ import { ProjectList } from "@/components/ProjectList";
 import { Head } from "@/components/blocks";
 import { ContactPageForm } from "@/components/ContactPageForm";
 import { ContactPanel } from "@/components/ContactPanel";
-import { FEAT, ICONS, SERVICES, SVC_CAT, svcById } from "@/data/services";
+import { SERVICES, SVC_CAT, svcById } from "@/data/services";
 import { PROJECTS } from "@/data/projects";
 import { vars } from "@/lib/ui";
 import { PageFx } from "@/components/PageFx";
@@ -27,8 +27,6 @@ export default async function Servizio({ params }: { params: Promise<{ slug: str
   const s = svcById((await params).slug);
   if (!s) notFound();
 
-  const feat = FEAT[s.id];
-  const items: [string, string, string][] = feat ? feat.items : s.tags.map((x) => [x, "bulb", ""]);
   const cat = SVC_CAT[s.id];
   const list = PROJECTS.filter((p) => cat && p.cats.includes(cat));
 
@@ -50,27 +48,6 @@ export default async function Servizio({ params }: { params: Promise<{ slug: str
           </div>
         </div>
         <PageFx />
-      </section>
-      <section className="sec feat-sec">
-        <div className="wrap">
-          <div className="feat-head pc-reveal">
-            <h2>Cosa facciamo</h2>
-            <p>{feat?.intro ?? ""}</p>
-          </div>
-          <ul className="feat">
-            {items.map((f, k) => (
-              <li key={f[0]} className="pc-reveal" style={vars({ "--i": k % 3 })}>
-                <span className="feat-ic">
-                  <svg viewBox="0 0 24 24" aria-hidden="true">
-                    <path d={ICONS[f[1]]} />
-                  </svg>
-                </span>
-                <h3>{f[0]}</h3>
-                <p>{f[2]}</p>
-              </li>
-            ))}
-          </ul>
-        </div>
       </section>
       <section className="sec svc-proj">
         <div className="wrap">
