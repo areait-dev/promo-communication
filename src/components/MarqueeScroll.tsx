@@ -3,7 +3,7 @@
 import { useEffect } from "react";
 import { onReducedMotionChange } from "@/lib/ui";
 
-const MAX_SHIFT = 0.25; // frazione della larghezza della striscia: stessa del CSS (pc-marquee)
+const MAX_SHIFT = 0.16; // frazione della larghezza della striscia: stessa del CSS (pc-marquee)
 
 /**
  * Fallback per i browser senza `animation-timeline` (vedi "Nastro" in site.css).

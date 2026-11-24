@@ -143,7 +143,7 @@
 .pc-marquee__item .pc-star path { stroke: var(--rosso-500); }
 .pc-marquee--accent { background: var(--surface-accent); }
 .pc-marquee--accent .pc-star path { stroke: var(--bianco); }
-@keyframes pc-marquee { to { transform: translateX(-25%); } }
+@keyframes pc-marquee { to { transform: translateX(-16%); } }
 
 /* ---------- Griglia di costruzione (texture) ---------- */
 .pc-grid-lines { position: absolute; inset: 0; pointer-events: none;
