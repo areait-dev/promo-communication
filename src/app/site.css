@@ -1949,6 +1949,29 @@ html[data-theme="dark"] .sec-story .pc-bubble .q-sub { color: rgba(0, 26, 112, .
 @media (max-width: 960px) { .hero .bigstar.pc-star--spin.is-live, .about-hero .bigstar.pc-star--spin.is-live { animation: pc-spin-2 4.5s cubic-bezier(0.45, 0, 0.25, 1) 1 both !important; } }
 @media (prefers-reduced-motion: reduce) { .hero .bigstar.pc-star--spin, .about-hero .bigstar.pc-star--spin { animation: none !important; } }
 
+/* Stella dell'hero, rotazione legata allo scroll (WCAG 2.2.2: si muove solo in risposta all'utente).
+   90deg ogni 500px di scroll (8000px = 1440deg), verso inverso se si risale, ferma se l'utente non scorre. Usa la proprieta' `rotate`,
+   cosi' non confligge con il `transform` del giro d'ingresso. Senza supporto a animation-timeline: nessuna rotazione, e nessun JS. */
+@keyframes pc-star-scroll { from { rotate: 0deg; } to { rotate: 1440deg; } }
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: scroll()) {
+    .hero .bigstar.pc-star--spin, .about-hero .bigstar.pc-star--spin { animation: pc-star-scroll linear both; animation-timeline: scroll(root block); animation-range: 0px 8000px; }
+    .hero .bigstar.pc-star--spin.is-live, .about-hero .bigstar.pc-star--spin.is-live {
+      animation: pc-spin-2 4.5s cubic-bezier(0.45, 0, 0.25, 1) 1 both, pc-star-scroll linear both;
+      animation-timeline: auto, scroll(root block); animation-range: normal, 0px 8000px;
+    }
+  }
+  @media (max-width: 960px) {
+    @supports (animation-timeline: scroll()) {
+      .hero .bigstar.pc-star--spin, .about-hero .bigstar.pc-star--spin { animation: pc-star-scroll linear both !important; animation-timeline: scroll(root block) !important; animation-range: 0px 8000px !important; }
+      .hero .bigstar.pc-star--spin.is-live, .about-hero .bigstar.pc-star--spin.is-live {
+        animation: pc-spin-2 4.5s cubic-bezier(0.45, 0, 0.25, 1) 1 both, pc-star-scroll linear both !important;
+        animation-timeline: auto, scroll(root block) !important; animation-range: normal, 0px 8000px !important;
+      }
+    }
+  }
+}
+
 /* ===== Navbar: stesso colore del footer ===== */
 /* Sfondo pieno --blu-notte come .pc-footer (in tema scuro e' gia' lo stesso colore). Dentro l'header i token "ink" sono quelli
    del tema scuro: testo bianco, logo con fumetto bianco, focus chiaro. */
