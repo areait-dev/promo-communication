@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
-/** Indirizzo pubblico del sito (dominio di produzione). Serve per canonical, Open Graph e sitemap. */
-export const SITE_URL = "https://promocommunication.it";
+/** Indirizzo pubblico del sito: quello con www, su cui Vercel reindirizza il dominio senza www. Serve per canonical, Open Graph e sitemap. */
+export const SITE_URL = "https://www.promocommunication.it";
 export const SITE_NAME = "PromoCommunication";
 /** Immagine di condivisione (1200×630) in /public. */
 export const OG_IMAGE = { url: "/og.png", width: 1200, height: 630, alt: "PromoCommunication, Boost your brand" };
