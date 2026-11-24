@@ -70,7 +70,7 @@ export default function ChiSiamo() {
             <div className="bulb-box">
               <Ill name="bulb" />
             </div>
-            <p className="q">Noi accendiamo la luce.</p>
+            <p className="q">Rendere visibile ciò che vale</p>
           </div>
         </div>
       </section>
