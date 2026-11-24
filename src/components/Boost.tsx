@@ -1,37 +1,130 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useRef, useState, type CSSProperties } from "react";
-import { motionOff, prefersReduced, vars } from "@/lib/ui";
+import { onReducedMotionChange, vars } from "@/lib/ui";
 
-const WORD = 2000; // permanenza di ogni parola
+/**
+ * WCAG 2.2.2: la sequenza delle parole dura al massimo 4 s (4 passaggi da 1 s) e poi si ferma sull'ultima.
+ * Riparte (sempre una sola volta, sempre <= 5 s) solo se il titolo esce dallo schermo e poi rientra.
+ */
+const STEP = 1000;
 
-export function Boost({ words, tag = "h1", size }: { words: string[]; tag?: "h1" | "h2"; size?: string }) {
+/**
+ * Titolo "Boost your <parola>": all'ingresso nello schermo le parole scorrono UNA volta e si fermano sull'ultima.
+ * `hrefs` (stessa lunghezza di `words`) rende la parola cliccabile: solo quella attiva riceve clic e focus.
+ * Mentre il mouse o il focus sono sulla parola la sequenza aspetta, cosi' il clic va dove si vede.
+ * Con prefers-reduced-motion (letto anche a runtime) si mostra subito la parola finale, senza sequenza.
+ */
+export function Boost({
+  words,
+  hrefs,
+  tag = "h1",
+  size,
+}: {
+  words: string[];
+  hrefs?: string[];
+  tag?: "h1" | "h2";
+  size?: string;
+}) {
   const [on, setOn] = useState(0);
   const [off, setOff] = useState(-1);
+  const root = useRef<HTMLHeadingElement>(null);
   const cur = useRef(0);
+  const held = useRef(false); // mouse o tastiera sulla parola
+  const reduced = useRef(false);
+  const timers = useRef<ReturnType<typeof setTimeout>[]>([]);
+  const last = words.length - 1;
 
   useEffect(() => {
-    if (prefersReduced() || words.length < 2) return;
-    const id = setInterval(() => {
-      if (motionOff()) return;
+    const clear = () => {
+      timers.current.forEach(clearTimeout);
+      timers.current = [];
+    };
+    const show = (i: number, animate: boolean) => {
       const prev = cur.current;
-      cur.current = (prev + 1) % words.length;
-      setOn(cur.current);
-      setOff(prev);
-      setTimeout(() => setOff((o) => (o === prev ? -1 : o)), 350);
-    }, WORD);
-    return () => clearInterval(id);
-  }, [words.length]);
+      cur.current = i;
+      setOn(i);
+      setOff(animate && prev !== i ? prev : -1);
+      if (animate && prev !== i) timers.current.push(setTimeout(() => setOff((o) => (o === prev ? -1 : o)), 350));
+    };
+    // una sola passata: parola 0 -> ultima, poi niente piu' timer
+    const run = () => {
+      clear();
+      show(0, false);
+      const next = () => {
+        if (held.current) {
+          timers.current.push(setTimeout(next, STEP)); // l'utente ha il puntatore/focus sopra: aspetta
+          return;
+        }
+        show(cur.current + 1, true);
+        if (cur.current < last) timers.current.push(setTimeout(next, STEP));
+      };
+      timers.current.push(setTimeout(next, STEP));
+    };
+
+    const stopMq = onReducedMotionChange((r) => {
+      reduced.current = r;
+      if (r) {
+        clear();
+        show(last, false);
+      }
+    });
+
+    let io: IntersectionObserver | undefined;
+    if (words.length > 1 && root.current) {
+      io = new IntersectionObserver(
+        ([e]) => {
+          if (reduced.current) return;
+          if (e.isIntersecting) run();
+          else {
+            clear();
+            show(0, false); // pronto per la prossima entrata
+          }
+        },
+        { threshold: 0.5 },
+      );
+      io.observe(root.current);
+    }
+    return () => {
+      stopMq();
+      io?.disconnect();
+      clear();
+    };
+  }, [words.length, last]);
 
   const Tag = tag;
   const style: CSSProperties | undefined = size ? vars({ "--boost-size": size }) : undefined;
+  const phrase = "Boost your " + words.map((w) => w.toLowerCase()).join(", ");
   return (
-    <Tag className="pc-boost" style={style}>
-      <span className="pc-boost__fixed">Boost your</span>
-      <span className="pc-boost__slot" aria-live="polite">
+    <Tag className="pc-boost" style={style} ref={root}>
+      <span className="sr-only">{phrase}</span>
+      <span className="pc-boost__fixed" aria-hidden="true">
+        Boost your
+      </span>
+      <span
+        className="pc-boost__slot"
+        // senza link la parte che cambia e' interamente nascosta agli screen reader (c'e' la frase completa sopra);
+        // con i link restano esposte solo le parole raggiungibili da tastiera, per non avere elementi focalizzabili dentro aria-hidden
+        aria-hidden={hrefs ? undefined : true}
+        onMouseEnter={() => (held.current = true)}
+        onMouseLeave={() => (held.current = false)}
+        onFocus={() => (held.current = true)}
+        onBlur={() => (held.current = false)}
+      >
         {words.map((w, i) => (
-          <span key={w} className={"pc-boost__word" + (i === on ? " is-on" : "") + (i === off ? " is-off" : "")}>
-            {w}
+          <span
+            key={w}
+            className={"pc-boost__word" + (i === on ? " is-on" : "") + (i === off ? " is-off" : "")}
+            aria-hidden={hrefs && i === on ? undefined : true}
+          >
+            {hrefs?.[i] ? (
+              <Link className="pc-boost__link" href={hrefs[i]} tabIndex={i === on ? 0 : -1}>
+                {w}
+              </Link>
+            ) : (
+              w
+            )}
           </span>
         ))}
       </span>
