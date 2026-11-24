@@ -2498,3 +2498,13 @@ html:not([data-theme="dark"]) .bi-book .bi-lo p, html:not([data-theme="dark"]) .
 @media (max-width: 960px) and (prefers-reduced-motion: reduce) {
   .pc-marquee__track { padding: 0 var(--space-4); column-gap: 0; }
 }
+
+/* --- 4. "La nostra storia" --- fumetto a tutta larghezza, testo leggibile, CTA a tutta larghezza */
+@media (max-width: 960px) {
+  .sec-story .split { gap: var(--space-8); }
+  .sec-story .big-bubble { width: 100%; padding: clamp(28px, 7vw, 48px) clamp(24px, 6vw, 44px); }
+  .sec-story .q { font-size: clamp(32px, 9vw, 48px); line-height: 1.04; }
+  .sec-story .q-sub { font-size: 16px; line-height: 1.5; max-width: none; }
+  .sec-story .p-lg { font-size: clamp(17px, 4.6vw, 20px); line-height: 1.6; }
+  .sec-story .pc-btn { display: flex; width: 100%; min-height: 48px; justify-content: center; text-align: center; }
+}
