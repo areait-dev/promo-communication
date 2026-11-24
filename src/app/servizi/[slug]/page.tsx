@@ -9,6 +9,7 @@ import { SERVICES, SVC_CAT, svcById } from "@/data/services";
 import { PROJECTS } from "@/data/projects";
 import { vars } from "@/lib/ui";
 import { PageFx } from "@/components/PageFx";
+import { pageMeta, snip } from "@/lib/seo";
 
 // Tutti gli slug sono noti in fase di build (generateStaticParams): la pagina e' statica, niente Suspense con fallback
 // (farebbe comparire un fallback prima del contenuto e romperebbe l'elemento condiviso voce -> hero).
@@ -20,7 +21,7 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const s = svcById((await params).slug);
-  return { title: s?.name };
+  return s ? pageMeta({ title: s.name, path: `/servizi/${s.id}`, description: snip(s.p1) }) : {};
 }
 
 export default async function Servizio({ params }: { params: Promise<{ slug: string }> }) {

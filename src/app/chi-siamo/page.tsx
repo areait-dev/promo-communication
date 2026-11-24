@@ -6,8 +6,14 @@ import { Star } from "@/components/Star";
 import { Cta, Marquee } from "@/components/blocks";
 import { vars } from "@/lib/ui";
 import { PageFx } from "@/components/PageFx";
+import { pageMeta } from "@/lib/seo";
 
-export const metadata: Metadata = { title: "Chi siamo" };
+export const metadata: Metadata = pageMeta({
+  title: "Chi siamo",
+  path: "/chi-siamo",
+  description:
+    "La Unit di Comunicazione & Marketing di Promotergroup: un team creativo che conosce le imprese dall’interno e le aiuta a rendere visibile ciò che vale.",
+});
 
 export default function ChiSiamo() {
   return (

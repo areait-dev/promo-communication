@@ -6,8 +6,14 @@ import { Star } from "@/components/Star";
 import { Cta } from "@/components/blocks";
 import { vars } from "@/lib/ui";
 import { PageFx } from "@/components/PageFx";
+import { pageMeta } from "@/lib/seo";
 
-export const metadata: Metadata = { title: "Servizi" };
+export const metadata: Metadata = pageMeta({
+  title: "Servizi",
+  path: "/servizi",
+  description:
+    "Brand strategy, identity, digital & web, social media, reputation, personal branding, eventi e comunicazione politica: i servizi di PromoCommunication.",
+});
 
 export default function Servizi() {
   return (

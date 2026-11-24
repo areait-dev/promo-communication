@@ -6,6 +6,7 @@ import { Cta, Pager } from "@/components/blocks";
 import { PROJECTS, pImg, projById } from "@/data/projects";
 import { projHref, vars } from "@/lib/ui";
 import { PageFx } from "@/components/PageFx";
+import { pageMeta, snip } from "@/lib/seo";
 
 // Solo i progetti pubblicati (con anteprima): gli altri danno 404.
 // Tutti gli slug sono noti in fase di build (generateStaticParams): la pagina e' statica, niente Suspense con fallback
@@ -18,7 +19,7 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const p = projById((await params).slug);
-  return { title: p?.name };
+  return p ? pageMeta({ title: p.name, path: `/portfolio/${p.id}`, description: snip(p.intro || `${p.name}: un progetto di PromoCommunication.`) }) : {};
 }
 
 export default async function Progetto({ params }: { params: Promise<{ slug: string }> }) {

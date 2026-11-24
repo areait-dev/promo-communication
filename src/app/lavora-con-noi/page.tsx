@@ -4,8 +4,14 @@ import { ContactPanel } from "@/components/ContactPanel";
 import { PageFx } from "@/components/PageFx";
 import { CAREERS_LEAD, CAREERS_TITLE, OPEN_ROLES } from "@/data/careers";
 import { vars } from "@/lib/ui";
+import { pageMeta } from "@/lib/seo";
 
-export const metadata: Metadata = { title: "Lavora con noi" };
+export const metadata: Metadata = pageMeta({
+  title: "Lavora con noi",
+  path: "/lavora-con-noi",
+  description:
+    "Cerchiamo persone curiose, con idee chiare e voglia di mettersi in gioco. Manda il tuo CV a PromoCommunication e raccontaci chi sei.",
+});
 
 export default function LavoraConNoi() {
   return (

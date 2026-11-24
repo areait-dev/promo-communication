@@ -5,18 +5,42 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { MainView } from "@/components/MainView";
 import { Behaviors } from "@/components/Behaviors";
+import { OG_IMAGE, SITE_NAME, SITE_URL } from "@/lib/seo";
+import { ADDRESS, EMAIL, PHONE, SOCIALS } from "@/data/contact";
 
 const outfit = Outfit({ subsets: ["latin"], variable: "--f-outfit", display: "swap" });
 const funnel = Funnel_Display({ subsets: ["latin"], variable: "--f-funnel", display: "swap" });
 
+const HOME_TITLE = "Boost your brand — PromoCommunication";
+const HOME_DESC =
+  "PromoCommunication — la Unit di Comunicazione & Marketing di Promotergroup. Diamo forma, voce e spazio a quello che la tua impresa fa ogni giorno.";
+
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: {
-    default: "Boost your brand — PromoCommunication",
+    default: HOME_TITLE,
     template: "%s — PromoCommunication",
   },
-  description:
-    "PromoCommunication — la Unit di Comunicazione & Marketing di Promotergroup. Diamo forma, voce e spazio a quello che la tua impresa fa ogni giorno.",
+  description: HOME_DESC,
+  alternates: { canonical: "/" },
+  openGraph: { type: "website", siteName: SITE_NAME, locale: "it_IT", url: "/", title: HOME_TITLE, description: HOME_DESC, images: [OG_IMAGE] },
+  twitter: { card: "summary_large_image", title: HOME_TITLE, description: HOME_DESC, images: [OG_IMAGE.url] },
 };
+
+// Dati strutturati: l'agenzia come organizzazione, parte di Promotergroup S.p.A.
+const ORG_JSONLD = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: SITE_NAME,
+  url: SITE_URL,
+  logo: `${SITE_URL}/icon.png`,
+  description: HOME_DESC,
+  email: EMAIL ?? undefined,
+  telephone: PHONE.label,
+  address: { "@type": "PostalAddress", streetAddress: ADDRESS[0], postalCode: "97019", addressLocality: "Vittoria", addressRegion: "RG", addressCountry: "IT" },
+  parentOrganization: { "@type": "Organization", name: "Promotergroup S.p.A.", url: "https://www.promotergroup.eu" },
+  sameAs: SOCIALS.map((x) => x.href),
+}).replace(/</g, "\u003c");
 
 export const viewport: Viewport = {
   themeColor: "#001a6f",
@@ -31,6 +55,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html lang="it" data-theme="light" suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: initScript }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: ORG_JSONLD }} />
       </head>
       <body className={`pc ${outfit.variable} ${funnel.variable}`}>
         <svg width="0" height="0" style={{ position: "absolute" }} aria-hidden="true">

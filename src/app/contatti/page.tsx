@@ -4,8 +4,14 @@ import { ContactPanel } from "@/components/ContactPanel";
 import { PageFx } from "@/components/PageFx";
 import { CONTACT_LEAD } from "@/data/contact";
 import { vars } from "@/lib/ui";
+import { pageMeta } from "@/lib/seo";
 
-export const metadata: Metadata = { title: "Contatti" };
+export const metadata: Metadata = pageMeta({
+  title: "Contatti",
+  path: "/contatti",
+  description:
+    "Scrivici due righe: ti rispondiamo entro 24 ore lavorative con una prima idea. Siamo a Vittoria (RG), in Via del Carrubo.",
+});
 
 export default function Contatti() {
   return (

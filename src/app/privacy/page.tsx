@@ -3,8 +3,14 @@ import Link from "next/link";
 import { PageFx } from "@/components/PageFx";
 import { ADDRESS, EMAIL, PHONE } from "@/data/contact";
 import { vars } from "@/lib/ui";
+import { pageMeta } from "@/lib/seo";
 
-export const metadata: Metadata = { title: "Privacy e Cookie Policy" };
+export const metadata: Metadata = pageMeta({
+  title: "Privacy e Cookie Policy",
+  path: "/privacy",
+  description:
+    "Come PromoCommunication tratta i tuoi dati quando visiti il sito o ci scrivi: informativa privacy e cookie policy.",
+});
 
 /**
  * Privacy e Cookie Policy di PromoCommunication.

@@ -4,8 +4,14 @@ import { TeamScroll } from "@/components/TeamScroll";
 import { Cta } from "@/components/blocks";
 import { vars } from "@/lib/ui";
 import { PageFx } from "@/components/PageFx";
+import { pageMeta } from "@/lib/seo";
 
-export const metadata: Metadata = { title: "Team" };
+export const metadata: Metadata = pageMeta({
+  title: "Team",
+  path: "/team",
+  description:
+    "Il team di PromoCommunication: press officer, art director, social media manager, graphic designer e developer. Teste diverse, stesso fumetto.",
+});
 
 export default function Team() {
   return (
