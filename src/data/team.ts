@@ -2,7 +2,7 @@ export type Member = { n: string; r: string; c: 'b' | 'r'; img?: string; b: stri
 export const TEAM: Member[] = [
  {
   "n": "Antonio Caputo",
-  "r": "Press Officer",
+  "r": "Strategy Director | Press Office & PR",
   "c": "b",
   "img": "/img/team/antonio-caputo.webp",
   "b": "La sua giornata inizia con Morning (Il Post) e finisce quasi sempre con la lettura di una newsletter. In agenzia si dimena tra comunicati stampa, relazioni coi media e la ricerca delle ‘giuste’ parole per dare vita e forma al racconto di ‘imprese’ quotidiane. L’esperienza nella comunicazione politica lo ha reso un osservatore attento dei media e del dibattito pubblico. Quando qualcosa in agenzia sembra complicarsi, torna sempre con un nuovo claim capace di ribaltare la situazione. Del resto, il suo motto resta lo stesso: <strong><em>Yes, we can!</em></strong>"
