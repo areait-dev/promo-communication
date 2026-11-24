@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect } from "react";
-import { MobileControls } from "./Controls";
 import { initLive, initMagnet } from "@/lib/fx";
 import { initReveal } from "@/lib/reveal";
 
@@ -16,5 +15,5 @@ export function PageFx() {
     const stops = [initReveal(), initLive(), initMagnet()];
     return () => stops.forEach((stop) => stop());
   }, []);
-  return <MobileControls />;
+  return null;
 }

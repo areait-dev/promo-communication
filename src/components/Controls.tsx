@@ -62,17 +62,3 @@ export function Controls() {
     </button>
   );
 }
-
-/**
- * Su mobile i controlli (animazioni / tema) stanno nella prima sezione di ogni pagina.
- * È JSX normale, senza modifiche manuali al DOM: sul server non rende nulla, sul client appare dopo l'idratazione.
- */
-export function MobileControls() {
-  const mobile = useMobile();
-  if (!mobile) return null;
-  return (
-    <div className="ctl-m" role="group" aria-label="Animazioni e tema">
-      <Controls />
-    </div>
-  );
-}

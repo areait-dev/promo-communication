@@ -2459,3 +2459,23 @@ html:not([data-theme="dark"]) .bi-book .bi-lo p, html:not([data-theme="dark"]) .
 .bi-book .bi-re { background: var(--blu-600); } .bi-book .bi-re::before { content: ""; position: absolute; z-index: -1; left: 0; right: 0; top: 0; height: 8px; background: var(--Red); }
 [data-theme="dark"] .bi-book .bi-re { background: var(--blu-700); }
 @media (max-width: 900px) and (min-width: 601px) { .bp-a2 .bp-photo { display: none; } }
+
+/* ===================================================================================================================
+   MOBILE E TABLET (<= 960px). Il desktop non cambia: tutto sta dentro media query. Un blocco per sezione.
+   =================================================================================================================== */
+
+/* --- 1. Header e menu --- logo a sinistra, hamburger a destra; il toggle del tema sta nel menu */
+.menu-open, .menu-open body { overflow: hidden; overscroll-behavior: contain; }
+@media (max-width: 960px) {
+  .hdr .wrap { display: flex !important; align-items: center; justify-content: space-between; }
+  .hdr .wrap > a:first-child { grid-column: auto; justify-self: auto; display: inline-flex; align-items: center; min-height: 44px; }
+  .hdr .nav { grid-column: auto; }
+  .burger { width: 48px; height: 48px; display: grid; place-content: center; padding: 0; margin-right: -11px; }
+  .mmenu .close { min-width: 44px; min-height: 44px; }
+  .mmenu .foot { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-top: 24px; margin-top: auto; border-top: 1px solid rgba(255, 255, 255, .22); font: 600 13px/1 var(--font-display); letter-spacing: .12em; text-transform: uppercase; color: #fff; }
+  .mmenu .foot .sw { position: relative; border-color: #fff; }
+  .mmenu .foot .sw::after { content: ""; position: absolute; inset: -8px -4px; } /* area di tocco 48px */
+  html:not([data-theme="dark"]) .mmenu .sw-k { background: #fff; }
+  html:not([data-theme="dark"]) .mmenu .sw-i { stroke: var(--blu-notte); }
+}
+
