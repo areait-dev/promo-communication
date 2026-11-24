@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { SocialLinks } from "./SocialLinks";
+import { CookieSettingsButton } from "./CookieBanner";
 import { ADDRESS, PHONE, PRIVACY_URL } from "@/data/contact";
 import { SERVICES } from "@/data/services";
 
@@ -44,6 +45,7 @@ export function Footer() {
       </div>
       <div className="pc-footer__legal">
         <Link href={PRIVACY_URL}>Privacy e Cookie Policy</Link>
+        <CookieSettingsButton className="ft-link" />
       </div>
     </footer>
   );

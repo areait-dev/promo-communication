@@ -5,6 +5,7 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { MainView } from "@/components/MainView";
 import { Behaviors } from "@/components/Behaviors";
+import { CookieBanner } from "@/components/CookieBanner";
 import { OG_IMAGE, SITE_NAME, SITE_URL } from "@/lib/seo";
 import { ADDRESS, EMAIL, PHONE, SOCIALS } from "@/data/contact";
 import { isPreview } from "@/lib/env";
@@ -50,7 +51,7 @@ export const viewport: Viewport = {
 // Google Tag Manager: solo in produzione (non in locale né sullo stage, per non sporcare i dati).
 // Il consenso parte NEGATO per analisi e pubblicità (Consent Mode): finché non c'è un banner che lo conceda, i tag Google che lo rispettano non salvano cookie.
 const GTM_ID = "GTM-N49MLKQV";
-const gtmScript = `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('consent','default',{ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',analytics_storage:'denied',wait_for_update:500});(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s);j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i;f.parentNode.insertBefore(j,f)})(window,document,'script','dataLayer','${GTM_ID}')`;
+const gtmScript = `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('consent','default',{ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',analytics_storage:'denied',wait_for_update:500});try{var c=JSON.parse(localStorage.getItem('pc-consent')||'null');if(c&&c.v==='granted'&&Date.now()-c.t<15724800000)gtag('consent','update',{ad_storage:'granted',ad_user_data:'granted',ad_personalization:'granted',analytics_storage:'granted'})}catch(e){}(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s);j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i;f.parentNode.insertBefore(j,f)})(window,document,'script','dataLayer','${GTM_ID}')`;
 const withGtm = process.env.NODE_ENV === "production" && !isPreview;
 
 // Prima del primo paint: classe .js (abilita lo stato iniziale dei reveal), tema e, con prefers-reduced-motion, la classe
@@ -82,6 +83,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           <Footer />
         </div>
         <Behaviors />
+        <CookieBanner />
       </body>
     </html>
   );

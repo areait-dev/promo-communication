@@ -147,8 +147,9 @@ export default function Privacy() {
             </li>
           </ul>
           <p>
-            I cookie tecnici non richiedono il consenso. Quelli di analisi e di marketing, se verranno attivati, saranno attivati solo dopo
-            il tuo consenso, e questa pagina verrà aggiornata con l’elenco degli strumenti usati.
+            I cookie tecnici non richiedono il consenso. Quelli di analisi e di marketing si attivano solo se premi “Accetta” nel banner
+            che compare alla prima visita. Puoi rifiutare con lo stesso gesto e cambiare idea in qualsiasi momento da “Gestisci cookie”,
+            in fondo a ogni pagina. La scelta resta nel tuo browser per sei mesi, poi te la chiediamo di nuovo.
           </p>
 
           <h3>Come gestire o disabilitare i cookie</h3>
