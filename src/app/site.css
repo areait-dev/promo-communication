@@ -662,7 +662,8 @@ main { min-height: 60vh; position: relative; }
 .pc-boost__word.is-on { transition: transform 300ms var(--ease-out), opacity 300ms linear; }
 .pc-boost__word.is-off { transition: transform 300ms var(--ease-in-out), opacity 300ms linear; }
 .pc-boost__word.is-on::before { animation: pc-mark 800ms var(--ease-out) both; }
-@media (prefers-reduced-motion: reduce) { .pc-boost__word::before, .pc-boost__word.is-on::before { animation: none !important; } .pc-boost__word { transition: none !important; } }
+/* reduced-motion: nessuna animazione, ma l'evidenziatore resta visibile (statico) sulla parola attiva: il testo e' bianco, senza il rosso sotto non si legge */
+@media (prefers-reduced-motion: reduce) { .pc-boost__word::before, .pc-boost__word.is-on::before { animation: none !important; } .pc-boost__word.is-on::before { transform: scaleX(1) !important; } .pc-boost__word { transition: none !important; } }
 @keyframes pc-mark { 0% { transform: scaleX(0); } 35%, 100% { transform: scaleX(1); } }
 
 /* "Scopri" nelle card: evidenziatore rosso al passaggio, come il menu */
