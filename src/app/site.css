@@ -2650,3 +2650,6 @@ html:not([data-theme="dark"]) .ssr-ph--m.has-img { background: var(--grigio-chia
 /* coda del fumetto con la foto: riempita dello stesso grigio (il bordo resta quello del tema) */
 html[data-theme="dark"] .ssr-card .ssr-ph.has-img::before,
 html:not([data-theme="dark"]) .ssr-card .ssr-ph.has-img::before { width: 56px; height: 41px; background: var(--grigio-chiaro); clip-path: polygon(0 0, 100% 0, 0 100%); z-index: 1; }
+/* il contorno della coda sta sopra il riempimento grigio */
+html[data-theme="dark"] .ssr-card .ssr-ph.has-img::after,
+html:not([data-theme="dark"]) .ssr-card .ssr-ph.has-img::after { z-index: 2; }
