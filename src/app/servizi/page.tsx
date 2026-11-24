@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Accordion } from "@/components/Accordion";
 import { Boost } from "@/components/Boost";
-import { ServicesScroll } from "@/components/ServicesScroll";
 import { ElasticGrid } from "@/components/ElasticGrid";
 import { Star } from "@/components/Star";
 import { Cta } from "@/components/blocks";
@@ -24,7 +23,6 @@ export default function Servizi() {
         <PageFx />
       </section>
       <Accordion />
-      <ServicesScroll />
       <Cta />
     </>
   );
