@@ -1,5 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import Link from "next/link";
+import { MarqueeScroll } from "./MarqueeScroll";
 import { Star } from "./Star";
 import { SERVICES } from "@/data/services";
 import type { Member } from "@/data/team";
@@ -23,16 +24,18 @@ export function Marquee() {
     </span>
   ));
   return (
-    <div className="pc-marquee" aria-label={"Servizi: " + SERVICES.map((s) => s.name).join(", ")}>
-      <div className="pc-marquee__track" aria-hidden="true">
+    <div className="pc-marquee" role="group" aria-label="Servizi">
+      <div className="pc-marquee__track">
         {items}
+        {/* seconda serie: serve solo a riempire la striscia mentre scorre, non va letta due volte */}
         {SERVICES.map((s) => (
-          <span className="pc-marquee__item" key={"b" + s.id}>
+          <span className="pc-marquee__item" key={"b" + s.id} aria-hidden="true">
             {s.name}
             <Star />
           </span>
         ))}
       </div>
+      <MarqueeScroll />
     </div>
   );
 }
@@ -54,7 +57,7 @@ export function Cta() {
 export function JoinCard() {
   return (
     <article className="pc-team tm tm-join pc-reveal" style={vars({ "--i": 2 })}>
-      <Link className="pc-team__frame" href="/contatti">
+      <Link className="pc-team__frame" href="/lavora-con-noi">
         <div className="pc-team__photo">
           <div className="pc-team__ph tm-join__in">
             <span>Il prossimo fumetto potresti essere tu</span>

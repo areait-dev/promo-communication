@@ -11,5 +11,17 @@ export const prefersReduced = () =>
   typeof window !== "undefined" &&
   window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-export const svcHref = (id: string) => `/servizi/${id}`;
+/**
+ * Ascolta prefers-reduced-motion anche a runtime (WCAG 2.2.2 / 2.3.3): `cb` parte subito col valore attuale
+ * e a ogni cambio. Restituisce la funzione per smettere di ascoltare.
+ */
+export function onReducedMotionChange(cb: (reduced: boolean) => void): () => void {
+  const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+  const fire = () => cb(mq.matches);
+  mq.addEventListener("change", fire);
+  fire();
+  return () => mq.removeEventListener("change", fire);
+}
+
+export const svcHref = (id: string) => `/contatti?servizio=${id}`;
 export const projHref = (id: string) => `/portfolio/${id}`;
