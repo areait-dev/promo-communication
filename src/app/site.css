@@ -2586,3 +2586,4 @@ html:not([data-theme="dark"]) .bi-book .bi-lo p, html:not([data-theme="dark"]) .
   .pc-footer__legal a, .pc-footer__legal span { display: inline-block; padding: 8px 0; }
 }
 @media (max-width: 560px) { .pc-footer__cols { grid-template-columns: minmax(0, 1fr) !important; } }
+@media (max-width: 960px) { .contact-list a[href^="mailto"], .contact-list a[href^="tel"] { display: inline-block; padding: 10px 0; } }
