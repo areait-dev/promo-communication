@@ -73,7 +73,7 @@ export async function POST(req: Request) {
   } else {
     if (tipo === "contatti") {
       const servizi = fd.getAll("servizi").map((x) => String(x).slice(0, 80)).slice(0, 12);
-      rows.push(["Servizi", servizi.join(", ") || "-"], ["Budget", field(fd, "budget", 80) || "-"]);
+      rows.push(["Servizi", servizi.join(", ") || "-"]);
     } else {
       let total = 0;
       for (const f of fd.getAll("f")) {

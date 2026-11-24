@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState, type FormEvent } from "react";
-import { BUDGETS, PHONE, PRIVACY_URL } from "@/data/contact";
+import { PHONE, PRIVACY_URL } from "@/data/contact";
 import { SERVICES } from "@/data/services";
 import { postForm } from "@/lib/send";
 
@@ -11,7 +11,6 @@ export type ContactRequest = {
   email: string;
   telefono: string;
   servizi: string[];
-  budget: string;
   messaggio: string;
   privacy: boolean;
 };
@@ -52,7 +51,6 @@ export function ContactPageForm({ defaultService }: { defaultService?: string } 
       email: String(fd.get("email") ?? ""),
       telefono: String(fd.get("telefono") ?? ""),
       servizi: fd.getAll("servizi").map(String),
-      budget: String(fd.get("budget") ?? ""),
       messaggio: String(fd.get("messaggio") ?? ""),
       privacy: fd.get("privacy") === "on",
     };
@@ -129,19 +127,6 @@ export function ContactPageForm({ defaultService }: { defaultService?: string } 
             <input className="ct-input" id="ct-t" name="telefono" type="tel" inputMode="tel" autoComplete="tel" {...invalid("t")} />
             {err("t")}
           </div>
-        </div>
-
-        <div className="ct-field">
-          <label className="ct-label" htmlFor="ct-b">
-            Budget indicativo <span className="ct-opt">(facoltativo)</span>
-          </label>
-          <select className="ct-input ct-select" id="ct-b" name="budget" defaultValue={BUDGETS[0]}>
-            {BUDGETS.map((b) => (
-              <option key={b} value={b}>
-                {b}
-              </option>
-            ))}
-          </select>
         </div>
 
         <div className="ct-field">

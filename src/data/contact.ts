@@ -42,5 +42,3 @@ export const MAPS_LINK = `https://www.google.com/maps/search/?api=1&query=${MAP_
 /** Mappa incorporata (Google): ricerca per indirizzo. */
 export const MAPS_EMBED = `https://www.google.com/maps?q=${encodeURIComponent("Via del Carrubo, Vittoria (RG)")}&output=embed`;
 
-/** Budget indicativo del form. */
-export const BUDGETS = ["Da definire", "Meno di 5.000 €", "5.000 – 15.000 €", "Oltre 15.000 €"] as const;
