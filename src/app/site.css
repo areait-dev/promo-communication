@@ -1939,12 +1939,11 @@ html[data-theme="dark"] .sec-story .pc-bubble .q-sub { color: rgba(0, 26, 112, .
 [data-theme="dark"] .sw-moon { opacity: 1; rotate: 0deg; }
 @media (max-width: 960px) { html:not([data-theme="dark"]) .svc-hero .ctl-m .sw-i { stroke: var(--blu-700); } }
 
-/* Stella dell'hero: rotazione lenta in loop */
-/* Un giro ogni 24 s, sempre uguale. Si ferma con prefers-reduced-motion (regola gia' presente per .pc-star--spin) e quando e' fuori schermo. */
-.hero .bigstar.pc-star--spin, .about-hero .bigstar.pc-star--spin { animation: pc-spin 24s linear infinite; }
-html[data-reveal="ready"] :is(.hero, .about-hero) .bigstar.pc-star--spin:not(.is-live) { animation-play-state: paused; }
-/* sotto i 961px una vecchia regola (.bigstar { animation: none !important }) fermava tutte le stelle: la rotazione lenta resta anche su mobile */
-@media (max-width: 960px) { .hero .bigstar.pc-star--spin, .about-hero .bigstar.pc-star--spin { animation: pc-spin 24s linear infinite !important; } }
+/* Stella dell'hero (WCAG 2.2.2): un solo giro di 4 s quando entra nello schermo (.is-live, vedi src/lib/fx.ts), poi ferma.
+   Niente loop. A fine giro la stella e' identica a come partiva (360 gradi). Con prefers-reduced-motion non ruota. */
+.hero .bigstar.pc-star--spin.is-live, .about-hero .bigstar.pc-star--spin.is-live { animation: pc-spin 4s var(--ease-out) 1 both; }
+/* sotto i 961px una vecchia regola (.bigstar { animation: none !important }) fermava tutte le stelle: il giro d'ingresso resta anche su mobile */
+@media (max-width: 960px) { .hero .bigstar.pc-star--spin.is-live, .about-hero .bigstar.pc-star--spin.is-live { animation: pc-spin 4s var(--ease-out) 1 both !important; } }
 @media (prefers-reduced-motion: reduce) { .hero .bigstar.pc-star--spin, .about-hero .bigstar.pc-star--spin { animation: none !important; } }
 
 /* ===== Navbar: stesso colore del footer ===== */
