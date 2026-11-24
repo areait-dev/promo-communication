@@ -18,6 +18,7 @@ export const metadata: Metadata = pageMeta({
  * divisione marketing di Promotergroup e non ha una P.IVA propria, quindi il Titolare resta Promotergroup S.p.a.
  * Sono state tolte le parti che riguardano funzioni che questo sito non ha (commenti, account, login, Gravatar) e descritto ciò che
  * il sito fa davvero: form di contatto e candidatura, localStorage per il tema, mappa di Google nella pagina Contatti.
+ * NB: con Google Tag Manager (GTM-N49MLKQV) attivo in produzione, se nel container si aggiungono tag di analisi o marketing serve un banner di consenso e va aggiornato l’elenco qui sotto.
  * TODO (da far verificare a chi segue la privacy di Promotergroup): tempi di conservazione, fornitori elencati, eventuali trasferimenti extra UE.
  */
 const UPDATED = "24/11/2026";
@@ -117,13 +118,23 @@ export default function Privacy() {
 
           <h3>Che cosa usa questo sito</h3>
           <p>
-            Questo sito <strong>non usa cookie di profilazione né strumenti di analisi statistica</strong>. Usa soltanto:
+            Questo sito <strong>non attiva cookie di profilazione né di analisi statistica senza il tuo consenso</strong>. Usa:
           </p>
           <ul>
             <li>
               <strong>Preferenza del tema</strong> (tecnico, di prima parte): quando scegli il tema chiaro o scuro, il browser ricorda la
               scelta con la voce <code>pc-theme</code> nell’archiviazione locale. Resta finché non la cancelli dal browser. Non contiene dati
               personali e non richiede consenso.
+            </li>
+            <li>
+              <strong>Google Tag Manager</strong> (di terza parte): è lo strumento con cui il sito gestisce eventuali strumenti di
+              misurazione. Quando apri una pagina, il tuo browser si collega ai server di Google per caricarlo. Per impostazione
+              predefinita il consenso a cookie di analisi e di pubblicità è negato: finché non lo dai, quegli strumenti non salvano cookie.
+              Maggiori informazioni nella{" "}
+              <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">
+                privacy policy di Google
+              </a>
+              .
             </li>
             <li>
               <strong>Mappa di Google</strong> (di terza parte), solo nella pagina <Link href="/contatti">Contatti</Link>: la mappa è
@@ -136,8 +147,8 @@ export default function Privacy() {
             </li>
           </ul>
           <p>
-            I cookie tecnici non richiedono il consenso: per questo, al momento, il sito non mostra un banner. Se in futuro aggiungeremo
-            strumenti di analisi o di marketing, aggiorneremo questa pagina e chiederemo il consenso prima di attivarli.
+            I cookie tecnici non richiedono il consenso. Quelli di analisi e di marketing, se verranno attivati, saranno attivati solo dopo
+            il tuo consenso, e questa pagina verrà aggiornata con l’elenco degli strumenti usati.
           </p>
 
           <h3>Come gestire o disabilitare i cookie</h3>

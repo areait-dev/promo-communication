@@ -7,6 +7,7 @@ import { MainView } from "@/components/MainView";
 import { Behaviors } from "@/components/Behaviors";
 import { OG_IMAGE, SITE_NAME, SITE_URL } from "@/lib/seo";
 import { ADDRESS, EMAIL, PHONE, SOCIALS } from "@/data/contact";
+import { isPreview } from "@/lib/env";
 
 const outfit = Outfit({ subsets: ["latin"], variable: "--f-outfit", display: "swap" });
 const funnel = Funnel_Display({ subsets: ["latin"], variable: "--f-funnel", display: "swap" });
@@ -46,6 +47,12 @@ export const viewport: Viewport = {
   themeColor: "#001a6f",
 };
 
+// Google Tag Manager: solo in produzione (non in locale né sullo stage, per non sporcare i dati).
+// Il consenso parte NEGATO per analisi e pubblicità (Consent Mode): finché non c'è un banner che lo conceda, i tag Google che lo rispettano non salvano cookie.
+const GTM_ID = "GTM-N49MLKQV";
+const gtmScript = `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('consent','default',{ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',analytics_storage:'denied',wait_for_update:500});(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s);j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i;f.parentNode.insertBefore(j,f)})(window,document,'script','dataLayer','${GTM_ID}')`;
+const withGtm = process.env.NODE_ENV === "production" && !isPreview;
+
 // Prima del primo paint: classe .js (abilita lo stato iniziale dei reveal), tema e, con prefers-reduced-motion, la classe
 // motion-off che ferma le animazioni decorative; evita lampi. Non c'e' piu' un pulsante di pausa: la scelta e' quella del sistema.
 const initScript = `var d=document.documentElement;d.classList.add('js');setTimeout(function(){if(!window.__pcReveal)d.classList.add('no-reveal')},5000);try{var t=localStorage.getItem('pc-theme');if(t)d.setAttribute('data-theme',t);}catch(e){}if(matchMedia('(prefers-reduced-motion: reduce)').matches)d.classList.add('motion-off')`;
@@ -55,6 +62,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html lang="it" data-theme="light" suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: initScript }} />
+        {withGtm && <script dangerouslySetInnerHTML={{ __html: gtmScript }} />}
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: ORG_JSONLD }} />
       </head>
       <body className={`pc ${outfit.variable} ${funnel.variable}`}>
