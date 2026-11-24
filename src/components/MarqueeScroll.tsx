@@ -6,16 +6,18 @@ import { onReducedMotionChange } from "@/lib/ui";
 const MAX_SHIFT = 0.16; // frazione della larghezza della striscia: stessa del CSS (pc-marquee)
 
 /**
- * Fallback per i browser senza `animation-timeline` (vedi "Nastro" in site.css).
- * La striscia si sposta solo mentre l'utente scorre la pagina: nessun timer, nessun loop.
- * Con prefers-reduced-motion resta ferma (ascolta anche il cambio a runtime).
+ * Nastro dei servizi (WCAG 2.2.2): nessun loop automatico.
+ *  1. Alla prima entrata nello schermo la striscia scivola piano per 4,5 s e si ferma (classe .is-drift, vedi "Nastro" in site.css).
+ *     Una sola volta per caricamento di pagina; con prefers-reduced-motion non parte.
+ *  2. Poi si muove solo mentre l'utente scorre la pagina. Lo fa il CSS (animation-timeline); questo componente
+ *     lo fa a mano solo nei browser che non lo supportano, senza timer e senza loop.
  */
 export function MarqueeScroll() {
   useEffect(() => {
-    if (typeof CSS !== "undefined" && CSS.supports("animation-timeline: view()")) return; // ci pensa il CSS
     const tracks = Array.from(document.querySelectorAll<HTMLElement>(".pc-marquee__track"));
     if (!tracks.length) return;
 
+    const native = typeof CSS !== "undefined" && CSS.supports("animation-timeline: view()");
     let reduced = false;
     let raf = 0;
     const apply = () => {
@@ -32,17 +34,38 @@ export function MarqueeScroll() {
     };
     const stopMq = onReducedMotionChange((r) => {
       reduced = r;
-      schedule();
+      if (!native) schedule();
     });
-    window.addEventListener("scroll", schedule, { passive: true });
-    window.addEventListener("resize", schedule);
-    schedule();
+
+    // scivolata d'ingresso: una volta sola, alla prima entrata
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const e of entries) {
+          if (!e.isIntersecting || reduced) continue;
+          e.target.querySelector(".pc-marquee__track")?.classList.add("is-drift");
+          io.unobserve(e.target);
+        }
+      },
+      { threshold: 0.3 },
+    );
+    tracks.forEach((t) => io.observe(t.parentElement!));
+
+    // fallback dello scroll-driven
+    if (!native) {
+      window.addEventListener("scroll", schedule, { passive: true });
+      window.addEventListener("resize", schedule);
+      schedule();
+    }
     return () => {
       stopMq();
+      io.disconnect();
       window.removeEventListener("scroll", schedule);
       window.removeEventListener("resize", schedule);
       cancelAnimationFrame(raf);
-      tracks.forEach((t) => t.style.removeProperty("transform"));
+      tracks.forEach((t) => {
+        t.style.removeProperty("transform");
+        t.classList.remove("is-drift");
+      });
     };
   }, []);
   return null;

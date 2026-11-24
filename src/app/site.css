@@ -128,10 +128,18 @@
 .pc-marquee__track { display: flex; width: max-content; }
 /* WCAG 2.2.2: niente movimento automatico. La striscia scorre solo mentre l'utente scorre la pagina (scroll-driven);
    dove non e' supportato lo fa src/components/MarqueeScroll.tsx. Con prefers-reduced-motion resta ferma e a capo. */
+@keyframes pc-marquee-drift { to { translate: -4% 0; } }
 @media (prefers-reduced-motion: no-preference) {
+  /* scivolata d'ingresso: 4,5 s, una sola volta (.is-drift la aggiunge MarqueeScroll alla prima entrata), poi la striscia resta dov'e'.
+     Usa `translate`, cosi' non confligge con il `transform` legato allo scroll. */
+  .pc-marquee__track.is-drift { animation: pc-marquee-drift 4.5s cubic-bezier(0.3, 0, 0.2, 1) 1 both; }
   @supports (animation-timeline: view()) {
     .pc-marquee { view-timeline: --pc-mq block; }
     .pc-marquee__track { animation: pc-marquee linear both; animation-timeline: --pc-mq; }
+    .pc-marquee__track.is-drift {
+      animation: pc-marquee linear both, pc-marquee-drift 4.5s cubic-bezier(0.3, 0, 0.2, 1) 1 both;
+      animation-timeline: --pc-mq, auto;
+    }
   }
 }
 @media (prefers-reduced-motion: reduce) {
