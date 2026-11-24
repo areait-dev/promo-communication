@@ -2508,3 +2508,21 @@ html:not([data-theme="dark"]) .bi-book .bi-lo p, html:not([data-theme="dark"]) .
   .sec-story .p-lg { font-size: clamp(17px, 4.6vw, 20px); line-height: 1.6; }
   .sec-story .pc-btn { display: flex; width: 100%; min-height: 48px; justify-content: center; text-align: center; }
 }
+
+/* --- 5. Portfolio (carosello) --- schede intere a proporzione fissa, swipe con scroll-snap, indicatore di posizione, controlli su una riga */
+.slider-pos { display: none; }
+@media (max-width: 960px) {
+  .slider-track { scroll-snap-type: x mandatory; scroll-padding-left: 0; -webkit-overflow-scrolling: touch; overscroll-behavior-x: contain; touch-action: pan-x pan-y; margin-top: var(--space-8); }
+  .slider-track .slide { aspect-ratio: 4 / 3; scroll-snap-align: start; scroll-snap-stop: always; min-height: 0; }
+  .slide-cap { padding: 32px 18px 16px; }
+  .slide-cap b { font-size: 19px; }
+  .slider-pos { display: flex; align-items: center; justify-content: center; gap: 14px; margin-top: var(--space-4); font: 600 13px/1 var(--font-display); letter-spacing: .08em; color: var(--ink); }
+  .slider-dots { display: inline-flex; gap: 8px; }
+  .slider-dots i { width: 8px; height: 8px; border-radius: 99px; background: color-mix(in srgb, var(--ink) 28%, transparent); transition: width var(--dur-fast) var(--ease-out), background var(--dur-fast); }
+  .slider-dots i.on { width: 24px; background: var(--ink); }
+  .slider-ctl { display: flex !important; flex-wrap: nowrap !important; align-items: center; justify-content: space-between !important; gap: 10px; margin-top: var(--space-4); }
+  .slider-ctl .sarrows { display: flex; gap: 10px; }
+  .slider-ctl .sbtn { width: 52px; height: 48px; min-width: 48px; }
+  .slider-ctl .pc-btn { margin-left: 0 !important; min-height: 48px; padding-inline: 16px; white-space: nowrap; }
+}
+@media (max-width: 380px) { .slider-ctl .pc-btn { padding-inline: 12px; font-size: 14px; } .slider-ctl .sbtn { width: 48px; } }
