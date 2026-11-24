@@ -2537,3 +2537,18 @@ html:not([data-theme="dark"]) .bi-book .bi-lo p, html:not([data-theme="dark"]) .
   .pc-index__k { font-size: 16px !important; line-height: 1.2; }
   .pc-index__t { font-size: clamp(24px, 6.8vw, 34px) !important; line-height: 1.12; overflow-wrap: anywhere; }
 }
+
+/* --- 7. Team --- griglia a 2 colonne (3 su tablet), foto o iniziali, nomi e ruoli allineati.
+   Le card senza foto (non ancora caricata in src/data/team.ts) mostrano le iniziali invece di un fumetto vuoto. */
+.tm-initials { display: none; }
+@media (max-width: 960px) {
+  .team-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-8) var(--space-6); align-items: start; margin-top: var(--space-8); }
+  .tm-initials { display: grid; place-items: center; position: absolute; left: 0; right: 0; top: 0; height: 83.76%; font: 700 clamp(34px, 11vw, 60px)/1 var(--font-display); letter-spacing: -.02em; color: var(--blu-700); }
+  [data-theme="dark"] .tm-initials { color: #fff; }
+  .pc-team__name { font-size: clamp(17px, 4.6vw, 22px); line-height: 1.2; overflow-wrap: anywhere; }
+  .pc-team__role { font-size: 11px; line-height: 1.35; letter-spacing: .06em; min-height: 0; margin: 6px 0 0; overflow-wrap: anywhere; }
+  .tm-join__in { padding: 0 16px 14%; gap: 10px; }
+  .tm-join__in span { font-size: clamp(18px, 5.4vw, 28px); }
+  .tm-join__in small { font-size: 13px; }
+}
+@media (max-width: 700px) { .team-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-8) var(--space-4); } }

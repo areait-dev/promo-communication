@@ -3,7 +3,7 @@ import Link from "next/link";
 import { MarqueeScroll } from "./MarqueeScroll";
 import { Star } from "./Star";
 import { SERVICES } from "@/data/services";
-import type { Member } from "@/data/team";
+import { initials, type Member } from "@/data/team";
 import { vars } from "@/lib/ui";
 
 export function Head({ title, tag: Tag = "h2" }: { title: string; tag?: "h1" | "h2" }) {
@@ -80,7 +80,7 @@ export function TeamCard({ t, i }: { t: Member; i: number }) {
         </svg>
         <div className="pc-team__photo">
           <div className={`pc-team__ph ph ph-${t.c}`}>
-            {t.img ? <img className="tm-cut" src={t.img} alt={t.n} /> : null}
+            {t.img ? <img className="tm-cut" src={t.img} alt={t.n} /> : <span className="tm-initials" aria-hidden="true">{initials(t.n)}</span>}
           </div>
         </div>
       </div>
