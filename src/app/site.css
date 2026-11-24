@@ -2622,3 +2622,5 @@ html:not([data-theme="dark"]) .bi-book .bi-lo p, html:not([data-theme="dark"]) .
 @media (prefers-reduced-motion: reduce) { .acc .acc-p.is-open .svc-ill--cp .cp-s { animation: none !important; } }
 /* Pagina del servizio: filtri per categoria sotto il titolo dei lavori */
 .svc-proj .pl-filters { margin-top: var(--space-6); margin-bottom: var(--space-4); }
+/* Pagina del servizio: spazio tra hero e progetti */
+.svc-proj { padding-top: clamp(56px, 8vw, 112px); }
