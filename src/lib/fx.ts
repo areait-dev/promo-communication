@@ -118,18 +118,36 @@ export function initMarquee(): () => void {
 export function initLive(): () => void {
   const els = Array.from(document.querySelectorAll<HTMLElement>(".acc-img--ill, .big-bubble, .pc-star--spin"));
   if (!els.length) return () => {};
+
+  // Stella grande dell'hero (WCAG 2.2.2): .is-live parte UNA volta per caricamento di pagina e non viene piu' tolta
+  // (altrimenti il giro ripartirebbe a ogni rientro). Con prefers-reduced-motion non viene mai aggiunta.
+  const heroStar = (e: HTMLElement) => e.matches(".hero .bigstar, .about-hero .bigstar");
+  let reduced = false;
+  const stopMq = onReducedMotionChange((r) => {
+    reduced = r;
+    if (r) els.filter(heroStar).forEach((e) => e.classList.remove("is-live"));
+  });
+  const setLive = (e: HTMLElement, on: boolean) => {
+    if (!heroStar(e)) return e.classList.toggle("is-live", on);
+    if (on && !reduced && !e.classList.contains("is-live")) {
+      e.classList.add("is-live");
+      io?.unobserve(e);
+    }
+  };
+
   if (!("IntersectionObserver" in window)) {
-    els.forEach((e) => e.classList.add("is-live"));
-    return () => {};
+    els.forEach((e) => setLive(e, true));
+    return stopMq;
   }
-  const io = new IntersectionObserver(
+  const io: IntersectionObserver | undefined = new IntersectionObserver(
     (entries) => {
-      for (const e of entries) e.target.classList.toggle("is-live", e.isIntersecting);
+      for (const e of entries) setLive(e.target as HTMLElement, e.isIntersecting);
     },
     { threshold: 0.15 },
   );
   els.forEach((e) => io.observe(e));
   return () => {
+    stopMq();
     io.disconnect();
     els.forEach((e) => e.classList.remove("is-live"));
   };
