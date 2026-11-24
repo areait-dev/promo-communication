@@ -40,7 +40,7 @@ const ORG_JSONLD = JSON.stringify({
   address: { "@type": "PostalAddress", streetAddress: ADDRESS[0], postalCode: "97019", addressLocality: "Vittoria", addressRegion: "RG", addressCountry: "IT" },
   parentOrganization: { "@type": "Organization", name: "Promotergroup S.p.A.", url: "https://www.promotergroup.eu" },
   sameAs: SOCIALS.map((x) => x.href),
-}).replace(/</g, "\u003c");
+}).replace(/</g, "\\u003c");
 
 export const viewport: Viewport = {
   themeColor: "#001a6f",
