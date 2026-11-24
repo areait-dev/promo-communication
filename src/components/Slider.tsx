@@ -1,12 +1,11 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useRef, ViewTransition } from "react";
+import { useRef, ViewTransition } from "react";
 import { REAL, pImg } from "@/data/projects";
-import { motionOff, prefersReduced, projHref } from "@/lib/ui";
+import { prefersReduced, projHref } from "@/lib/ui";
 
 export function Slider() {
-  const root = useRef<HTMLDivElement>(null);
   const track = useRef<HTMLDivElement>(null);
 
   const step = (d: number) => {
@@ -17,19 +16,8 @@ export function Slider() {
     tr.scrollBy({ left: d * w, behavior: prefersReduced() ? "auto" : "smooth" });
   };
 
-  useEffect(() => {
-    const sl = root.current, tr = track.current;
-    if (!sl || !tr || prefersReduced()) return;
-    const id = setInterval(() => {
-      if (sl.matches(":hover") || motionOff()) return;
-      if (tr.scrollLeft + tr.clientWidth >= tr.scrollWidth - 4) tr.scrollTo({ left: 0, behavior: "smooth" });
-      else step(1);
-    }, 4300);
-    return () => clearInterval(id);
-  }, []);
-
   return (
-    <div className="slider pc-reveal" ref={root}>
+    <div className="slider pc-reveal">
       <div className="slider-track" ref={track}>
         {REAL.slice(0, 6).map((p, i) => (
           <Link
