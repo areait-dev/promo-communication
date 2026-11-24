@@ -34,6 +34,12 @@ export function MarqueeScroll() {
     };
     const stopMq = onReducedMotionChange((r) => {
       reduced = r;
+      // con movimento ridotto il nastro e' una riga ferma che si scorre a mano: serve raggiungibile da tastiera
+      tracks.forEach((t) => {
+        const band = t.parentElement!;
+        if (r) band.setAttribute("tabindex", "0");
+        else band.removeAttribute("tabindex");
+      });
       if (!native) schedule();
     });
 
@@ -63,6 +69,7 @@ export function MarqueeScroll() {
       window.removeEventListener("resize", schedule);
       cancelAnimationFrame(raf);
       tracks.forEach((t) => {
+        t.parentElement?.removeAttribute("tabindex");
         t.style.removeProperty("transform");
         t.classList.remove("is-drift");
       });

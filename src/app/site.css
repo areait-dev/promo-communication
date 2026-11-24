@@ -2588,3 +2588,14 @@ html:not([data-theme="dark"]) .bi-book .bi-lo p, html:not([data-theme="dark"]) .
 }
 @media (max-width: 560px) { .pc-footer__cols { grid-template-columns: minmax(0, 1fr) !important; } }
 @media (max-width: 960px) { .contact-list a[href^="mailto"], .contact-list a[href^="tel"] { display: inline-block; padding: 10px 0; } }
+
+/* --- 3b. Nastro mobile, ricostruito --- sempre UNA riga (mai impilato).
+   Movimento normale: scivolata d'ingresso + spostamento con lo scroll (regole sopra).
+   Movimento ridotto: riga ferma, da scorrere con il dito (o con le frecce se ha il focus), sfumatura a destra come indizio. */
+@media (max-width: 960px) and (prefers-reduced-motion: reduce) {
+  .pc-marquee { overflow-x: auto; overflow-y: hidden; scrollbar-width: none; -webkit-overflow-scrolling: touch; overscroll-behavior-x: contain; scroll-snap-type: x proximity; -webkit-mask-image: linear-gradient(to right, #000 86%, transparent); mask-image: linear-gradient(to right, #000 86%, transparent); }
+  .pc-marquee::-webkit-scrollbar { display: none; }
+  .pc-marquee:focus-visible { outline: 3px solid #fff; outline-offset: -4px; }
+  .pc-marquee__track { flex-wrap: nowrap; width: max-content; row-gap: 0; padding: 0 var(--space-4); }
+  .pc-marquee__item { flex: none; scroll-snap-align: start; }
+}
