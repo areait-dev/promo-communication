@@ -186,7 +186,7 @@ export function Accordion() {
                       ))}
                     </ul>
                     <Link className="acc-more" href={svcHref(s.id)}>
-                      <span className="hl">Scopri</span> <span aria-hidden="true">→</span>
+                      <span className="hl">Scopri il servizio</span> <span aria-hidden="true">→</span>
                     </Link>
                   </div>
                 </div>

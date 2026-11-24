@@ -3,12 +3,14 @@ import { Boost } from "@/components/Boost";
 import { ContactForm } from "@/components/ContactForm";
 import { ElasticGrid } from "@/components/ElasticGrid";
 import { Slider } from "@/components/Slider";
+import { SocialLinks } from "@/components/SocialLinks";
 import { Star } from "@/components/Star";
 import { Head, JoinCard, Marquee, TeamCard } from "@/components/blocks";
 import { SvcIndex } from "@/components/SvcIndex";
+import { ADDRESS, EMAIL, PHONE } from "@/data/contact";
 import { HOME_ORDER } from "@/data/services";
 import { TEAM } from "@/data/team";
-import { vars } from "@/lib/ui";
+import { svcHref, vars } from "@/lib/ui";
 import { PageFx } from "@/components/PageFx";
 
 export default function Home() {
@@ -19,7 +21,11 @@ export default function Home() {
         <Star className="pc-star--spin bigstar" />
         <div className="wrap" style={{ position: "relative" }}>
           <div className="pc-reveal" style={vars({ "--i": 1 })}>
-            <Boost words={["Brand", "Reputation", "Idea", "Event", "Business"]} tag="h1" />
+            <Boost
+              words={["Brand", "Reputation", "Idea", "Event", "Business"]}
+              hrefs={[svcHref("brand-identity"), svcHref("brand-reputation"), "/contatti", svcHref("event-management"), "/servizi"]}
+              tag="h1"
+            />
           </div>
           <p className="lead hero-lead pc-reveal" style={vars({ "--i": 2 })}>
             Diamo forma, voce e spazio a quello che la tua impresa fa ogni giorno.
@@ -39,6 +45,7 @@ export default function Home() {
             <p className="q">
               La nostra storia comincia <em>inside</em>
             </p>
+            <p className="q-sub">Nati dentro Promotergroup S.p.a., al fianco delle imprese ogni giorno.</p>
           </div>
           <div className="pc-reveal" style={vars({ "--i": 1 })}>
             <p className="p-lg">
@@ -79,6 +86,30 @@ export default function Home() {
         <div className="wrap contact contact-home">
           <div>
             <Head title="Raccontaci la tua idea, noi mettiamo il boost!" />
+            <ul className="contact-list pc-reveal" style={vars({ "--i": 1 })}>
+              {EMAIL && (
+                <li>
+                  <span className="contact-list__k">Email</span>
+                  <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
+                </li>
+              )}
+              <li>
+                <span className="contact-list__k">Telefono</span>
+                <a href={PHONE.href}>{PHONE.label}</a>
+              </li>
+              <li>
+                <span className="contact-list__k">Indirizzo</span>
+                <address>
+                  {ADDRESS[0]}
+                  <br />
+                  {ADDRESS[1]}
+                </address>
+              </li>
+              <li>
+                <span className="contact-list__k">Social</span>
+                <SocialLinks />
+              </li>
+            </ul>
           </div>
           <div className="form">
             <ContactForm kind="home" />

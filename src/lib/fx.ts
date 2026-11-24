@@ -1,4 +1,4 @@
-import { motionOff, prefersReduced } from "@/lib/ui";
+import { onReducedMotionChange, prefersReduced } from "@/lib/ui";
 
 const finePointer = () => window.matchMedia("(hover: hover) and (pointer: fine)").matches;
 
@@ -55,59 +55,6 @@ export function initMagnet(): () => void {
       b.style.removeProperty("--mx");
       b.style.removeProperty("--my");
     });
-  };
-}
-
-/**
- * Marquee reattiva allo scroll: un solo listener + un solo rAF.
- * La velocita' dell'animazione CSS esistente cresce con la velocita' di scroll (playbackRate: l'animazione non viene
- * ricreata) e le voci si inclinano (skewX, massimo 4 gradi, via --sk) nella direzione dello scroll.
- * Tutto torna gradualmente alla normalita'. La pausa al passaggio del mouse resta quella del CSS.
- */
-export function initMarquee(): () => void {
-  if (prefersReduced()) return () => {};
-  const tracks = Array.from(document.querySelectorAll<HTMLElement>(".pc-marquee__track"));
-  if (!tracks.length) return () => {};
-
-  const anims = tracks
-    .map((t) => ({ t, a: t.getAnimations().find((x) => (x as CSSAnimation).animationName === "pc-marquee") }))
-    .filter((x): x is { t: HTMLElement; a: Animation } => !!x.a);
-  if (!anims.length) return () => {};
-
-  let last = window.scrollY;
-  let vel = 0; // px per frame, livellata
-  let raf = 0;
-
-  const apply = (rate: number, skew: number) => {
-    anims.forEach(({ t, a }) => {
-      a.playbackRate = rate;
-      t.style.setProperty("--sk", skew.toFixed(2) + "deg");
-    });
-  };
-  const frame = () => {
-    raf = 0;
-    const y = window.scrollY;
-    const dy = y - last;
-    last = y;
-    vel += (dy - vel) * 0.18;
-    if (motionOff()) {
-      apply(1, 0);
-    } else {
-      const rate = 1 + Math.min(Math.abs(vel) * 0.45, 7);
-      const skew = Math.max(-4, Math.min(4, vel * 0.3));
-      apply(rate, skew);
-    }
-    if (Math.abs(vel) > 0.05 || Math.abs(dy) > 0) raf = requestAnimationFrame(frame);
-    else apply(1, 0);
-  };
-  const onScroll = () => {
-    if (!raf) raf = requestAnimationFrame(frame);
-  };
-  window.addEventListener("scroll", onScroll, { passive: true });
-  return () => {
-    window.removeEventListener("scroll", onScroll);
-    cancelAnimationFrame(raf);
-    apply(1, 0);
   };
 }
 

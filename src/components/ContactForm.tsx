@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useState, type FormEvent } from "react";
+import { postForm } from "@/lib/send";
 
 type Kind = "home" | "contact";
 
@@ -13,7 +14,7 @@ export function ContactForm({ kind }: { kind: Kind }) {
   const home = kind === "home";
   const p = home ? "h" : "f";
 
-  function onSubmit(ev: FormEvent) {
+  async function onSubmit(ev: FormEvent) {
     ev.preventDefault();
     const f = form.current!;
     const el = (name: string) => f.elements.namedItem(name) as HTMLInputElement | null;
@@ -38,7 +39,13 @@ export function ContactForm({ kind }: { kind: Kind }) {
     setErr("");
     setWho(n);
     setState("sending");
-    setTimeout(() => setState("sent"), 2200);
+    try {
+      await postForm(home ? "home" : "contatti", new FormData(f));
+      setState("sent");
+    } catch (e) {
+      setState("idle");
+      setErr(e instanceof Error ? e.message : "Invio non riuscito. Riprova tra poco.");
+    }
   }
   function reset() {
     form.current?.reset();
@@ -55,17 +62,30 @@ export function ContactForm({ kind }: { kind: Kind }) {
         onSubmit={onSubmit}
         style={state === "idle" ? undefined : { display: "none" }}
       >
+        <input className="sr-only" name="sito" tabIndex={-1} autoComplete="off" aria-hidden="true" />
         {home ? (
-          <div className="row2">
-            <div className="field">
-              <label htmlFor="h-n">Nome</label>
-              <input id="h-n" name="n" autoComplete="given-name" required />
+          <>
+            <div className="row2">
+              <div className="field">
+                <label htmlFor="h-n">Nome</label>
+                <input id="h-n" name="n" autoComplete="given-name" required />
+              </div>
+              <div className="field">
+                <label htmlFor="h-c">Cognome</label>
+                <input id="h-c" name="c" autoComplete="family-name" />
+              </div>
             </div>
-            <div className="field">
-              <label htmlFor="h-c">Cognome</label>
-              <input id="h-c" name="c" autoComplete="family-name" />
+            <div className="row2">
+              <div className="field">
+                <label htmlFor="h-e">Email</label>
+                <input id="h-e" name="e" type="email" autoComplete="email" required />
+              </div>
+              <div className="field">
+                <label htmlFor="h-t">Telefono</label>
+                <input id="h-t" name="t" type="tel" autoComplete="tel" />
+              </div>
             </div>
-          </div>
+          </>
         ) : (
           <>
             <div className="field">
@@ -129,7 +149,6 @@ export function ContactForm({ kind }: { kind: Kind }) {
         <button className="pc-btn pc-btn--accent" type="submit">
           Boost <span className="pc-btn__arrow">→</span>
         </button>
-        <p className="note">Anteprima: il messaggio non viene inviato davvero.</p>
       </form>
       <div className={"sent" + (state === "idle" ? "" : " show")} aria-live="polite">
         {state === "sending" && (
@@ -143,7 +162,7 @@ export function ContactForm({ kind }: { kind: Kind }) {
           <>
             <div className="pc-bubble pc-bubble--lg pc-bubble--pop">Messaggio ricevuto, forte e chiaro.</div>
             <p className="p" style={{ marginTop: 8 }}>
-              Grazie {who.replace(/[<>&"]/g, "")}. In questa anteprima il messaggio non parte davvero.
+              Grazie {who.replace(/[<>&"]/g, "")}.
             </p>
             <button className="pc-btn pc-btn--ghost" type="button" onClick={reset}>
               Scrivi un altro messaggio

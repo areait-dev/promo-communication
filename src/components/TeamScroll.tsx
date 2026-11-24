@@ -52,7 +52,7 @@ export function TeamScroll() {
               nostro team, mandaci il tuo CV e raccontaci chi sei.
             </p>
             <p style={{ marginTop: 28 }}>
-              <Link className="pc-btn pc-btn--accent" href="/contatti">
+              <Link className="pc-btn pc-btn--accent" href="/lavora-con-noi">
                 Candidati <span className="pc-btn__arrow">→</span>
               </Link>
             </p>
