@@ -12,7 +12,7 @@ export const TEAM: Member[] = [
   "r": "Art Director & Graphic Designer",
   "c": "r",
   "img": "/img/team/emanuele-canzonieri.webp",
-  "b": "Frequentatore abituale del bizzarro mondo del <em>Paese delle Meraviglie</em>, vaga tra illustrator e photoshop, alla ricerca del Bianconiglio. Coordina l’identità visiva dei clienti come un discografico alle prese con gli umori dei fratelli Gallagher: <strong><em>“And you know it’s no fun”!</em></strong>"
+  "b": "Pare sia uscito dal <em>Paese delle Meraviglie</em>, ma nessuno lo ha mai visto tornare davvero. Frequentatore abituale di quel bizzarro universo, vaga ancora tra Illustrator e Photoshop, inseguendo il Bianconiglio. Tra identità visive e direzioni creative, cerca di dare una forma alle idee e un senso al caos. Un’impresa non troppo diversa dal produrre un disco dei fratelli Gallagher o dal trovare un biglietto per il loro ultimo concerto: <strong><em>«And you know it’s no fun»!</em></strong>"
  },
  {
   "n": "Ausilia Ippolito",
