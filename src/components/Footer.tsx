@@ -16,7 +16,7 @@ export function Footer() {
           <h4 className="ft-brand">PromoCommunication</h4>
           PromoCommunication è un brand di Promotergroup S.p.a.
           <br />
-          <a href="#" data-soon>Dati aziendali</a>
+          Promotergroup S.p.A. · P.IVA 13178771005
           <br />
           <a href="#" data-soon>Company Profile</a>
         </div>
