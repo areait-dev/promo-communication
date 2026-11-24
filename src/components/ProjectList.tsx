@@ -41,6 +41,9 @@ export function ProjectList({ list, mode }: { list: Project[]; mode: "portfolio"
   const portfolio = mode === "portfolio";
   const Heading = portfolio ? "h2" : "h3"; // nelle pagine servizio il titolo di sezione è già un h2
   const items = portfolio ? PROJECTS : list;
+  // categorie del filtro: nel portfolio quelle fisse; nella pagina di un servizio solo quelle dei suoi lavori
+  const chips = portfolio ? CHIPS : ["Tutti", ...Array.from(new Set(list.flatMap((p) => p.cats))).filter((c) => CHIPS.includes(c))];
+  const showFilters = portfolio || chips.length > 2;
 
   // anteprima agganciata al cursore
   useEffect(() => {
@@ -153,10 +156,10 @@ export function ProjectList({ list, mode }: { list: Project[]; mode: "portfolio"
 
   return (
     <>
-      {portfolio && (
+      {showFilters && (
         <div className="pl-filters pc-reveal" role="toolbar" aria-label="Filtra i progetti per categoria">
           <div className="pl-chips">
-            {CHIPS.map((c, i) => {
+            {chips.map((c, i) => {
               const val = i === 0 ? "" : c;
               const on = cat === val;
               return (
@@ -166,7 +169,7 @@ export function ProjectList({ list, mode }: { list: Project[]; mode: "portfolio"
               );
             })}
           </div>
-          <label className="pl-sort">
+          {portfolio && <label className="pl-sort">
             <span>Ordina per</span>
             <select aria-label="Ordina i progetti" value={sort} onChange={(e) => setSort(e.target.value)}>
               <option value="new">Più recenti</option>
@@ -174,12 +177,12 @@ export function ProjectList({ list, mode }: { list: Project[]; mode: "portfolio"
               <option value="name">Nome A-Z</option>
               <option value="name-desc">Nome Z-A</option>
             </select>
-          </label>
+          </label>}
         </div>
       )}
       <ul className="pl pc-reveal" style={portfolio ? vars({ "--i": 1 }) : undefined} ref={ul}>
         {shown.map(({ p, i }) => {
-          const out = portfolio && !!cat && !p.cats.includes(cat);
+          const out = !!cat && !p.cats.includes(cat);
           return (
             <li key={p.id} className={out ? "is-out" : undefined} inert={out}>
               <Link className="pl-row" href={projHref(p.id)} data-i={i}>

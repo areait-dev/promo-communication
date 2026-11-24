@@ -2606,3 +2606,19 @@ html:not([data-theme="dark"]) .bi-book .bi-lo p, html:not([data-theme="dark"]) .
   .acc-sec--pin { height: calc(790px + (var(--n) - 1) * 55vh); }
   .acc-sec--pin .acc { position: sticky; top: 92px; }
 }
+
+/* Urna (Comunicazione Politica): la scheda sale e scende nella feritoia, dentro lo stesso ciclo di 5 s delle altre illustrazioni.
+   Posizione di riposo (e con prefers-reduced-motion): scheda alzata. */
+.svc-ill--cp .cp-s { transform: translateY(-14px); }
+@keyframes cp-vote {
+  0%, 24% { transform: translateY(-14px); }
+  36% { transform: translateY(30px); }
+  48% { transform: translateY(-14px); }
+  60% { transform: translateY(30px); }
+  72% { transform: translateY(-14px); }
+  100% { transform: translateY(-14px); }
+}
+.acc .acc-p.is-open .svc-ill--cp .cp-s { animation: ill-draw 5s linear infinite, cp-vote 5s ease-in-out infinite; }
+@media (prefers-reduced-motion: reduce) { .acc .acc-p.is-open .svc-ill--cp .cp-s { animation: none !important; } }
+/* Pagina del servizio: filtri per categoria sotto il titolo dei lavori */
+.svc-proj .pl-filters { margin-top: var(--space-6); margin-bottom: var(--space-4); }

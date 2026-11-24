@@ -1,14 +1,13 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { ViewTransition } from "react";
 import { notFound } from "next/navigation";
 import { ProjectList } from "@/components/ProjectList";
-import { Head, Pager } from "@/components/blocks";
+import { Head } from "@/components/blocks";
 import { ContactPageForm } from "@/components/ContactPageForm";
 import { ContactPanel } from "@/components/ContactPanel";
 import { FEAT, ICONS, SERVICES, SVC_CAT, svcById } from "@/data/services";
 import { PROJECTS } from "@/data/projects";
-import { svcHref, vars } from "@/lib/ui";
+import { vars } from "@/lib/ui";
 import { PageFx } from "@/components/PageFx";
 
 // Tutti gli slug sono noti in fase di build (generateStaticParams): la pagina e' statica, niente Suspense con fallback
@@ -28,9 +27,6 @@ export default async function Servizio({ params }: { params: Promise<{ slug: str
   const s = svcById((await params).slug);
   if (!s) notFound();
 
-  const i = SERVICES.indexOf(s);
-  const prev = SERVICES[(i + SERVICES.length - 1) % SERVICES.length];
-  const next = SERVICES[(i + 1) % SERVICES.length];
   const feat = FEAT[s.id];
   const items: [string, string, string][] = feat ? feat.items : s.tags.map((x) => [x, "bulb", ""]);
   const cat = SVC_CAT[s.id];
@@ -84,22 +80,8 @@ export default async function Servizio({ params }: { params: Promise<{ slug: str
           ) : (
             <p className="svc-proj-empty pc-reveal">I progetti di {s.name} arrivano presto.</p>
           )}
-          <div className="svc-proj-cta pc-reveal">
-            <Link className="pc-btn pc-btn--ghost" href="/portfolio">
-              Vedi tutto il portfolio <span className="pc-btn__arrow">→</span>
-            </Link>
-          </div>
         </div>
       </section>
-      <Pager
-        label="Altri servizi"
-        prev={prev.name}
-        next={next.name}
-        prevHref={svcHref(prev.id)}
-        nextHref={svcHref(next.id)}
-        prevLabel="← Servizio precedente"
-        nextLabel="Servizio successivo →"
-      />
       <section className="sec ct-sec" id="info">
         <div className="wrap">
           <Head title={"Vuoi saperne di più su " + s.name + "?"} />
