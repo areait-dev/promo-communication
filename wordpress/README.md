@@ -109,3 +109,27 @@ Al posto di `published`: un progetto compare sul sito solo se è **pubblicato** 
 ```
 
 I nomi dei campi si vedono nel **GraphiQL IDE** di WPGraphQL: sono quelli dei campi ACF in camelCase.
+
+## Plugin di collegamento (mu-plugin)
+
+`mu-plugins/promocommunication-headless.php` fa quattro cose:
+
+1. **Anteprima:** il tasto "Anteprima" dell'editor apre il sito Next su `/api/preview` (la pagina va ancora scritta nel sito).
+2. **Reindirizzamento:** chi apre il front di `wp.promocommunication.it` finisce sul sito pubblico. Restano raggiungibili `wp-admin`, `wp-login`, REST, GraphQL e i file caricati. Il dominio di WordPress è anche escluso da Google.
+3. **GraphQL con password applicazione:** serve per leggere le bozze con l'utente `headless`.
+4. **Aggiornamento del sito:** quando si pubblica o si modifica un contenuto, avvisa Vercel con un Deploy Hook. Più salvataggi ravvicinati diventano una sola richiesta, dopo 60 secondi.
+
+### Installazione
+
+1. Copia il file in `wp-content/mu-plugins/` (se la cartella non esiste, creala). Non va attivato.
+2. In `wp-config.php`, sopra la riga `That's all, stop editing!`, aggiungi:
+
+```php
+define( 'PC_FRONTEND_URL', 'https://www.promocommunication.it' );
+define( 'PC_PREVIEW_SECRET', 'la-stessa-stringa-di-PREVIEW_SECRET-su-Vercel' );
+define( 'PC_DEPLOY_HOOK', 'https://api.vercel.com/v1/integrations/deploy/...' ); // facoltativo
+```
+
+3. Il Deploy Hook si crea su Vercel: **Settings → Git → Deploy Hooks**, scegli il ramo `main` e copia l'indirizzo.
+
+Il file non l'ho potuto provare su un WordPress vero e non ho potuto controllarne la sintassi PHP (qui PHP non è installato). Se dopo il caricamento compare un errore, mandami il messaggio.
