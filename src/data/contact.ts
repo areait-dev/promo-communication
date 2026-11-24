@@ -1,3 +1,9 @@
+/**
+ * Privacy e Cookie Policy: PromoCommunication e' la divisione marketing di Promotergroup S.p.a. e non ha una P.IVA propria,
+ * quindi l'informativa e' quella di Promotergroup.
+ */
+export const PRIVACY_URL = "https://www.promotergroup.eu/index.php/contattanoi/privacy-e-cookie-policy";
+
 /** Recapiti dell'agenzia (gli stessi del footer). */
 export const PHONE = { label: "+39 0932 862613", href: "tel:+390932862613" };
 export const ADDRESS = ["Via del Carrubo sn", "Vittoria (RG)"] as const;

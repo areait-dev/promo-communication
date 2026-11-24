@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState, type FormEvent } from "react";
-import { BUDGETS, PHONE } from "@/data/contact";
+import { BUDGETS, PHONE, PRIVACY_URL } from "@/data/contact";
 import { SERVICES } from "@/data/services";
 import { postForm } from "@/lib/send";
 
@@ -29,7 +29,7 @@ function validate(req: ContactRequest): Partial<Record<Field, string>> {
   return errs;
 }
 
-export function ContactPageForm() {
+export function ContactPageForm({ defaultService }: { defaultService?: string } = {}) {
   const form = useRef<HTMLFormElement>(null);
   const [errors, setErrors] = useState<Partial<Record<Field, string>>>({});
   const [status, setStatus] = useState<Status>("idle");
@@ -37,12 +37,12 @@ export function ContactPageForm() {
 
   // Arrivando da "Scopri il servizio" (?servizio=id) il servizio è già spuntato.
   useEffect(() => {
-    const id = new URLSearchParams(window.location.search).get("servizio");
+    const id = defaultService ?? new URLSearchParams(window.location.search).get("servizio");
     const name = SERVICES.find((s) => s.id === id)?.name;
     if (!name) return;
     const box = form.current?.querySelector<HTMLInputElement>(`input[name="servizi"][value="${name}"]`);
     if (box) box.checked = true;
-  }, []);
+  }, [defaultService]);
 
   async function onSubmit(ev: FormEvent) {
     ev.preventDefault();
@@ -156,7 +156,7 @@ export function ContactPageForm() {
             <input id="ct-p" type="checkbox" name="privacy" required {...invalid("p")} />
             <span>
               Acconsento al trattamento dei dati personali secondo l’{" "}
-              <a href="#" data-soon>
+              <a href={PRIVACY_URL} target="_blank" rel="noopener noreferrer">
                 informativa privacy
               </a>
               .

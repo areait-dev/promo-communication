@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { SocialLinks } from "./SocialLinks";
-import { ADDRESS, PHONE } from "@/data/contact";
+import { ADDRESS, PHONE, PRIVACY_URL } from "@/data/contact";
 import { SERVICES } from "@/data/services";
 
 export function Footer() {
@@ -45,7 +45,9 @@ export function Footer() {
         </div>
       </div>
       <div className="pc-footer__legal">
-        <span>Privacy · Cookie</span>
+        <a href={PRIVACY_URL} target="_blank" rel="noopener noreferrer">
+          Privacy e Cookie Policy<span className="sr-only"> (si apre su promotergroup.eu, in una nuova scheda)</span>
+        </a>
       </div>
     </footer>
   );

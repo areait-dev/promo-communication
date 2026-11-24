@@ -2,7 +2,7 @@
 
 import { useRef, useState, type FormEvent } from "react";
 import { AREAS, CV_EXT, CV_MAX_MB } from "@/data/careers";
-import { PHONE } from "@/data/contact";
+import { PHONE, PRIVACY_URL } from "@/data/contact";
 import { postForm } from "@/lib/send";
 
 /** Dati della candidatura, come li riceverà l'invio reale. */
@@ -168,7 +168,7 @@ export function CareersForm() {
             <input id="cr-p" type="checkbox" name="privacy" required {...invalid("p")} />
             <span>
               Acconsento al trattamento dei dati personali secondo l’{" "}
-              <a href="#" data-soon>
+              <a href={PRIVACY_URL} target="_blank" rel="noopener noreferrer">
                 informativa privacy
               </a>
               .

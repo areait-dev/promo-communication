@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useState, type FormEvent } from "react";
+import { PRIVACY_URL } from "@/data/contact";
 import { postForm } from "@/lib/send";
 
 type Kind = "home" | "contact";
@@ -136,7 +137,7 @@ export function ContactForm({ kind }: { kind: Kind }) {
             <input type="checkbox" name="p" required />
             <span>
               Acconsento al trattamento dei dati personali secondo l’
-              <a href="#" data-soon>
+              <a href={PRIVACY_URL} target="_blank" rel="noopener noreferrer">
                 informativa privacy
               </a>
               .
