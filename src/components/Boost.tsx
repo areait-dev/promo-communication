@@ -5,10 +5,13 @@ import { useEffect, useRef, useState, type CSSProperties } from "react";
 import { onReducedMotionChange, vars } from "@/lib/ui";
 
 /**
- * WCAG 2.2.2: la sequenza delle parole dura 3,6 s (4 passaggi da 0,9 s; l’ultima evidenziatura finisce a 4,4 s) e poi si ferma sull'ultima.
- * Riparte (sempre una sola volta, sempre <= 5 s) solo se il titolo esce dallo schermo e poi rientra.
+ * WCAG 2.2.2: la sequenza finisce entro 4,5 s dall'avvio, qualunque sia il numero di parole.
+ * L'ultima parola compare al massimo a 3,7 s e la sua evidenziatura (0,8 s) finisce a 4,5 s:
+ * il passo tra le parole è 0,9 s o meno (con più di 5 parole si accorcia).
+ * Riparte (sempre una sola volta, sempre entro 5 s) solo se il titolo esce dallo schermo e poi rientra.
  */
-const STEP = 900;
+const MAX_STEP = 900;
+const LAST_WORD_AT = 3700;
 
 /**
  * Titolo "Boost your <parola>": all'ingresso nello schermo le parole scorrono UNA volta e si fermano sull'ultima.
@@ -35,6 +38,7 @@ export function Boost({
   const reduced = useRef(false);
   const timers = useRef<ReturnType<typeof setTimeout>[]>([]);
   const last = words.length - 1;
+  const STEP = Math.min(MAX_STEP, Math.floor(LAST_WORD_AT / Math.max(1, last)));
 
   useEffect(() => {
     const clear = () => {
@@ -91,7 +95,7 @@ export function Boost({
       io?.disconnect();
       clear();
     };
-  }, [words.length, last]);
+  }, [words.length, last, STEP]);
 
   const Tag = tag;
   const style: CSSProperties | undefined = size ? vars({ "--boost-size": size }) : undefined;

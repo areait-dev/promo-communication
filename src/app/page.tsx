@@ -22,8 +22,8 @@ export default function Home() {
         <div className="wrap" style={{ position: "relative" }}>
           <div className="pc-reveal" style={vars({ "--i": 1 })}>
             <Boost
-              words={["Brand", "Reputation", "Idea", "Event", "Business"]}
-              hrefs={[svcHref("brand-identity"), svcHref("brand-reputation"), "/contatti", svcHref("event-management"), "/servizi"]}
+              words={["Brand", "Reputation", "Idea", "Event", "Campaign", "Business"]}
+              hrefs={[svcHref("brand-identity"), svcHref("brand-reputation"), "/contatti", svcHref("event-management"), svcHref("comunicazione-politica"), "/servizi"]}
               tag="h1"
             />
           </div>
