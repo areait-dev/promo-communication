@@ -23,5 +23,5 @@ export function onReducedMotionChange(cb: (reduced: boolean) => void): () => voi
   return () => mq.removeEventListener("change", fire);
 }
 
-export const svcHref = (id: string) => `/contatti?servizio=${id}`;
+export const svcHref = (id: string) => `/servizi/${id}`;
 export const projHref = (id: string) => `/portfolio/${id}`;
