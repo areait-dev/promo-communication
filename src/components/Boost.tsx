@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useRef, useState, type CSSProperties } from "react";
-import { onReducedMotionChange, vars } from "@/lib/ui";
+import { vars } from "@/lib/ui";
 
 /**
  * WCAG 2.2.2: la sequenza finisce entro 4,5 s dall'avvio, qualunque sia il numero di parole.
@@ -17,7 +17,9 @@ const LAST_WORD_AT = 3700;
  * Titolo "Boost your <parola>": all'ingresso nello schermo le parole scorrono UNA volta e si fermano sull'ultima.
  * `hrefs` (stessa lunghezza di `words`) rende la parola cliccabile: solo quella attiva riceve clic e focus.
  * Mentre il mouse o il focus sono sulla parola la sequenza aspetta, cosi' il clic va dove si vede.
- * Con prefers-reduced-motion (letto anche a runtime) si mostra subito la parola finale, senza sequenza.
+ * Con prefers-reduced-motion la sequenza parte lo stesso (finita, <= 4,5 s, mai in loop) ma senza scorrimento né animazione:
+ * le parole si danno il cambio sul posto, con l'evidenziatore fermo (vedi site.css). Ferma subito era la scelta di prima: su un telefono
+ * con "Riduci movimento" il titolo restava bloccato su una parola sola.
  */
 export function Boost({
   words,
@@ -35,7 +37,6 @@ export function Boost({
   const root = useRef<HTMLHeadingElement>(null);
   const cur = useRef(0);
   const held = useRef(false); // mouse o tastiera sulla parola
-  const reduced = useRef(false);
   const timers = useRef<ReturnType<typeof setTimeout>[]>([]);
   const last = words.length - 1;
   const STEP = Math.min(MAX_STEP, Math.floor(LAST_WORD_AT / Math.max(1, last)));
@@ -67,19 +68,10 @@ export function Boost({
       timers.current.push(setTimeout(next, STEP));
     };
 
-    const stopMq = onReducedMotionChange((r) => {
-      reduced.current = r;
-      if (r) {
-        clear();
-        show(last, false);
-      }
-    });
-
     let io: IntersectionObserver | undefined;
     if (words.length > 1 && root.current) {
       io = new IntersectionObserver(
         ([e]) => {
-          if (reduced.current) return;
           if (e.isIntersecting) run();
           else {
             clear();
@@ -91,7 +83,6 @@ export function Boost({
       io.observe(root.current);
     }
     return () => {
-      stopMq();
       io?.disconnect();
       clear();
     };
