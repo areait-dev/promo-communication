@@ -149,7 +149,7 @@ const perPagina = (slug) => [[{ param: "page_slug", operator: "==", value: slug 
  * @param pagina    true per i gruppi legati alle Pagine (il tipo GraphQL va indicato a mano:
  *                  WPGraphQL for ACF non conosce la regola "Slug pagina")
  */
-const fieldGroup = ({ id, titolo, descrizione = "", graphql, posizione, campi, ordine = 0, pagina = false }) => ({
+const fieldGroup = ({ id, titolo, descrizione = "", graphql, posizione, campi, ordine = 0, pagina = false, modificato: mod }) => ({
   key: `group_promo_${id}`,
   title: titolo,
   fields: campi.map((f) => f(id)),
@@ -167,6 +167,7 @@ const fieldGroup = ({ id, titolo, descrizione = "", graphql, posizione, campi, o
   graphql_field_name: graphql,
   map_graphql_types_from_location_rules: pagina ? 0 : 1,
   graphql_types: pagina ? ["Page"] : "",
+  ...(mod ? { modified: mod } : {}),
 });
 
 const ICONE = [
@@ -219,11 +220,13 @@ const gruppi = [
     titolo: "Membro · dettagli",
     descrizione: "Il nome è il titolo del contenuto.",
     graphql: "campiMembro",
+    modificato: Math.floor(Date.UTC(2026, 10, 26) / 1000), // avanzata: aggiunto il campo LinkedIn, ACF segnala solo questo gruppo
     posizione: perTipo("membro"),
     campi: [
       testo("ruolo", "Ruolo", { istruzioni: "Es. Art Director & Graphic Designer.", obbligatorio: true, larghezza: "50" }),
       scelta("colore", "Colore del segnaposto", { b: "Blu", r: "Rosso" }, { istruzioni: "Usato dove manca la foto.", larghezza: "25", predefinito: "b" }),
       numero("ordine", "Ordine", { istruzioni: "Numero più basso = compare prima.", larghezza: "25" }),
+      url("linkedin", "LinkedIn", { istruzioni: "Indirizzo del profilo LinkedIn (facoltativo). Se vuoto, sul sito compare il LinkedIn della società." }),
       immagine("foto", "Foto", { istruzioni: "Ritaglio con sfondo trasparente (webp o png), 1200 x 1000 px." }),
       editor("descrizione", "Descrizione", { istruzioni: "Grassetto e corsivo per le citazioni finali." }),
     ],
@@ -595,7 +598,7 @@ const controlla = (campi) => {
 const modificato = Math.floor(Date.UTC(2026, 10, 25) / 1000); // fisso: rigenerare non cambia i file se i campi non cambiano
 for (const g of gruppi) {
   controlla(g.fields);
-  writeFileSync(join(uscita, `${g.key}.json`), JSON.stringify({ ...g, modified: modificato }, null, 4) + "\n", "utf8");
+  writeFileSync(join(uscita, `${g.key}.json`), JSON.stringify({ modified: modificato, ...g }, null, 4) + "\n", "utf8");
 }
 
 console.log(`${gruppi.length} gruppi, ${chiavi.size} campi → ${uscita}`);
