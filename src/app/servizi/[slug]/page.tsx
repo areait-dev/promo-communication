@@ -5,8 +5,7 @@ import { ProjectList } from "@/components/ProjectList";
 import { Head } from "@/components/blocks";
 import { ContactPageForm } from "@/components/ContactPageForm";
 import { ContactPanel } from "@/components/ContactPanel";
-import { SERVICES, SVC_CAT, svcById } from "@/data/services";
-import { PROJECTS } from "@/data/projects";
+import { getContent, getPublishedContent, serviceById } from "@/lib/content";
 import { vars } from "@/lib/ui";
 import { PageFx } from "@/components/PageFx";
 import { pageMeta, snip } from "@/lib/seo";
@@ -15,21 +14,22 @@ import { pageMeta, snip } from "@/lib/seo";
 // (farebbe comparire un fallback prima del contenuto e romperebbe l'elemento condiviso voce -> hero).
 export const instant = false;
 
-export function generateStaticParams() {
-  return SERVICES.map((s) => ({ slug: s.id }));
+export async function generateStaticParams() {
+  return (await getPublishedContent()).services.list.map((s) => ({ slug: s.id }));
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
-  const s = svcById((await params).slug);
+  const s = serviceById(await getContent(), (await params).slug);
   return s ? pageMeta({ title: s.name, path: `/servizi/${s.id}`, description: snip(s.p1) }) : {};
 }
 
 export default async function Servizio({ params }: { params: Promise<{ slug: string }> }) {
-  const s = svcById((await params).slug);
+  const c = await getContent();
+  const s = serviceById(c, (await params).slug);
   if (!s) notFound();
 
-  const cat = SVC_CAT[s.id];
-  const list = PROJECTS.filter((p) => cat && p.cats.includes(cat));
+  const cat = c.services.cat[s.id];
+  const list = c.projects.filter((p) => cat && p.cats.includes(cat));
 
   return (
     <>
@@ -68,7 +68,7 @@ export default async function Servizio({ params }: { params: Promise<{ slug: str
           </p>
         </div>
         <div className="wrap ct-grid">
-          <ContactPageForm defaultService={s.id} />
+          <ContactPageForm defaultService={s.id} services={c.services.list} phone={c.contact.phone} />
           <ContactPanel />
         </div>
       </section>

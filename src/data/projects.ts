@@ -935,6 +935,7 @@ export const ALL_PROJECTS: Project[] = [
 /** Solo i progetti pubblicati: è la lista usata da portfolio, servizi, pager e route. */
 export const PROJECTS: Project[] = ALL_PROJECTS.filter((p) => p.published);
 export const REAL = PROJECTS;
-export const pImg = (n: string) => '/img/pf/' + n + '.webp';
+/** Immagine di un progetto: un indirizzo completo (WordPress) resta com'è, un nome locale diventa /img/pf/<nome>.webp. */
+export const pImg = (n: string) => (/^(https?:)?\/\//.test(n) || n.startsWith('/') ? n : '/img/pf/' + n + '.webp');
 export const projSlug = (p: Project) => p.id;
 export function projById(id: string) { return PROJECTS.find((p) => p.id === id); }

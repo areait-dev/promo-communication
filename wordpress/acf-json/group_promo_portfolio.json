@@ -1,0 +1,416 @@
+{
+    "key": "group_promo_portfolio",
+    "title": "Pagina · Portfolio",
+    "fields": [
+        {
+            "key": "field_promo_portfolio_titolo_1",
+            "label": "Titolo, prima riga",
+            "name": "titolo_1",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "allow_in_bindings": 0,
+            "show_in_graphql": 1,
+            "graphql_field_name": "titolo1"
+        },
+        {
+            "key": "field_promo_portfolio_titolo_2",
+            "label": "Titolo, seconda riga",
+            "name": "titolo_2",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "allow_in_bindings": 0,
+            "show_in_graphql": 1,
+            "graphql_field_name": "titolo2"
+        },
+        {
+            "key": "field_promo_portfolio_filtri",
+            "label": "Filtri ed elenco",
+            "name": "filtri",
+            "aria-label": "",
+            "type": "group",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "layout": "block",
+            "show_in_graphql": 1,
+            "graphql_field_name": "filtri",
+            "sub_fields": [
+                {
+                    "key": "field_promo_portfolio_filtri_tutti",
+                    "label": "Etichetta 'Tutti'",
+                    "name": "tutti",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "allow_in_bindings": 0,
+                    "show_in_graphql": 1,
+                    "graphql_field_name": "tutti"
+                },
+                {
+                    "key": "field_promo_portfolio_filtri_ordina",
+                    "label": "Etichetta 'Ordina per'",
+                    "name": "ordina",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "allow_in_bindings": 0,
+                    "show_in_graphql": 1,
+                    "graphql_field_name": "ordina"
+                },
+                {
+                    "key": "field_promo_portfolio_filtri_piu_recenti",
+                    "label": "Ordine: più recenti",
+                    "name": "piu_recenti",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "allow_in_bindings": 0,
+                    "show_in_graphql": 1,
+                    "graphql_field_name": "piuRecenti"
+                },
+                {
+                    "key": "field_promo_portfolio_filtri_meno_recenti",
+                    "label": "Ordine: meno recenti",
+                    "name": "meno_recenti",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "allow_in_bindings": 0,
+                    "show_in_graphql": 1,
+                    "graphql_field_name": "menoRecenti"
+                },
+                {
+                    "key": "field_promo_portfolio_filtri_nome_az",
+                    "label": "Ordine: nome A-Z",
+                    "name": "nome_az",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "allow_in_bindings": 0,
+                    "show_in_graphql": 1,
+                    "graphql_field_name": "nomeAz"
+                },
+                {
+                    "key": "field_promo_portfolio_filtri_nome_za",
+                    "label": "Ordine: nome Z-A",
+                    "name": "nome_za",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "allow_in_bindings": 0,
+                    "show_in_graphql": 1,
+                    "graphql_field_name": "nomeZa"
+                }
+            ]
+        },
+        {
+            "key": "field_promo_portfolio_scheda",
+            "label": "Pagina del singolo progetto",
+            "name": "scheda",
+            "aria-label": "",
+            "type": "group",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "layout": "block",
+            "show_in_graphql": 1,
+            "graphql_field_name": "scheda",
+            "sub_fields": [
+                {
+                    "key": "field_promo_portfolio_scheda_cliente",
+                    "label": "Etichetta 'Cliente'",
+                    "name": "cliente",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "allow_in_bindings": 0,
+                    "show_in_graphql": 1,
+                    "graphql_field_name": "cliente"
+                },
+                {
+                    "key": "field_promo_portfolio_scheda_servizi",
+                    "label": "Etichetta 'Servizi'",
+                    "name": "servizi",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "allow_in_bindings": 0,
+                    "show_in_graphql": 1,
+                    "graphql_field_name": "servizi"
+                },
+                {
+                    "key": "field_promo_portfolio_scheda_titolo_cliente",
+                    "label": "Titolo 'Il cliente'",
+                    "name": "titolo_cliente",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "allow_in_bindings": 0,
+                    "show_in_graphql": 1,
+                    "graphql_field_name": "titoloCliente"
+                },
+                {
+                    "key": "field_promo_portfolio_scheda_titolo_lavoro",
+                    "label": "Titolo 'Cosa abbiamo fatto'",
+                    "name": "titolo_lavoro",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "allow_in_bindings": 0,
+                    "show_in_graphql": 1,
+                    "graphql_field_name": "titoloLavoro"
+                },
+                {
+                    "key": "field_promo_portfolio_scheda_altri",
+                    "label": "Titolo 'Altri progetti'",
+                    "name": "altri",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "allow_in_bindings": 0,
+                    "show_in_graphql": 1,
+                    "graphql_field_name": "altri"
+                },
+                {
+                    "key": "field_promo_portfolio_scheda_precedente",
+                    "label": "Link progetto precedente",
+                    "name": "precedente",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "allow_in_bindings": 0,
+                    "show_in_graphql": 1,
+                    "graphql_field_name": "precedente"
+                },
+                {
+                    "key": "field_promo_portfolio_scheda_successivo",
+                    "label": "Link progetto successivo",
+                    "name": "successivo",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "allow_in_bindings": 0,
+                    "show_in_graphql": 1,
+                    "graphql_field_name": "successivo"
+                }
+            ]
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "page_slug",
+                "operator": "==",
+                "value": "portfolio"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "Testi della pagina 'Portfolio' e della pagina del singolo progetto.",
+    "show_in_rest": 1,
+    "show_in_graphql": 1,
+    "graphql_field_name": "paginaPortfolio",
+    "map_graphql_types_from_location_rules": 0,
+    "graphql_types": [
+        "Page"
+    ],
+    "modified": 1795564800
+}

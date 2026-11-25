@@ -2,8 +2,8 @@
 import Link from "next/link";
 import { MarqueeScroll } from "./MarqueeScroll";
 import { Star } from "./Star";
-import { SERVICES } from "@/data/services";
 import { initials, type Member } from "@/data/team";
+import { getContent } from "@/lib/content";
 import { vars } from "@/lib/ui";
 
 export function Head({ title, tag: Tag = "h2" }: { title: string; tag?: "h1" | "h2" }) {
@@ -16,7 +16,8 @@ export function Head({ title, tag: Tag = "h2" }: { title: string; tag?: "h1" | "
   );
 }
 
-export function Marquee() {
+export async function Marquee() {
+  const SERVICES = (await getContent()).services.list;
   const items = SERVICES.map((s) => (
     <span className="pc-marquee__item" key={s.id}>
       {s.name}

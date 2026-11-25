@@ -5,6 +5,7 @@ import { Cta } from "@/components/blocks";
 import { vars } from "@/lib/ui";
 import { PageFx } from "@/components/PageFx";
 import { pageMeta } from "@/lib/seo";
+import { getContent } from "@/lib/content";
 
 export const metadata: Metadata = pageMeta({
   title: "Team",
@@ -13,7 +14,8 @@ export const metadata: Metadata = pageMeta({
     "Il team di PromoCommunication: press officer, art director, social media manager, graphic designer e developer. Teste diverse, stesso fumetto.",
 });
 
-export default function Team() {
+export default async function Team() {
+  const { team } = await getContent();
   return (
     <>
       <Stickers />
@@ -29,7 +31,7 @@ export default function Team() {
         </div>
         <PageFx />
       </section>
-      <TeamScroll />
+      <TeamScroll team={team} />
       <Cta />
     </>
   );

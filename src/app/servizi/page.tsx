@@ -7,6 +7,7 @@ import { Cta } from "@/components/blocks";
 import { vars } from "@/lib/ui";
 import { PageFx } from "@/components/PageFx";
 import { pageMeta } from "@/lib/seo";
+import { getContent } from "@/lib/content";
 
 export const metadata: Metadata = pageMeta({
   title: "Servizi",
@@ -15,7 +16,8 @@ export const metadata: Metadata = pageMeta({
     "Brand strategy, identity, digital & web, social media, reputation, personal branding, eventi e comunicazione politica: i servizi di PromoCommunication.",
 });
 
-export default function Servizi() {
+export default async function Servizi() {
+  const { services } = await getContent();
   return (
     <>
       <section className="hero ctl-host" style={{ paddingTop: 246, paddingBottom: 326 }}>
@@ -28,7 +30,7 @@ export default function Servizi() {
         </div>
         <PageFx />
       </section>
-      <Accordion />
+      <Accordion services={services.list} acc={services.acc} />
       <Cta />
     </>
   );

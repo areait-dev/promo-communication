@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { PageFx } from "@/components/PageFx";
-import { ADDRESS, EMAIL, PHONE } from "@/data/contact";
+import { getContent } from "@/lib/content";
 import { vars } from "@/lib/ui";
 import { pageMeta } from "@/lib/seo";
 
@@ -23,7 +23,8 @@ export const metadata: Metadata = pageMeta({
  */
 const UPDATED = "24/11/2026";
 
-export default function Privacy() {
+export default async function Privacy() {
+  const { email: EMAIL, phone: PHONE, address: ADDRESS } = (await getContent()).contact;
   return (
     <>
       <section className="hero ct-hero ctl-host">
@@ -57,7 +58,7 @@ export default function Privacy() {
             brand di Promotergroup S.p.a. e non ha una partita IVA propria.
           </p>
           <p>
-            Promotergroup S.p.a., {ADDRESS[0]}, 97019 {ADDRESS[1]}
+            Promotergroup S.p.a., {ADDRESS[0]}, {/^\d{5}/.test(ADDRESS[1]) ? ADDRESS[1] : "97019 " + ADDRESS[1]}
             <br />
             Tel. <a href={PHONE.href}>{PHONE.label}</a>
             {EMAIL && (

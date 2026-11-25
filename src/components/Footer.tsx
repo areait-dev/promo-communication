@@ -1,10 +1,14 @@
 import Link from "next/link";
 import { SocialLinks } from "./SocialLinks";
 import { CookieSettingsButton } from "./CookieBanner";
-import { ADDRESS, PHONE, PRIVACY_URL } from "@/data/contact";
-import { SERVICES } from "@/data/services";
+import { PRIVACY_URL } from "@/data/contact";
+import { getContent } from "@/lib/content";
 
-export function Footer() {
+export async function Footer() {
+  const { services, contact } = await getContent();
+  const SERVICES = services.list;
+  const PHONE = contact.phone;
+  const ADDRESS = contact.address;
   return (
     <footer className="pc-footer">
       <p className="pc-footer__big">

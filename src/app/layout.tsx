@@ -6,8 +6,10 @@ import { Footer } from "@/components/Footer";
 import { MainView } from "@/components/MainView";
 import { Behaviors } from "@/components/Behaviors";
 import { CookieBanner } from "@/components/CookieBanner";
+import { PreviewBar } from "@/components/PreviewBar";
+import { Suspense } from "react";
 import { OG_IMAGE, SITE_NAME, SITE_URL } from "@/lib/seo";
-import { ADDRESS, EMAIL, PHONE, SOCIALS } from "@/data/contact";
+import { getContent, type Contact } from "@/lib/content";
 import { isPreview } from "@/lib/env";
 
 const outfit = Outfit({ subsets: ["latin"], variable: "--f-outfit", display: "swap" });
@@ -31,8 +33,8 @@ export const metadata: Metadata = {
   twitter: { card: "summary_large_image", title: HOME_TITLE, description: HOME_DESC, images: [OG_IMAGE.url] },
 };
 
-// Dati strutturati: l'agenzia come organizzazione, parte di Promotergroup S.p.A.
-const ORG_JSONLD = JSON.stringify({
+// Dati strutturati: l'agenzia come organizzazione, parte di Promotergroup S.p.A. Recapiti da WordPress.
+const orgJsonLd = ({ email: EMAIL, phone: PHONE, address: ADDRESS, socials: SOCIALS }: Contact) => JSON.stringify({
   "@context": "https://schema.org",
   "@type": "Organization",
   name: SITE_NAME,
@@ -60,7 +62,8 @@ const withGtm = process.env.NODE_ENV === "production" && !isPreview;
 // motion-off che ferma le animazioni decorative; evita lampi. Non c'e' piu' un pulsante di pausa: la scelta e' quella del sistema.
 const initScript = `var d=document.documentElement;d.classList.add('js');setTimeout(function(){if(!window.__pcReveal)d.classList.add('no-reveal')},5000);try{var t=localStorage.getItem('pc-theme');if(t)d.setAttribute('data-theme',t);}catch(e){}if(matchMedia('(prefers-reduced-motion: reduce)').matches)d.classList.add('motion-off')`;
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+export default async function RootLayout({ children }: LayoutProps<"/">) {
+  const ORG_JSONLD = orgJsonLd((await getContent()).contact);
   return (
     <html lang="it" data-theme="light" suppressHydrationWarning>
       <head>
@@ -85,6 +88,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           <Footer />
         </div>
         <Behaviors />
+        {/* solo in anteprima: legge il cookie del Draft Mode, quindi sta fuori dalla parte statica */}
+        <Suspense fallback={null}>
+          <PreviewBar />
+        </Suspense>
         <CookieBanner />
       </body>
     </html>

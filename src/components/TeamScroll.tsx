@@ -3,10 +3,10 @@
 
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
-import { TEAM, initials } from "@/data/team";
+import { initials, type Member } from "@/data/team";
 
 /** Sezione Team: il testo scorre, la card a lato cambia con il membro al centro dello schermo. */
-export function TeamScroll() {
+export function TeamScroll({ team: TEAM }: { team: Member[] }) {
   const sec = useRef<HTMLElement>(null);
   const items = useRef<(HTMLElement | null)[]>([]);
   const [cur, setCur] = useState(0);

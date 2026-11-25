@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 import { SocialLinks } from "./SocialLinks";
-import { ADDRESS, EMAIL, HOURS, MAPS_EMBED, MAPS_LINK, PHONE } from "@/data/contact";
+import { getContent, mapsLink } from "@/lib/content";
 
 /** Icone a tratto (viewBox 24), le stesse forme semplici usate nel resto del sito. */
 const IC = {
@@ -42,8 +42,12 @@ function Item({ icon, label, children }: { icon: keyof typeof IC; label: string;
 
 const TODO = <span className="ct-v ct-v--todo">Da inserire</span>;
 
-/** Pannello blu notte con i recapiti e la mappa. Email, telefono e orari si modificano in src/data/contact.ts. */
-export function ContactPanel() {
+/** Pannello blu notte con i recapiti e la mappa. Si modificano in WordPress, "Impostazioni del sito" → Recapiti. */
+export async function ContactPanel() {
+  const { contact } = await getContent();
+  const { email: EMAIL, phone: PHONE, address: ADDRESS, hours: HOURS } = contact;
+  const MAPS_LINK = mapsLink(contact.mapPoint);
+  const MAPS_EMBED = `https://www.google.com/maps?q=${encodeURIComponent(`${ADDRESS[0]}, ${ADDRESS[1]}`)}&output=embed`;
   return (
     <aside className="ct-panel pc-reveal" aria-label="Recapiti">
       <ul className="ct-list">
@@ -82,7 +86,7 @@ export function ContactPanel() {
         <li className="ct-map-item">
           <div className="ct-map">
             <iframe
-              title="Mappa: Via del Carrubo, Vittoria (RG)"
+              title={`Mappa: ${ADDRESS[0]}, ${ADDRESS[1]}`}
               src={MAPS_EMBED}
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"

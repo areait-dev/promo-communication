@@ -5,6 +5,7 @@ import { PageFx } from "@/components/PageFx";
 import { CONTACT_LEAD } from "@/data/contact";
 import { vars } from "@/lib/ui";
 import { pageMeta } from "@/lib/seo";
+import { getContent } from "@/lib/content";
 
 export const metadata: Metadata = pageMeta({
   title: "Contatti",
@@ -13,7 +14,8 @@ export const metadata: Metadata = pageMeta({
     "Scrivici due righe: ti rispondiamo entro 24 ore lavorative con una prima idea. Siamo a Vittoria (RG), in Via del Carrubo.",
 });
 
-export default function Contatti() {
+export default async function Contatti() {
+  const { services, contact } = await getContent();
   return (
     <>
       <section className="hero ct-hero ctl-host">
@@ -30,7 +32,7 @@ export default function Contatti() {
 
       <section className="sec ct-sec">
         <div className="wrap ct-grid">
-          <ContactPageForm />
+          <ContactPageForm services={services.list} phone={contact.phone} />
           <ContactPanel />
         </div>
       </section>

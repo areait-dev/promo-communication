@@ -27,6 +27,18 @@
 | Cambio pagina con "sipario" lento | **Sostituito** da View Transitions | `9e4b1d9` | Nessun overlay; cross-fade di 350 ms; elementi condivisi card → hero (titolo e immagine). |
 | Easing con rimbalzo, reveal tutti uguali, loop infiniti | **Modernizzati** | `0d88560`, `43162ea`, `7bd7028` | Vedi i messaggi dei commit. Restano in loop le scene dell'accordion (T-08). |
 
+## Collegamento a WordPress (25/11/2026)
+
+Progetti, servizi, team, posizioni aperte, recapiti, social e aree del modulo candidature arrivano da WordPress
+(`wp.promocommunication.it`, REST con ACF) tramite `src/lib/content.ts`; `src/data` resta come **riserva** quando WordPress non
+risponde o una raccolta è vuota. Cache di un'ora (`cacheLife("hours")`, tag `wp`). Anteprima delle bozze: `/api/preview`
+(dal tasto Anteprima di WordPress) e `/api/preview/esci`, con barra `PreviewBar`.
+Verifica: build con WordPress simulato (stesse risposte della REST reale) e senza WordPress; 13 pagine confrontate, testi, link,
+immagini e JSON-LD identici (cambiano solo gli indirizzi delle immagini, ora su WordPress). Anteprima: 401 con segreto
+sbagliato, 307 verso la pagina con quello giusto, barra solo in anteprima, uscita funzionante.
+**Ancora nel codice**: i testi delle pagine (titoli, frasi, fumetti, footer, banner cookie, testi dei moduli). I campi esistono già
+in WordPress (Pagine), vanno collegati.
+
 ## 1. Riepilogo e voti
 
 I voti sono **giudizi miei per area**, non una metrica standard. Il sito ha un'identità forte e coerente e ora funziona su mobile; i punti deboli sono ciò che non si vede a colpo d'occhio: form finti, privacy, SEO e accessibilità strutturale.

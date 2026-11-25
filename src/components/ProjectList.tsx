@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState, useSyncExternalStore, ViewTransition } from "react";
 import { createPortal } from "react-dom";
-import { PROJECTS, pImg, type Project } from "@/data/projects";
+import { pImg, type Project } from "@/data/projects";
 import { prefersReduced, projHref, vars } from "@/lib/ui";
 
 const CHIPS = ["Tutti", "Brand Identity", "Digital & Web", "Social Media", "Shooting foto/video", "Event Management"];
@@ -40,7 +40,7 @@ export function ProjectList({ list, mode }: { list: Project[]; mode: "portfolio"
   const [sort, setSort] = useState("new");
   const portfolio = mode === "portfolio";
   const Heading = portfolio ? "h2" : "h3"; // nelle pagine servizio il titolo di sezione è già un h2
-  const items = portfolio ? PROJECTS : list;
+  const items = list;
   // categorie del filtro: nel portfolio quelle fisse; nella pagina di un servizio solo quelle dei suoi lavori
   const chips = portfolio ? CHIPS : ["Tutti", ...Array.from(new Set(list.flatMap((p) => p.cats))).filter((c) => CHIPS.includes(c))];
   const showFilters = portfolio || chips.length > 2;
@@ -144,7 +144,7 @@ export function ProjectList({ list, mode }: { list: Project[]; mode: "portfolio"
   }, [sort, portfolio]);
 
   const shown = portfolio
-    ? PROJECTS.map((p, i) => ({ p, i })).sort((a, b) => {
+    ? list.map((p, i) => ({ p, i })).sort((a, b) => {
         if (sort === "name" || sort === "name-desc") {
           const c = a.p.name.localeCompare(b.p.name, "it");
           return sort === "name" ? c : -c;

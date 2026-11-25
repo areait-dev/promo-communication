@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import { CareersForm } from "@/components/CareersForm";
 import { ContactPanel } from "@/components/ContactPanel";
 import { PageFx } from "@/components/PageFx";
-import { CAREERS_LEAD, CAREERS_TITLE, OPEN_ROLES } from "@/data/careers";
+import { CAREERS_LEAD, CAREERS_TITLE } from "@/data/careers";
+import { getContent } from "@/lib/content";
 import { vars } from "@/lib/ui";
 import { pageMeta } from "@/lib/seo";
 
@@ -13,7 +14,8 @@ export const metadata: Metadata = pageMeta({
     "Cerchiamo persone curiose, con idee chiare e voglia di mettersi in gioco. Manda il tuo CV a PromoCommunication e raccontaci chi sei.",
 });
 
-export default function LavoraConNoi() {
+export default async function LavoraConNoi() {
+  const { roles: OPEN_ROLES, areas, contact } = await getContent();
   return (
     <>
       <section className="hero ct-hero ctl-host">
@@ -55,7 +57,7 @@ export default function LavoraConNoi() {
 
       <section className="sec ct-sec">
         <div className="wrap ct-grid">
-          <CareersForm />
+          <CareersForm areas={areas} phone={contact.phone} />
           <ContactPanel />
         </div>
       </section>

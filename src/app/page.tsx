@@ -7,13 +7,13 @@ import { SocialLinks } from "@/components/SocialLinks";
 import { Star } from "@/components/Star";
 import { Head, JoinCard, Marquee, TeamCard } from "@/components/blocks";
 import { SvcIndex } from "@/components/SvcIndex";
-import { ADDRESS, EMAIL, PHONE } from "@/data/contact";
-import { HOME_ORDER } from "@/data/services";
-import { TEAM } from "@/data/team";
+import { getContent } from "@/lib/content";
 import { svcHref, vars } from "@/lib/ui";
 import { PageFx } from "@/components/PageFx";
 
-export default function Home() {
+export default async function Home() {
+  const { projects, team: TEAM, contact } = await getContent();
+  const { email: EMAIL, phone: PHONE, address: ADDRESS } = contact;
   return (
     <>
       <section className="hero hero-elastic ctl-host">
@@ -62,13 +62,13 @@ export default function Home() {
       <section className="sec">
         <div className="wrap">
           <Head title="Progetti che abbiamo fatto (e che rifaremmo domani)" />
-          <Slider />
+          <Slider projects={projects} />
         </div>
       </section>
       <section className="sec alt">
         <div className="wrap">
           <Head title="Cosa mettiamo in boost" />
-          <SvcIndex ids={HOME_ORDER} />
+          <SvcIndex />
         </div>
       </section>
       <section className="sec">

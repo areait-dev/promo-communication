@@ -1,0 +1,413 @@
+{
+    "key": "group_promo_chi_siamo",
+    "title": "Pagina · Chi siamo",
+    "fields": [
+        {
+            "key": "field_promo_chi_siamo_titolo",
+            "label": "Titolo della pagina",
+            "name": "titolo",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "allow_in_bindings": 0,
+            "show_in_graphql": 1,
+            "graphql_field_name": "titolo"
+        },
+        {
+            "key": "field_promo_chi_siamo_intro_1",
+            "label": "Introduzione, primo paragrafo",
+            "name": "intro_1",
+            "aria-label": "",
+            "type": "wysiwyg",
+            "instructions": "Grassetto, corsivo e link si fanno dalla barra degli strumenti.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "tabs": "all",
+            "toolbar": "basic",
+            "media_upload": 0,
+            "delay": 0,
+            "allow_in_bindings": 0,
+            "show_in_graphql": 1,
+            "graphql_field_name": "intro1"
+        },
+        {
+            "key": "field_promo_chi_siamo_intro_2",
+            "label": "Introduzione, secondo paragrafo",
+            "name": "intro_2",
+            "aria-label": "",
+            "type": "wysiwyg",
+            "instructions": "Grassetto, corsivo e link si fanno dalla barra degli strumenti.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "tabs": "all",
+            "toolbar": "basic",
+            "media_upload": 0,
+            "delay": 0,
+            "allow_in_bindings": 0,
+            "show_in_graphql": 1,
+            "graphql_field_name": "intro2"
+        },
+        {
+            "key": "field_promo_chi_siamo_team",
+            "label": "Sezione 'Un team di professionisti'",
+            "name": "team",
+            "aria-label": "",
+            "type": "group",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "layout": "block",
+            "show_in_graphql": 1,
+            "graphql_field_name": "team",
+            "sub_fields": [
+                {
+                    "key": "field_promo_chi_siamo_team_citazione",
+                    "label": "Frase nel fumetto",
+                    "name": "citazione",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "allow_in_bindings": 0,
+                    "show_in_graphql": 1,
+                    "graphql_field_name": "citazione"
+                },
+                {
+                    "key": "field_promo_chi_siamo_team_testo_1",
+                    "label": "Primo paragrafo",
+                    "name": "testo_1",
+                    "aria-label": "",
+                    "type": "wysiwyg",
+                    "instructions": "Grassetto, corsivo e link si fanno dalla barra degli strumenti.",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "tabs": "all",
+                    "toolbar": "basic",
+                    "media_upload": 0,
+                    "delay": 0,
+                    "allow_in_bindings": 0,
+                    "show_in_graphql": 1,
+                    "graphql_field_name": "testo1"
+                },
+                {
+                    "key": "field_promo_chi_siamo_team_testo_2",
+                    "label": "Secondo paragrafo",
+                    "name": "testo_2",
+                    "aria-label": "",
+                    "type": "wysiwyg",
+                    "instructions": "Grassetto, corsivo e link si fanno dalla barra degli strumenti.",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "tabs": "all",
+                    "toolbar": "basic",
+                    "media_upload": 0,
+                    "delay": 0,
+                    "allow_in_bindings": 0,
+                    "show_in_graphql": 1,
+                    "graphql_field_name": "testo2"
+                },
+                {
+                    "key": "field_promo_chi_siamo_team_pulsante_testo",
+                    "label": "Pulsante: testo",
+                    "name": "pulsante_testo",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "allow_in_bindings": 0,
+                    "show_in_graphql": 1,
+                    "graphql_field_name": "pulsanteTesto"
+                },
+                {
+                    "key": "field_promo_chi_siamo_team_pulsante_link",
+                    "label": "Pulsante: dove porta",
+                    "name": "pulsante_link",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "allow_in_bindings": 0,
+                    "show_in_graphql": 1,
+                    "graphql_field_name": "pulsanteLink"
+                }
+            ]
+        },
+        {
+            "key": "field_promo_chi_siamo_luce",
+            "label": "Sezione 'Noi accendiamo la luce'",
+            "name": "luce",
+            "aria-label": "",
+            "type": "group",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "layout": "block",
+            "show_in_graphql": 1,
+            "graphql_field_name": "luce",
+            "sub_fields": [
+                {
+                    "key": "field_promo_chi_siamo_luce_testo_1",
+                    "label": "Primo paragrafo",
+                    "name": "testo_1",
+                    "aria-label": "",
+                    "type": "wysiwyg",
+                    "instructions": "Grassetto, corsivo e link si fanno dalla barra degli strumenti.",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "tabs": "all",
+                    "toolbar": "basic",
+                    "media_upload": 0,
+                    "delay": 0,
+                    "allow_in_bindings": 0,
+                    "show_in_graphql": 1,
+                    "graphql_field_name": "testo1"
+                },
+                {
+                    "key": "field_promo_chi_siamo_luce_testo_2",
+                    "label": "Secondo paragrafo",
+                    "name": "testo_2",
+                    "aria-label": "",
+                    "type": "wysiwyg",
+                    "instructions": "Grassetto, corsivo e link si fanno dalla barra degli strumenti.",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "tabs": "all",
+                    "toolbar": "basic",
+                    "media_upload": 0,
+                    "delay": 0,
+                    "allow_in_bindings": 0,
+                    "show_in_graphql": 1,
+                    "graphql_field_name": "testo2"
+                },
+                {
+                    "key": "field_promo_chi_siamo_luce_citazione",
+                    "label": "Frase nel fumetto",
+                    "name": "citazione",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "allow_in_bindings": 0,
+                    "show_in_graphql": 1,
+                    "graphql_field_name": "citazione"
+                }
+            ]
+        },
+        {
+            "key": "field_promo_chi_siamo_lavoro",
+            "label": "Sezione 'Come lavoriamo'",
+            "name": "lavoro",
+            "aria-label": "",
+            "type": "group",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "layout": "block",
+            "show_in_graphql": 1,
+            "graphql_field_name": "lavoro",
+            "sub_fields": [
+                {
+                    "key": "field_promo_chi_siamo_lavoro_citazione",
+                    "label": "Frase nel fumetto",
+                    "name": "citazione",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "allow_in_bindings": 0,
+                    "show_in_graphql": 1,
+                    "graphql_field_name": "citazione"
+                },
+                {
+                    "key": "field_promo_chi_siamo_lavoro_testo_1",
+                    "label": "Primo paragrafo",
+                    "name": "testo_1",
+                    "aria-label": "",
+                    "type": "wysiwyg",
+                    "instructions": "Grassetto, corsivo e link si fanno dalla barra degli strumenti.",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "tabs": "all",
+                    "toolbar": "basic",
+                    "media_upload": 0,
+                    "delay": 0,
+                    "allow_in_bindings": 0,
+                    "show_in_graphql": 1,
+                    "graphql_field_name": "testo1"
+                },
+                {
+                    "key": "field_promo_chi_siamo_lavoro_testo_2",
+                    "label": "Secondo paragrafo",
+                    "name": "testo_2",
+                    "aria-label": "",
+                    "type": "wysiwyg",
+                    "instructions": "Grassetto, corsivo e link si fanno dalla barra degli strumenti.",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "tabs": "all",
+                    "toolbar": "basic",
+                    "media_upload": 0,
+                    "delay": 0,
+                    "allow_in_bindings": 0,
+                    "show_in_graphql": 1,
+                    "graphql_field_name": "testo2"
+                }
+            ]
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "page_slug",
+                "operator": "==",
+                "value": "chi-siamo"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "Testi della pagina 'Chi siamo'.",
+    "show_in_rest": 1,
+    "show_in_graphql": 1,
+    "graphql_field_name": "paginaChiSiamo",
+    "map_graphql_types_from_location_rules": 0,
+    "graphql_types": [
+        "Page"
+    ],
+    "modified": 1795564800
+}

@@ -3,7 +3,8 @@ import Link from "next/link";
 import { ViewTransition } from "react";
 import { notFound } from "next/navigation";
 import { Cta, Pager } from "@/components/blocks";
-import { PROJECTS, pImg, projById } from "@/data/projects";
+import { pImg } from "@/data/projects";
+import { getContent, getPublishedContent, projectById } from "@/lib/content";
 import { projHref, vars } from "@/lib/ui";
 import { PageFx } from "@/components/PageFx";
 import { pageMeta, snip } from "@/lib/seo";
@@ -13,17 +14,19 @@ import { pageMeta, snip } from "@/lib/seo";
 // (farebbe comparire un fallback prima del contenuto e romperebbe l'elemento condiviso card -> hero).
 export const instant = false;
 
-export function generateStaticParams() {
-  return PROJECTS.map((p) => ({ slug: p.id }));
+export async function generateStaticParams() {
+  return (await getPublishedContent()).projects.map((p) => ({ slug: p.id }));
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
-  const p = projById((await params).slug);
+  const p = projectById(await getContent(), (await params).slug);
   return p ? pageMeta({ title: p.name, path: `/portfolio/${p.id}`, description: snip(p.intro || `${p.name}: un progetto di PromoCommunication.`) }) : {};
 }
 
 export default async function Progetto({ params }: { params: Promise<{ slug: string }> }) {
-  const p = projById((await params).slug);
+  const { projects: PROJECTS } = await getContent();
+  const slug = (await params).slug;
+  const p = PROJECTS.find((x) => x.id === slug);
   if (!p) notFound();
 
   const i = PROJECTS.indexOf(p);

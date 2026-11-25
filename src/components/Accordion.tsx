@@ -2,10 +2,10 @@
 
 import Link from "next/link";
 import { useEffect, useRef, useState, ViewTransition, type CSSProperties } from "react";
-import { ACC, ILL, SERVICES } from "@/data/services";
+import { ILL, type Service } from "@/data/services";
 import { motionOff, prefersReduced, svcHref, vars } from "@/lib/ui";
 
-export function Accordion() {
+export function Accordion({ services: SERVICES, acc: ACC }: { services: Service[]; acc: Record<string, [string, string]> }) {
   const root = useRef<HTMLDivElement>(null);
   const panels = useRef<(HTMLDivElement | null)[]>([]);
   const tabs = useRef<(HTMLButtonElement | null)[]>([]);
@@ -66,7 +66,7 @@ export function Accordion() {
       window.removeEventListener("scroll", onScroll);
       cancelAnimationFrame(raf);
     };
-  }, []);
+  }, [SERVICES.length]);
 
   function select(i: number) {
     if (window.matchMedia(PIN).matches) {

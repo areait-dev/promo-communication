@@ -1,8 +1,8 @@
 "use client";
 
 import { useEffect, useRef, useState, type FormEvent } from "react";
-import { PHONE, PRIVACY_URL } from "@/data/contact";
-import { SERVICES } from "@/data/services";
+import { PRIVACY_URL } from "@/data/contact";
+import type { Service } from "@/data/services";
 import { postForm } from "@/lib/send";
 
 /** Dati della richiesta, come li riceverà l'invio reale. */
@@ -28,7 +28,15 @@ function validate(req: ContactRequest): Partial<Record<Field, string>> {
   return errs;
 }
 
-export function ContactPageForm({ defaultService }: { defaultService?: string } = {}) {
+export function ContactPageForm({
+  defaultService,
+  services: SERVICES,
+  phone: PHONE,
+}: {
+  defaultService?: string;
+  services: Service[];
+  phone: { label: string; href: string };
+}) {
   const form = useRef<HTMLFormElement>(null);
   const [errors, setErrors] = useState<Partial<Record<Field, string>>>({});
   const [status, setStatus] = useState<Status>("idle");
@@ -41,7 +49,7 @@ export function ContactPageForm({ defaultService }: { defaultService?: string } 
     if (!name) return;
     const box = form.current?.querySelector<HTMLInputElement>(`input[name="servizi"][value="${name}"]`);
     if (box) box.checked = true;
-  }, [defaultService]);
+  }, [defaultService, SERVICES]);
 
   async function onSubmit(ev: FormEvent) {
     ev.preventDefault();

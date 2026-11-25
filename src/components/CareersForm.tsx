@@ -1,8 +1,8 @@
 "use client";
 
 import { useRef, useState, type FormEvent } from "react";
-import { AREAS, CV_EXT, CV_MAX_MB } from "@/data/careers";
-import { PHONE, PRIVACY_URL } from "@/data/contact";
+import { CV_EXT, CV_MAX_MB } from "@/data/careers";
+import { PRIVACY_URL } from "@/data/contact";
 import { postForm } from "@/lib/send";
 
 /** Dati della candidatura, come li riceverà l'invio reale. */
@@ -33,7 +33,7 @@ function validate(req: CareersRequest): Partial<Record<Field, string>> {
   return errs;
 }
 
-export function CareersForm() {
+export function CareersForm({ areas: AREAS, phone: PHONE }: { areas: readonly string[]; phone: { label: string; href: string } }) {
   const form = useRef<HTMLFormElement>(null);
   const [errors, setErrors] = useState<Partial<Record<Field, string>>>({});
   const [status, setStatus] = useState<Status>("idle");

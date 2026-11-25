@@ -1,0 +1,875 @@
+{
+    "key": "group_promo_home",
+    "title": "Pagina · Home",
+    "fields": [
+        {
+            "key": "field_promo_home_parole",
+            "label": "Titolo 'Boost your...': parole che scorrono",
+            "name": "parole",
+            "aria-label": "",
+            "type": "group",
+            "instructions": "Fino a 8 parole, nell'ordine in cui scorrono. L'ultima resta ferma.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "layout": "block",
+            "show_in_graphql": 1,
+            "graphql_field_name": "parole",
+            "sub_fields": [
+                {
+                    "key": "field_promo_home_parole_parola_1",
+                    "label": "Parola 1",
+                    "name": "parola_1",
+                    "aria-label": "",
+                    "type": "group",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "layout": "block",
+                    "show_in_graphql": 1,
+                    "graphql_field_name": "parola1",
+                    "sub_fields": [
+                        {
+                            "key": "field_promo_home_parole_parola_1_testo",
+                            "label": "Parola",
+                            "name": "testo",
+                            "aria-label": "",
+                            "type": "text",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "maxlength": "",
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": "",
+                            "allow_in_bindings": 0,
+                            "show_in_graphql": 1,
+                            "graphql_field_name": "testo"
+                        },
+                        {
+                            "key": "field_promo_home_parole_parola_1_link",
+                            "label": "Dove porta",
+                            "name": "link",
+                            "aria-label": "",
+                            "type": "text",
+                            "instructions": "Es. /servizi/brand-identity. Vuoto = nessun link.",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "maxlength": "",
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": "",
+                            "allow_in_bindings": 0,
+                            "show_in_graphql": 1,
+                            "graphql_field_name": "link"
+                        }
+                    ]
+                },
+                {
+                    "key": "field_promo_home_parole_parola_2",
+                    "label": "Parola 2",
+                    "name": "parola_2",
+                    "aria-label": "",
+                    "type": "group",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "layout": "block",
+                    "show_in_graphql": 1,
+                    "graphql_field_name": "parola2",
+                    "sub_fields": [
+                        {
+                            "key": "field_promo_home_parole_parola_2_testo",
+                            "label": "Parola",
+                            "name": "testo",
+                            "aria-label": "",
+                            "type": "text",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "maxlength": "",
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": "",
+                            "allow_in_bindings": 0,
+                            "show_in_graphql": 1,
+                            "graphql_field_name": "testo"
+                        },
+                        {
+                            "key": "field_promo_home_parole_parola_2_link",
+                            "label": "Dove porta",
+                            "name": "link",
+                            "aria-label": "",
+                            "type": "text",
+                            "instructions": "Es. /servizi/brand-identity. Vuoto = nessun link.",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "maxlength": "",
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": "",
+                            "allow_in_bindings": 0,
+                            "show_in_graphql": 1,
+                            "graphql_field_name": "link"
+                        }
+                    ]
+                },
+                {
+                    "key": "field_promo_home_parole_parola_3",
+                    "label": "Parola 3",
+                    "name": "parola_3",
+                    "aria-label": "",
+                    "type": "group",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "layout": "block",
+                    "show_in_graphql": 1,
+                    "graphql_field_name": "parola3",
+                    "sub_fields": [
+                        {
+                            "key": "field_promo_home_parole_parola_3_testo",
+                            "label": "Parola",
+                            "name": "testo",
+                            "aria-label": "",
+                            "type": "text",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "maxlength": "",
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": "",
+                            "allow_in_bindings": 0,
+                            "show_in_graphql": 1,
+                            "graphql_field_name": "testo"
+                        },
+                        {
+                            "key": "field_promo_home_parole_parola_3_link",
+                            "label": "Dove porta",
+                            "name": "link",
+                            "aria-label": "",
+                            "type": "text",
+                            "instructions": "Es. /servizi/brand-identity. Vuoto = nessun link.",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "maxlength": "",
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": "",
+                            "allow_in_bindings": 0,
+                            "show_in_graphql": 1,
+                            "graphql_field_name": "link"
+                        }
+                    ]
+                },
+                {
+                    "key": "field_promo_home_parole_parola_4",
+                    "label": "Parola 4",
+                    "name": "parola_4",
+                    "aria-label": "",
+                    "type": "group",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "layout": "block",
+                    "show_in_graphql": 1,
+                    "graphql_field_name": "parola4",
+                    "sub_fields": [
+                        {
+                            "key": "field_promo_home_parole_parola_4_testo",
+                            "label": "Parola",
+                            "name": "testo",
+                            "aria-label": "",
+                            "type": "text",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "maxlength": "",
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": "",
+                            "allow_in_bindings": 0,
+                            "show_in_graphql": 1,
+                            "graphql_field_name": "testo"
+                        },
+                        {
+                            "key": "field_promo_home_parole_parola_4_link",
+                            "label": "Dove porta",
+                            "name": "link",
+                            "aria-label": "",
+                            "type": "text",
+                            "instructions": "Es. /servizi/brand-identity. Vuoto = nessun link.",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "maxlength": "",
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": "",
+                            "allow_in_bindings": 0,
+                            "show_in_graphql": 1,
+                            "graphql_field_name": "link"
+                        }
+                    ]
+                },
+                {
+                    "key": "field_promo_home_parole_parola_5",
+                    "label": "Parola 5",
+                    "name": "parola_5",
+                    "aria-label": "",
+                    "type": "group",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "layout": "block",
+                    "show_in_graphql": 1,
+                    "graphql_field_name": "parola5",
+                    "sub_fields": [
+                        {
+                            "key": "field_promo_home_parole_parola_5_testo",
+                            "label": "Parola",
+                            "name": "testo",
+                            "aria-label": "",
+                            "type": "text",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "maxlength": "",
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": "",
+                            "allow_in_bindings": 0,
+                            "show_in_graphql": 1,
+                            "graphql_field_name": "testo"
+                        },
+                        {
+                            "key": "field_promo_home_parole_parola_5_link",
+                            "label": "Dove porta",
+                            "name": "link",
+                            "aria-label": "",
+                            "type": "text",
+                            "instructions": "Es. /servizi/brand-identity. Vuoto = nessun link.",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "maxlength": "",
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": "",
+                            "allow_in_bindings": 0,
+                            "show_in_graphql": 1,
+                            "graphql_field_name": "link"
+                        }
+                    ]
+                },
+                {
+                    "key": "field_promo_home_parole_parola_6",
+                    "label": "Parola 6",
+                    "name": "parola_6",
+                    "aria-label": "",
+                    "type": "group",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "layout": "block",
+                    "show_in_graphql": 1,
+                    "graphql_field_name": "parola6",
+                    "sub_fields": [
+                        {
+                            "key": "field_promo_home_parole_parola_6_testo",
+                            "label": "Parola",
+                            "name": "testo",
+                            "aria-label": "",
+                            "type": "text",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "maxlength": "",
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": "",
+                            "allow_in_bindings": 0,
+                            "show_in_graphql": 1,
+                            "graphql_field_name": "testo"
+                        },
+                        {
+                            "key": "field_promo_home_parole_parola_6_link",
+                            "label": "Dove porta",
+                            "name": "link",
+                            "aria-label": "",
+                            "type": "text",
+                            "instructions": "Es. /servizi/brand-identity. Vuoto = nessun link.",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "maxlength": "",
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": "",
+                            "allow_in_bindings": 0,
+                            "show_in_graphql": 1,
+                            "graphql_field_name": "link"
+                        }
+                    ]
+                },
+                {
+                    "key": "field_promo_home_parole_parola_7",
+                    "label": "Parola 7",
+                    "name": "parola_7",
+                    "aria-label": "",
+                    "type": "group",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "layout": "block",
+                    "show_in_graphql": 1,
+                    "graphql_field_name": "parola7",
+                    "sub_fields": [
+                        {
+                            "key": "field_promo_home_parole_parola_7_testo",
+                            "label": "Parola",
+                            "name": "testo",
+                            "aria-label": "",
+                            "type": "text",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "maxlength": "",
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": "",
+                            "allow_in_bindings": 0,
+                            "show_in_graphql": 1,
+                            "graphql_field_name": "testo"
+                        },
+                        {
+                            "key": "field_promo_home_parole_parola_7_link",
+                            "label": "Dove porta",
+                            "name": "link",
+                            "aria-label": "",
+                            "type": "text",
+                            "instructions": "Es. /servizi/brand-identity. Vuoto = nessun link.",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "maxlength": "",
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": "",
+                            "allow_in_bindings": 0,
+                            "show_in_graphql": 1,
+                            "graphql_field_name": "link"
+                        }
+                    ]
+                },
+                {
+                    "key": "field_promo_home_parole_parola_8",
+                    "label": "Parola 8",
+                    "name": "parola_8",
+                    "aria-label": "",
+                    "type": "group",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "layout": "block",
+                    "show_in_graphql": 1,
+                    "graphql_field_name": "parola8",
+                    "sub_fields": [
+                        {
+                            "key": "field_promo_home_parole_parola_8_testo",
+                            "label": "Parola",
+                            "name": "testo",
+                            "aria-label": "",
+                            "type": "text",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "maxlength": "",
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": "",
+                            "allow_in_bindings": 0,
+                            "show_in_graphql": 1,
+                            "graphql_field_name": "testo"
+                        },
+                        {
+                            "key": "field_promo_home_parole_parola_8_link",
+                            "label": "Dove porta",
+                            "name": "link",
+                            "aria-label": "",
+                            "type": "text",
+                            "instructions": "Es. /servizi/brand-identity. Vuoto = nessun link.",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "maxlength": "",
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": "",
+                            "allow_in_bindings": 0,
+                            "show_in_graphql": 1,
+                            "graphql_field_name": "link"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "key": "field_promo_home_lead",
+            "label": "Frase sotto il titolo",
+            "name": "lead",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "allow_in_bindings": 0,
+            "show_in_graphql": 1,
+            "graphql_field_name": "lead"
+        },
+        {
+            "key": "field_promo_home_pulsante_testo",
+            "label": "Pulsante: testo",
+            "name": "pulsante_testo",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "allow_in_bindings": 0,
+            "show_in_graphql": 1,
+            "graphql_field_name": "pulsanteTesto"
+        },
+        {
+            "key": "field_promo_home_pulsante_link",
+            "label": "Pulsante: dove porta",
+            "name": "pulsante_link",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "Es. /contatti",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "allow_in_bindings": 0,
+            "show_in_graphql": 1,
+            "graphql_field_name": "pulsanteLink"
+        },
+        {
+            "key": "field_promo_home_storia",
+            "label": "Sezione 'La nostra storia'",
+            "name": "storia",
+            "aria-label": "",
+            "type": "group",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "layout": "block",
+            "show_in_graphql": 1,
+            "graphql_field_name": "storia",
+            "sub_fields": [
+                {
+                    "key": "field_promo_home_storia_citazione",
+                    "label": "Citazione nel fumetto",
+                    "name": "citazione",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "Per mettere una parola in evidenza usa <em>parola</em>.",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "allow_in_bindings": 0,
+                    "show_in_graphql": 1,
+                    "graphql_field_name": "citazione"
+                },
+                {
+                    "key": "field_promo_home_storia_sottotitolo",
+                    "label": "Sottotitolo del fumetto",
+                    "name": "sottotitolo",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "allow_in_bindings": 0,
+                    "show_in_graphql": 1,
+                    "graphql_field_name": "sottotitolo"
+                },
+                {
+                    "key": "field_promo_home_storia_testo",
+                    "label": "Testo",
+                    "name": "testo",
+                    "aria-label": "",
+                    "type": "wysiwyg",
+                    "instructions": "Grassetto, corsivo e link si fanno dalla barra degli strumenti.",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "tabs": "all",
+                    "toolbar": "basic",
+                    "media_upload": 0,
+                    "delay": 0,
+                    "allow_in_bindings": 0,
+                    "show_in_graphql": 1,
+                    "graphql_field_name": "testo"
+                },
+                {
+                    "key": "field_promo_home_storia_pulsante_testo",
+                    "label": "Pulsante: testo",
+                    "name": "pulsante_testo",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "allow_in_bindings": 0,
+                    "show_in_graphql": 1,
+                    "graphql_field_name": "pulsanteTesto"
+                },
+                {
+                    "key": "field_promo_home_storia_pulsante_link",
+                    "label": "Pulsante: dove porta",
+                    "name": "pulsante_link",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "allow_in_bindings": 0,
+                    "show_in_graphql": 1,
+                    "graphql_field_name": "pulsanteLink"
+                }
+            ]
+        },
+        {
+            "key": "field_promo_home_titolo_progetti",
+            "label": "Titolo sezione progetti",
+            "name": "titolo_progetti",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "allow_in_bindings": 0,
+            "show_in_graphql": 1,
+            "graphql_field_name": "titoloProgetti"
+        },
+        {
+            "key": "field_promo_home_titolo_servizi",
+            "label": "Titolo sezione servizi",
+            "name": "titolo_servizi",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "allow_in_bindings": 0,
+            "show_in_graphql": 1,
+            "graphql_field_name": "titoloServizi"
+        },
+        {
+            "key": "field_promo_home_titolo_team",
+            "label": "Titolo sezione team",
+            "name": "titolo_team",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "allow_in_bindings": 0,
+            "show_in_graphql": 1,
+            "graphql_field_name": "titoloTeam"
+        },
+        {
+            "key": "field_promo_home_titolo_contatti",
+            "label": "Titolo sezione contatti",
+            "name": "titolo_contatti",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "allow_in_bindings": 0,
+            "show_in_graphql": 1,
+            "graphql_field_name": "titoloContatti"
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "page_slug",
+                "operator": "==",
+                "value": "home"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "Testi della pagina 'Home'. I testi con una parola in corsivo usano <em>...</em>.",
+    "show_in_rest": 1,
+    "show_in_graphql": 1,
+    "graphql_field_name": "paginaHome",
+    "map_graphql_types_from_location_rules": 0,
+    "graphql_types": [
+        "Page"
+    ],
+    "modified": 1795564800
+}

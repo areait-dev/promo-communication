@@ -1,0 +1,77 @@
+{
+    "key": "group_promo_pagina_non_trovata",
+    "title": "Pagina · Pagina non trovata",
+    "fields": [
+        {
+            "key": "field_promo_pagina_non_trovata_titolo",
+            "label": "Titolo",
+            "name": "titolo",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "allow_in_bindings": 0,
+            "show_in_graphql": 1,
+            "graphql_field_name": "titolo"
+        },
+        {
+            "key": "field_promo_pagina_non_trovata_pulsante",
+            "label": "Pulsante: testo",
+            "name": "pulsante",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "allow_in_bindings": 0,
+            "show_in_graphql": 1,
+            "graphql_field_name": "pulsante"
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "page_slug",
+                "operator": "==",
+                "value": "pagina-non-trovata"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "Testi della pagina di errore 404.",
+    "show_in_rest": 1,
+    "show_in_graphql": 1,
+    "graphql_field_name": "paginaNonTrovata",
+    "map_graphql_types_from_location_rules": 0,
+    "graphql_types": [
+        "Page"
+    ],
+    "modified": 1795564800
+}

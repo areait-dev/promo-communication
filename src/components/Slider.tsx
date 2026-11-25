@@ -3,13 +3,13 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState, ViewTransition } from "react";
-import { REAL, pImg } from "@/data/projects";
+import { pImg, type Project } from "@/data/projects";
 import { prefersReduced, projHref } from "@/lib/ui";
 
-export function Slider() {
+export function Slider({ projects }: { projects: Project[] }) {
   const track = useRef<HTMLDivElement>(null);
   const [pos, setPos] = useState(0);
-  const slides = REAL.slice(0, 6);
+  const slides = projects.slice(0, 6);
 
   // posizione nel carosello: la prima scheda visibile (IntersectionObserver, nessun listener di scroll)
   useEffect(() => {

@@ -1,0 +1,166 @@
+{
+    "key": "group_promo_servizi",
+    "title": "Pagina · Servizi",
+    "fields": [
+        {
+            "key": "field_promo_servizi_parole",
+            "label": "Titolo 'Boost your...': parole che scorrono",
+            "name": "parole",
+            "aria-label": "",
+            "type": "textarea",
+            "instructions": "Una per riga, fino a 8. L'ultima resta ferma.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "rows": 3,
+            "placeholder": "",
+            "new_lines": "",
+            "allow_in_bindings": 0,
+            "show_in_graphql": 1,
+            "graphql_field_name": "parole"
+        },
+        {
+            "key": "field_promo_servizi_singolo",
+            "label": "Pagina del singolo servizio",
+            "name": "singolo",
+            "aria-label": "",
+            "type": "group",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "layout": "block",
+            "show_in_graphql": 1,
+            "graphql_field_name": "singolo",
+            "sub_fields": [
+                {
+                    "key": "field_promo_servizi_singolo_titolo_progetti",
+                    "label": "Titolo dei progetti",
+                    "name": "titolo_progetti",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "Usa {servizio} per inserire il nome. Es. Progetti di {servizio}.",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "allow_in_bindings": 0,
+                    "show_in_graphql": 1,
+                    "graphql_field_name": "titoloProgetti"
+                },
+                {
+                    "key": "field_promo_servizi_singolo_progetti_vuoto",
+                    "label": "Messaggio senza progetti",
+                    "name": "progetti_vuoto",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "Es. I progetti di {servizio} arrivano presto.",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "allow_in_bindings": 0,
+                    "show_in_graphql": 1,
+                    "graphql_field_name": "progettiVuoto"
+                },
+                {
+                    "key": "field_promo_servizi_singolo_titolo_contatto",
+                    "label": "Titolo del modulo",
+                    "name": "titolo_contatto",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "Es. Vuoi saperne di più su {servizio}?",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "allow_in_bindings": 0,
+                    "show_in_graphql": 1,
+                    "graphql_field_name": "titoloContatto"
+                },
+                {
+                    "key": "field_promo_servizi_singolo_lead_contatto",
+                    "label": "Frase sopra il modulo",
+                    "name": "lead_contatto",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "allow_in_bindings": 0,
+                    "show_in_graphql": 1,
+                    "graphql_field_name": "leadContatto"
+                }
+            ]
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "page_slug",
+                "operator": "==",
+                "value": "servizi"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "Testi della pagina 'Servizi' e della pagina del singolo servizio.",
+    "show_in_rest": 1,
+    "show_in_graphql": 1,
+    "graphql_field_name": "paginaServizi",
+    "map_graphql_types_from_location_rules": 0,
+    "graphql_types": [
+        "Page"
+    ],
+    "modified": 1795564800
+}
