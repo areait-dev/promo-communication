@@ -2,7 +2,7 @@
 /**
  * Plugin Name: PromoCommunication Headless
  * Description: WordPress solo come CMS del sito Next.js su Vercel: tipi di contenuto e categorie, campi ACF da /acf-json con la regola "Slug pagina", anteprima delle bozze, reindirizzamento del front, accesso con password applicazione, aggiornamento immediato del sito quando si pubblica, testi SEO di Yoast per il sito (campo REST pc_seo).
- * Version: 2.3.0
+ * Version: 2.3.1
  *
  * Si installa copiando questo file in wp-content/mu-plugins/ (la cartella va creata se non c'è). Non va attivato: WordPress lo carica da solo.
  * I campi ACF stanno in wp-content/acf-json/ (copia della cartella wordpress/acf-json del progetto): si attivano da
@@ -404,13 +404,13 @@ function pc_url_yoast( $url, $presentation = null ) {
 add_filter( 'wpseo_canonical', 'pc_url_yoast', 10, 2 );
 add_filter( 'wpseo_opengraph_url', 'pc_url_yoast', 10, 2 );
 
-// Nei titoli di Yoast (%%sitename%%) il nome si scrive sempre attaccato, anche se il titolo del sito in
-// Impostazioni → Generali è diverso: "Chi siamo — PromoCommunication".
+// Nei titoli di Yoast (%%sitename%%) il nome si scrive sempre "Promo Communication", anche se il titolo del sito in
+// Impostazioni → Generali è diverso: "Chi siamo | Promo Communication".
 add_filter(
 	'wpseo_replacements',
 	function ( $sostituzioni ) {
 		if ( isset( $sostituzioni['%%sitename%%'] ) ) {
-			$sostituzioni['%%sitename%%'] = 'PromoCommunication';
+			$sostituzioni['%%sitename%%'] = 'Promo Communication';
 		}
 		return $sostituzioni;
 	}

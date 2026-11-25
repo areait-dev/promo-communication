@@ -95,7 +95,7 @@ Lavora con noi, Privacy), di un **progetto** o di un **servizio** va sul sito. I
 
 | Riquadro Yoast | Sul sito | Se è vuoto |
 | --- | --- | --- |
-| Titolo SEO | `<title>` completo, così com'è (nessun " \| PromoCommunication" aggiunto) | "Titolo \| PromoCommunication" del codice |
+| Titolo SEO | `<title>` completo, così com'è (nessun " \| Promo Communication" aggiunto) | "Titolo \| Promo Communication" del codice |
 | Meta descrizione | `description` | testo del codice (servizi e progetti: inizio della descrizione) |
 | Social → Titolo / Descrizione | `og:` e Twitter | titolo e descrizione qui sopra |
 | Social → Immagine | `og:image` | `/og.png` |
@@ -105,7 +105,7 @@ Lavora con noi, Privacy), di un **progetto** o di un **servizio** va sul sito. I
 - Dopo **Aggiorna** il sito si aggiorna subito (vedi Aggiornamento immediato).
 - Team e posizioni aperte non hanno una pagina loro: il loro riquadro Yoast non va sul sito.
 - **Separatore**: il sito usa `|`. Conviene lo stesso in Yoast → Impostazioni → Informazioni di base del sito, così
-  l'anteprima di Google in WordPress coincide con il sito. Il mu-plugin fa valere `%%sitename%%` = "PromoCommunication".
+  l'anteprima di Google in WordPress coincide con il sito. Il mu-plugin fa valere `%%sitename%%` = "Promo Communication".
 - **Semafori**: SEO e leggibilità leggono i campi ACF della pagina (plugin ACF Content Analysis for Yoast SEO). La parola
   chiave si sceglie nel riquadro Yoast; serve solo ai semafori.
 - **Indirizzi**: il mu-plugin riscrive canonical e `og:url` di Yoast verso il sito pubblico (serve `PC_FRONTEND_URL` in

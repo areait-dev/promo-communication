@@ -4,9 +4,9 @@ import type { WpSeo } from "./wordpress";
 
 /** Indirizzo pubblico del sito: quello con www, su cui Vercel reindirizza il dominio senza www. Serve per canonical, Open Graph e sitemap. */
 export const SITE_URL = "https://www.promocommunication.it";
-export const SITE_NAME = "PromoCommunication";
+export const SITE_NAME = "Promo Communication";
 /** Immagine di condivisione (1200×630) in /public. */
-export const OG_IMAGE = { url: "/og.png", width: 1200, height: 630, alt: "PromoCommunication, Boost your brand" };
+export const OG_IMAGE = { url: "/og.png", width: 1200, height: 630, alt: "Promo Communication, Boost your brand" };
 
 /** Accorcia un testo a max `n` caratteri, chiudendo a fine frase o, se non c'è, a fine parola. */
 export function snip(text: string, n = 158): string {
@@ -19,12 +19,12 @@ export function snip(text: string, n = 158): string {
 }
 
 /** Titolo e descrizione della home (anche nel layout e nei dati strutturati). */
-export const HOME_TITLE = "Boost your brand | PromoCommunication";
+export const HOME_TITLE = "Boost your brand | Promo Communication";
 export const HOME_DESC =
-  "PromoCommunication, la Unit di Comunicazione & Marketing di Promotergroup. Diamo forma, voce e spazio a quello che la tua impresa fa ogni giorno.";
+  "Promo Communication, la Unit di Comunicazione & Marketing di Promotergroup. Diamo forma, voce e spazio a quello che la tua impresa fa ogni giorno.";
 
 type PageMetaInput = {
-  /** Titolo breve: il template del layout aggiunge " | PromoCommunication". Con `absolute` è già completo. */
+  /** Titolo breve: il template del layout aggiunge " | Promo Communication". Con `absolute` è già completo. */
   title: string;
   description: string;
   path: string;
@@ -35,7 +35,7 @@ type PageMetaInput = {
 
 /** Metadati di una pagina: titolo, descrizione, canonical, Open Graph, Twitter card e, se scelto in Yoast, noindex. */
 export function pageMeta({ title, description, path, absolute, seo }: PageMetaInput): Metadata {
-  // Il titolo di Yoast è già completo (di solito "Titolo | PromoCommunication"): niente template.
+  // Il titolo di Yoast è già completo (di solito "Titolo | Promo Communication"): niente template.
   const full = seo?.title || (absolute ? title : `${title} | ${SITE_NAME}`);
   const desc = seo?.description || description;
   const ogTitle = seo?.og_title || full;

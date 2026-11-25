@@ -9,7 +9,7 @@ export const generateMetadata = (): Promise<Metadata> => seoMeta({
   title: "Privacy e Cookie Policy",
   path: "/privacy",
   description:
-    "Come PromoCommunication tratta i tuoi dati quando visiti il sito o ci scrivi: informativa privacy e cookie policy.",
+    "Come Promo Communication tratta i tuoi dati quando visiti il sito o ci scrivi: informativa privacy e cookie policy.",
 });
 
 /**

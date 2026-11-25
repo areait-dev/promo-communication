@@ -13,7 +13,7 @@ export const generateMetadata = (): Promise<Metadata> => seoMeta({
   title: "Servizi",
   path: "/servizi",
   description:
-    "Brand strategy, identity, digital & web, social media, reputation, personal branding, eventi e comunicazione politica: i servizi di PromoCommunication.",
+    "Brand strategy, identity, digital & web, social media, reputation, personal branding, eventi e comunicazione politica: i servizi di Promo Communication.",
 });
 
 export default async function Servizi() {

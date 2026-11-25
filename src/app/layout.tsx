@@ -19,7 +19,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
     default: HOME_TITLE,
-    template: "%s | PromoCommunication",
+    template: "%s | Promo Communication",
   },
   description: HOME_DESC,
   alternates: { canonical: "/" },

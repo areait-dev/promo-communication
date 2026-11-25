@@ -11,7 +11,7 @@ export const generateMetadata = (): Promise<Metadata> => seoMeta({
   title: "Lavora con noi",
   path: "/lavora-con-noi",
   description:
-    "Cerchiamo persone curiose, con idee chiare e voglia di mettersi in gioco. Manda il tuo CV a PromoCommunication e raccontaci chi sei.",
+    "Cerchiamo persone curiose, con idee chiare e voglia di mettersi in gioco. Manda il tuo CV a Promo Communication e raccontaci chi sei.",
 });
 
 export default async function LavoraConNoi() {

@@ -11,7 +11,7 @@ export const generateMetadata = (): Promise<Metadata> => seoMeta({
   title: "Portfolio",
   path: "/portfolio",
   description:
-    "I progetti di PromoCommunication: identità di marca, siti, social ed eventi realizzati per le imprese con cui lavoriamo.",
+    "I progetti di Promo Communication: identità di marca, siti, social ed eventi realizzati per le imprese con cui lavoriamo.",
 });
 
 export default async function Portfolio() {

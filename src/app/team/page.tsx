@@ -11,7 +11,7 @@ export const generateMetadata = (): Promise<Metadata> => seoMeta({
   title: "Team",
   path: "/team",
   description:
-    "Il team di PromoCommunication: press officer, art director, social media manager, graphic designer e developer. Teste diverse, stesso fumetto.",
+    "Il team di Promo Communication: press officer, art director, social media manager, graphic designer e developer. Teste diverse, stesso fumetto.",
 });
 
 export default async function Team() {
