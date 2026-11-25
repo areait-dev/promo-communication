@@ -232,7 +232,19 @@
     animation-range: entry calc(min(var(--i, 0), 6) * 4%) entry calc(60% + min(var(--i, 0), 6) * 4%);
   }
 }
+/* Ingresso senza aspettare JavaScript: testi e blocchi entrano con un'animazione CSS che parte al primo paint, stesso effetto
+   della transizione (opacity + blur + translate, stagger --i). Vale finche' reveal.ts non e' pronto e poi, per gli elementi gia'
+   visibili al caricamento (.is-intro), resta la stessa animazione: niente ripartenze. Sotto la piega, dopo l'avvio, comandano lo
+   scroll (regola sopra) o IntersectionObserver. Cosi' il testo principale compare subito (LCP) e non dopo l'idratazione.
+   Titoli e media restano a reveal.ts (maschere e tendine). */
+:is(.js:not([data-reveal="ready"]) .pc-reveal, .js .pc-reveal.is-intro):not(h1, h2, h3, h4, h5, h6, .pc-section-head, .pc-reveal--title, .pc-reveal--media, figure, .pj-cover, .pj-img, .pc-team, .slider, :has(h1:not(.pc-boost), h2, h3, > img)) {
+  opacity: 1; translate: none; filter: none; transition: transform var(--dur-base) var(--ease-out);
+  animation: pc-reveal-intro .7s var(--ease-out) calc(min(var(--i, 0), 6) * 80ms) both;
+}
 @keyframes pc-reveal-in { from { opacity: 0; translate: 0 12px; filter: blur(6px); } to { opacity: 1; translate: 0 0; filter: none; } }
+/* Come pc-reveal-in, ma parte da un'opacita' minima invece che da 0: a occhio e' identico, e per il browser il testo e' gia'
+   dipinto al primo frame (un elemento a opacita' 0 non conta come contenuto visibile e l'LCP slitterebbe a fine idratazione). */
+@keyframes pc-reveal-intro { from { opacity: .01; translate: 0 12px; filter: blur(6px); } to { opacity: 1; translate: 0 0; filter: none; } }
 
 /* Rete di sicurezza: se i reveal non partono entro 5 s (JS rotto) il contenuto si mostra comunque */
 .js.no-reveal .pc-reveal, .js.no-reveal .pc-reveal--media { opacity: 1 !important; translate: none !important; filter: none !important; clip-path: none !important; animation: none !important; }
