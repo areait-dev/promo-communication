@@ -1368,7 +1368,8 @@ html:not([data-theme="dark"]) #main .pf-title2 { color: var(--blu-700); }
 .ssr-name { font: 700 clamp(36px, 4.2vw, 60px)/1 var(--font-display); letter-spacing: -.025em; margin: 0 0 10px; }
 .ssr-namerow { display: flex; align-items: center; gap: 16px; margin: 0 0 10px; }
 .ssr-namerow .ssr-name { margin: 0; }
-.ssr-in { flex: none; display: grid; place-items: center; width: 38px; height: 38px; border: 2px solid currentColor; border-radius: 50%; color: var(--blu-700); text-decoration: none; transition: background-color .2s, color .2s; }
+.ssr-role:has(+ .ssr-in) { margin-bottom: 14px; }
+.ssr-in { flex: none; margin: 0 0 20px; display: grid; place-items: center; width: 38px; height: 38px; border: 2px solid currentColor; border-radius: 50%; color: var(--blu-700); text-decoration: none; transition: background-color .2s, color .2s; }
 .ssr-in svg { width: 17px; height: 17px; overflow: visible; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 .ssr-in:hover, .ssr-in:focus-visible { background: var(--blu-700); color: #fff; }
 html[data-theme="dark"] .ssr-in { color: #fff; }
@@ -1396,8 +1397,9 @@ html:not([data-theme="dark"]) #main .ssr-name { color: var(--blu-700); }
   .ssr { padding: 0; height: calc(var(--n, 6) * 55vh + 100vh); }
   .ssr-stage { position: sticky; top: 0; height: 100vh; display: flex; align-items: center; }
   .ssr-stage > .ssr-grid { width: 100%; align-items: center; }
-  .ssr-text { position: relative; height: 460px; }
-  .ssr-item { position: absolute; inset: 0; min-height: 0; justify-content: flex-start; padding: 72px 0 0; opacity: 0; pointer-events: none; transition: none; }
+  /* Tutti i membri nella stessa cella: il riquadro e' alto quanto il testo piu' lungo, niente tagli e niente scroll interno. */
+  .ssr-text { position: relative; display: grid; }
+  .ssr-item { position: relative; grid-area: 1 / 1; min-height: 0; justify-content: flex-start; padding: 72px 0 0; opacity: 0; pointer-events: none; transition: none; }
   .ssr-item.is-on { opacity: 1; pointer-events: auto; }
   .ssr-grid { grid-template-columns: 1fr 1fr; }
   .ssr-side { position: relative; top: auto; }
