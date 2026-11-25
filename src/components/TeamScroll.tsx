@@ -40,7 +40,18 @@ export function TeamScroll({ team: TEAM, linkedin }: { team: Member[]; linkedin?
         <div className="ssr-text">
           {TEAM.map((m, i) => (
             <article key={m.n} className={"ssr-item" + on(i)} data-i={i} ref={(el) => { items.current[i] = el; }}>
-              <h2 className="ssr-name">{m.n}</h2>
+              <div className="ssr-namerow">
+                <h2 className="ssr-name">{m.n}</h2>
+                {m.li || linkedin ? (
+                  <a className="ssr-in" href={m.li || linkedin} target="_blank" rel="noopener noreferrer" tabIndex={i === cur ? 0 : -1} aria-label={m.li ? `${m.n} su LinkedIn` : "Promo Communication su LinkedIn"}>
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                      <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+                      <rect x="2" y="9" width="4" height="12" />
+                      <circle cx="4" cy="4" r="2" />
+                    </svg>
+                  </a>
+                ) : null}
+              </div>
               {m.r ? <p className="ssr-role">{m.r}</p> : null}
               <p className="ssr-desc" dangerouslySetInnerHTML={{ __html: m.b }} />
               <div className={`ssr-ph ssr-ph--m ph ph-${m.c}${m.img ? " has-img" : ""}`} aria-hidden="true">
@@ -89,17 +100,6 @@ export function TeamScroll({ team: TEAM, linkedin }: { team: Member[]; linkedin?
               <small>Posizioni aperte e candidature spontanee</small>
             </div>
           </div>
-          {TEAM.map((m, i) =>
-            m.li || linkedin ? (
-              <a key={m.n} className={"ssr-in" + on(i)} href={m.li || linkedin} target="_blank" rel="noopener noreferrer" tabIndex={i === cur ? 0 : -1} aria-hidden={i === cur ? undefined : true} aria-label={m.li ? `${m.n} su LinkedIn` : "Promo Communication su LinkedIn"}>
-                <svg viewBox="0 0 24 24" aria-hidden="true">
-                  <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
-                  <rect x="2" y="9" width="4" height="12" />
-                  <circle cx="4" cy="4" r="2" />
-                </svg>
-              </a>
-            ) : null,
-          )}
         </div>
       </div>
       </div>

@@ -1366,6 +1366,13 @@ html:not([data-theme="dark"]) #main .pf-title2 { color: var(--blu-700); }
 .ssr-item { min-height: 72vh; display: flex; flex-direction: column; justify-content: center; opacity: .25; transition: opacity .2s var(--ease-out); }
 .ssr-item.is-on { opacity: 1; }
 .ssr-name { font: 700 clamp(36px, 4.2vw, 60px)/1 var(--font-display); letter-spacing: -.025em; margin: 0 0 10px; }
+.ssr-namerow { display: flex; align-items: center; gap: 16px; margin: 0 0 10px; }
+.ssr-namerow .ssr-name { margin: 0; }
+.ssr-in { flex: none; display: grid; place-items: center; width: 38px; height: 38px; border: 2px solid currentColor; border-radius: 50%; color: var(--blu-700); text-decoration: none; transition: background-color .2s, color .2s; }
+.ssr-in svg { width: 17px; height: 17px; overflow: visible; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.ssr-in:hover, .ssr-in:focus-visible { background: var(--blu-700); color: #fff; }
+html[data-theme="dark"] .ssr-in { color: #fff; }
+html[data-theme="dark"] .ssr-in:hover, html[data-theme="dark"] .ssr-in:focus-visible { background: #fff; color: var(--blu-700); }
 .ssr-role { font: 600 15px/1.3 var(--font-body); letter-spacing: .06em; text-transform: uppercase; color: var(--Red); margin: 0 0 20px; }
 .ssr-desc { font: 400 21px/1.5 var(--font-body); margin: 0; max-width: 46ch; }
 html:not([data-theme="dark"]) #main .ssr-name { color: var(--blu-700); }
@@ -1390,17 +1397,10 @@ html:not([data-theme="dark"]) #main .ssr-name { color: var(--blu-700); }
   .ssr-stage { position: sticky; top: 0; height: 100vh; display: flex; align-items: center; }
   .ssr-stage > .ssr-grid { width: 100%; align-items: center; }
   .ssr-text { position: relative; height: 460px; }
-  .ssr-item { position: absolute; inset: 0; min-height: 0; justify-content: flex-start; padding-top: 72px; opacity: 0; pointer-events: none; transition: none; }
+  .ssr-item { position: absolute; inset: 0; min-height: 0; justify-content: flex-start; padding: 72px 0 0; opacity: 0; pointer-events: none; transition: none; }
   .ssr-item.is-on { opacity: 1; pointer-events: auto; }
   .ssr-grid { grid-template-columns: 1fr 1fr; }
-  .ssr-side { position: relative; top: auto; display: grid; grid-template-columns: 3fr 1fr; column-gap: clamp(16px, 2vw, 32px); }
-  .ssr-side > .ssr-card { grid-area: 1 / 1; }
-  .ssr-in { grid-area: 1 / 2; align-self: end; justify-self: start; display: grid; place-items: center; width: 40px; height: 40px; border: 2px solid currentColor; border-radius: 50%; font-size: 0; color: var(--blu-700); text-decoration: none; opacity: 0; pointer-events: none; transition: none; }
-  .ssr-in.is-on { opacity: 1; pointer-events: auto; }
-  .ssr-in svg { width: 18px; height: 18px; overflow: visible; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
-  .ssr-in:hover, .ssr-in:focus-visible { background: var(--blu-700); color: #fff; }
-  html[data-theme="dark"] .ssr-in { color: #fff; }
-  html[data-theme="dark"] .ssr-in:hover, html[data-theme="dark"] .ssr-in:focus-visible { background: #fff; color: var(--blu-700); }
+  .ssr-side { position: relative; top: auto; }
 }
 [data-theme="dark"] .ssr[data-tone] { background: var(--surface); }
 
