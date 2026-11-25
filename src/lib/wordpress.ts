@@ -61,6 +61,17 @@ export type WpPost<A> = {
   acf: A | [];
   /** Categorie progetto: la REST usa il rest_base della tassonomia come nome del campo. */
   "categorie-progetto"?: number[];
+  /** Testi SEO compilati in Yoast (mu-plugin, campo pc_seo): ci sono solo quelli non vuoti. */
+  pc_seo?: WpSeo | [];
+};
+
+export type WpSeo = {
+  title?: string;
+  description?: string;
+  og_title?: string;
+  og_description?: string;
+  og_image?: { url: string; width?: number; height?: number };
+  noindex?: boolean;
 };
 
 export type WpTerm = { id: number; name: string; slug: string };

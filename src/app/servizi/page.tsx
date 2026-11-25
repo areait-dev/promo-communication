@@ -6,10 +6,10 @@ import { Star } from "@/components/Star";
 import { Cta } from "@/components/blocks";
 import { vars } from "@/lib/ui";
 import { PageFx } from "@/components/PageFx";
-import { pageMeta } from "@/lib/seo";
+import { seoMeta } from "@/lib/seo";
 import { getContent } from "@/lib/content";
 
-export const metadata: Metadata = pageMeta({
+export const generateMetadata = (): Promise<Metadata> => seoMeta({
   title: "Servizi",
   path: "/servizi",
   description:

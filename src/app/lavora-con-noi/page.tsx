@@ -5,9 +5,9 @@ import { PageFx } from "@/components/PageFx";
 import { CAREERS_LEAD, CAREERS_TITLE } from "@/data/careers";
 import { getContent } from "@/lib/content";
 import { vars } from "@/lib/ui";
-import { pageMeta } from "@/lib/seo";
+import { seoMeta } from "@/lib/seo";
 
-export const metadata: Metadata = pageMeta({
+export const generateMetadata = (): Promise<Metadata> => seoMeta({
   title: "Lavora con noi",
   path: "/lavora-con-noi",
   description:

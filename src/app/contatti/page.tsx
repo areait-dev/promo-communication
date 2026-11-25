@@ -4,10 +4,10 @@ import { ContactPanel } from "@/components/ContactPanel";
 import { PageFx } from "@/components/PageFx";
 import { CONTACT_LEAD } from "@/data/contact";
 import { vars } from "@/lib/ui";
-import { pageMeta } from "@/lib/seo";
+import { seoMeta } from "@/lib/seo";
 import { getContent } from "@/lib/content";
 
-export const metadata: Metadata = pageMeta({
+export const generateMetadata = (): Promise<Metadata> => seoMeta({
   title: "Contatti",
   path: "/contatti",
   description:

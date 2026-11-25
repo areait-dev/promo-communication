@@ -1,8 +1,8 @@
 <?php
 /**
  * Plugin Name: PromoCommunication Headless
- * Description: WordPress solo come CMS del sito Next.js su Vercel: tipi di contenuto e categorie, campi ACF da /acf-json con la regola "Slug pagina", anteprima delle bozze, reindirizzamento del front, accesso con password applicazione, aggiornamento immediato del sito quando si pubblica.
- * Version: 2.2.0
+ * Description: WordPress solo come CMS del sito Next.js su Vercel: tipi di contenuto e categorie, campi ACF da /acf-json con la regola "Slug pagina", anteprima delle bozze, reindirizzamento del front, accesso con password applicazione, aggiornamento immediato del sito quando si pubblica, testi SEO di Yoast per il sito (campo REST pc_seo).
+ * Version: 2.3.0
  *
  * Si installa copiando questo file in wp-content/mu-plugins/ (la cartella va creata se non c'è). Non va attivato: WordPress lo carica da solo.
  * I campi ACF stanno in wp-content/acf-json/ (copia della cartella wordpress/acf-json del progetto): si attivano da
@@ -427,6 +427,70 @@ add_filter(
 			$tipi[ $tipo ] = $tipo;
 		}
 		return $tipi;
+	}
+);
+
+/**
+ * Testi SEO scritti in Yoast, per il sito Next.js: campo REST "pc_seo" su pagine, progetti e servizi.
+ * Contiene solo quello che è stato compilato nel riquadro di Yoast (con le variabili %%title%%, %%sep%%… già
+ * sostituite); i campi lasciati vuoti mancano e il sito usa i suoi testi. yoast_head_json invece riempie sempre
+ * tutto con i modelli di Yoast, e il sito non saprebbe distinguere un testo scritto da uno automatico.
+ */
+function pc_seo_rest( $dati ) {
+	$post = get_post( (int) $dati['id'] );
+	if ( ! $post instanceof WP_Post ) {
+		return null;
+	}
+	$testo = function ( $chiave ) use ( $post ) {
+		$grezzo = trim( (string) get_post_meta( $post->ID, '_yoast_wpseo_' . $chiave, true ) );
+		if ( '' === $grezzo ) {
+			return null;
+		}
+		$pronto = function_exists( 'wpseo_replace_vars' ) ? wpseo_replace_vars( $grezzo, $post ) : $grezzo;
+		$pronto = trim( preg_replace( '/\s+/', ' ', wp_strip_all_tags( html_entity_decode( (string) $pronto, ENT_QUOTES, 'UTF-8' ) ) ) );
+		return '' === $pronto ? null : $pronto;
+	};
+
+	$immagine = null;
+	$img_id   = (int) get_post_meta( $post->ID, '_yoast_wpseo_opengraph-image-id', true );
+	$img_url  = trim( (string) get_post_meta( $post->ID, '_yoast_wpseo_opengraph-image', true ) );
+	if ( $img_id && ( $src = wp_get_attachment_image_src( $img_id, 'full' ) ) ) {
+		$immagine = array( 'url' => $src[0], 'width' => (int) $src[1], 'height' => (int) $src[2] );
+	} elseif ( '' !== $img_url ) {
+		$immagine = array( 'url' => $img_url );
+	}
+
+	$seo = array_filter(
+		array(
+			'title'          => $testo( 'title' ),
+			'description'    => $testo( 'metadesc' ),
+			'og_title'       => $testo( 'opengraph-title' ),
+			'og_description' => $testo( 'opengraph-description' ),
+			'og_image'       => $immagine,
+			// "1" = l'editor ha scelto "No" a "Consentire ai motori di ricerca di mostrare questo contenuto?".
+			'noindex'        => '1' === (string) get_post_meta( $post->ID, '_yoast_wpseo_meta-robots-noindex', true ) ? true : null,
+		),
+		function ( $v ) {
+			return null !== $v;
+		}
+	);
+	return (object) $seo;
+}
+add_action(
+	'rest_api_init',
+	function () {
+		register_rest_field(
+			array( 'page', 'progetto', 'servizio' ),
+			'pc_seo',
+			array(
+				'get_callback' => 'pc_seo_rest',
+				'schema'       => array(
+					'description' => 'Testi SEO compilati in Yoast (solo quelli non vuoti).',
+					'type'        => 'object',
+					'context'     => array( 'view', 'edit' ),
+				),
+			)
+		);
 	}
 );
 

@@ -1,5 +1,5 @@
 /**
- * Contenuti del sito: progetti, servizi, team, posizioni aperte e recapiti.
+ * Contenuti del sito: progetti, servizi, team, posizioni aperte, recapiti e testi SEO di Yoast.
  *
  * Vengono da WordPress (wp.promocommunication.it). Per ogni raccolta, se WordPress non risponde o non ha ancora
  * contenuti pubblicati, si usano i dati di src/data: il sito resta identico e il build non si rompe.
@@ -14,7 +14,7 @@ import { ACC, FEAT, HOME_ORDER, SERVICES, SVC_CAT, type Service } from "@/data/s
 import { TEAM, type Member } from "@/data/team";
 import { AREAS, OPEN_ROLES, type Role } from "@/data/careers";
 import { ADDRESS, EMAIL, HOURS, MAP_POINT, PHONE, SOCIALS } from "@/data/contact";
-import { acfOf, decode, imgUrl, lines, wpGet, type WpImage, type WpPost, type WpTerm } from "./wordpress";
+import { acfOf, decode, imgUrl, lines, wpGet, type WpImage, type WpPost, type WpSeo, type WpTerm } from "./wordpress";
 
 /* ---------------------------------------------------------------------------------------------------------------
  * Forma dei contenuti usata da pagine e componenti (la stessa di src/data)
@@ -52,6 +52,8 @@ export type Content = {
   roles: Role[];
   areas: readonly string[];
   contact: Contact;
+  /** Testi SEO scritti in Yoast, per percorso pubblico ("/", "/chi-siamo", "/portfolio/pure-red"…). */
+  seo: Record<string, WpSeo>;
 };
 
 /* ---------------------------------------------------------------------------------------------------------------
@@ -72,6 +74,7 @@ const LOCAL: Content = {
     mapPoint: MAP_POINT,
     socials: SOCIALS.map((s) => ({ ...s })),
   },
+  seo: {},
 };
 
 /* ---------------------------------------------------------------------------------------------------------------
@@ -237,28 +240,60 @@ function toContact(a: ImpostazioniAcf | undefined): Contact {
 
 const LIST = { per_page: 100 };
 
+/** Pagine WordPress che hanno una pagina sul sito: slug → percorso (come pc_pagine() nel mu-plugin). */
+const PAGE_PATHS: Record<string, string> = {
+  home: "/",
+  "chi-siamo": "/chi-siamo",
+  servizi: "/servizi",
+  portfolio: "/portfolio",
+  team: "/team",
+  contatti: "/contatti",
+  "lavora-con-noi": "/lavora-con-noi",
+  privacy: "/privacy",
+};
+
+/** Il campo pc_seo arriva come [] quando WordPress serializza un oggetto vuoto: qui diventa undefined. */
+const seoOf = (p: { pc_seo?: WpSeo | [] }): WpSeo | undefined =>
+  p.pc_seo && !Array.isArray(p.pc_seo) && Object.keys(p.pc_seo).length ? p.pc_seo : undefined;
+
 async function load(draft: boolean): Promise<Content> {
   "use cache";
   cacheLife("hours");
   cacheTag("wp");
 
-  const [progetti, termini, servizi, membri, posizioni, impostazioni, lavora] = await Promise.all([
-    wpGet<WpPost<ProgettoAcf>[]>("progetti", { ...LIST, _fields: "id,slug,status,title,acf,categorie-progetto" }, draft),
+  const [progetti, termini, servizi, membri, posizioni, pagine] = await Promise.all([
+    wpGet<WpPost<ProgettoAcf>[]>("progetti", { ...LIST, _fields: "id,slug,status,title,acf,categorie-progetto,pc_seo" }, draft),
     wpGet<WpTerm[]>("categorie-progetto", { ...LIST, _fields: "id,name,slug" }),
-    wpGet<WpPost<ServizioAcf>[]>("servizi", { ...LIST, _fields: "id,slug,status,title,acf" }, draft),
+    wpGet<WpPost<ServizioAcf>[]>("servizi", { ...LIST, _fields: "id,slug,status,title,acf,pc_seo" }, draft),
     wpGet<WpPost<MembroAcf>[]>("membri", { ...LIST, _fields: "id,slug,status,title,acf" }, draft),
     wpGet<WpPost<PosizioneAcf>[]>("posizioni", { ...LIST, _fields: "id,slug,status,title,acf" }, draft),
-    wpGet<WpPost<ImpostazioniAcf>[]>("pages", { slug: "impostazioni", _fields: "id,slug,status,title,acf" }, draft),
-    wpGet<WpPost<LavoraAcf>[]>("pages", { slug: "lavora-con-noi", _fields: "id,slug,status,title,acf" }, draft),
+    wpGet<WpPost<unknown>[]>("pages", { ...LIST, _fields: "id,slug,status,title,acf,pc_seo" }, draft),
   ]);
+  const page = <A,>(slug: string) => (pagine || []).find((p) => p.slug === slug) as WpPost<A> | undefined;
+  const impostazioni = page<ImpostazioniAcf>("impostazioni");
+  const lavora = page<LavoraAcf>("lavora-con-noi");
+
+  const seo: Record<string, WpSeo> = {};
+  for (const p of pagine || []) {
+    const s = PAGE_PATHS[p.slug] && seoOf(p);
+    if (s) seo[PAGE_PATHS[p.slug]] = s;
+  }
+  for (const p of progetti || []) {
+    const s = seoOf(p);
+    if (s) seo[`/portfolio/${p.slug}`] = s;
+  }
+  for (const p of servizi || []) {
+    const s = seoOf(p);
+    if (s) seo[`/servizi/${p.slug}`] = s;
+  }
 
   const terms = new Map((termini || []).map((t) => [t.id, decode(t.name)]));
   const fromWp = (progetti || []).map((p) => toProject(p, terms)).filter((p) => p.published);
   const services = servizi && servizi.length ? toServices(servizi) : null;
   const team = (membri || []).map(toMember).sort((a, b) => a.o - b.o);
   const roles = (posizioni || []).map(toRole).sort((a, b) => a.o - b.o);
-  const settings = impostazioni?.[0] ? acfOf(impostazioni[0]) : undefined;
-  const aree = lavora?.[0] ? lines(acfOf(lavora[0]).aree) : [];
+  const settings = impostazioni ? acfOf(impostazioni) : undefined;
+  const aree = lavora ? lines(acfOf(lavora).aree) : [];
 
   return {
     // Una raccolta vuota in WordPress (ancora da riempire) non svuota il sito: restano i dati locali.
@@ -269,6 +304,7 @@ async function load(draft: boolean): Promise<Content> {
     roles: posizioni ? roles.map((r) => ({ title: r.title, area: r.area, where: r.where, desc: r.desc })) : LOCAL.roles,
     areas: aree.length ? aree : LOCAL.areas,
     contact: toContact(settings),
+    seo,
   };
 }
 

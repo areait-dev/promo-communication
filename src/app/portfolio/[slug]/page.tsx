@@ -19,8 +19,11 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
-  const p = projectById(await getContent(), (await params).slug);
-  return p ? pageMeta({ title: p.name, path: `/portfolio/${p.id}`, description: snip(p.intro || `${p.name}: un progetto di PromoCommunication.`) }) : {};
+  const c = await getContent();
+  const p = projectById(c, (await params).slug);
+  return p
+    ? pageMeta({ title: p.name, path: `/portfolio/${p.id}`, description: snip(p.intro || `${p.name}: un progetto di PromoCommunication.`), seo: c.seo[`/portfolio/${p.id}`] })
+    : {};
 }
 
 export default async function Progetto({ params }: { params: Promise<{ slug: string }> }) {

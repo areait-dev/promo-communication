@@ -8,16 +8,12 @@ import { Behaviors } from "@/components/Behaviors";
 import { CookieBanner } from "@/components/CookieBanner";
 import { PreviewBar } from "@/components/PreviewBar";
 import { Suspense } from "react";
-import { OG_IMAGE, SITE_NAME, SITE_URL } from "@/lib/seo";
+import { HOME_DESC, HOME_TITLE, OG_IMAGE, SITE_NAME, SITE_URL } from "@/lib/seo";
 import { getContent, type Contact } from "@/lib/content";
 import { isPreview } from "@/lib/env";
 
 const outfit = Outfit({ subsets: ["latin"], variable: "--f-outfit", display: "swap" });
 const funnel = Funnel_Display({ subsets: ["latin"], variable: "--f-funnel", display: "swap" });
-
-const HOME_TITLE = "Boost your brand | PromoCommunication";
-const HOME_DESC =
-  "PromoCommunication, la Unit di Comunicazione & Marketing di Promotergroup. Diamo forma, voce e spazio a quello che la tua impresa fa ogni giorno.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),

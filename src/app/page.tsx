@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { Boost } from "@/components/Boost";
 import { ContactForm } from "@/components/ContactForm";
@@ -10,6 +11,10 @@ import { SvcIndex } from "@/components/SvcIndex";
 import { getContent } from "@/lib/content";
 import { svcHref, vars } from "@/lib/ui";
 import { PageFx } from "@/components/PageFx";
+import { HOME_DESC, HOME_TITLE, seoMeta } from "@/lib/seo";
+
+// Titolo e descrizione: quelli scritti in Yoast nella pagina "Home", se compilati.
+export const generateMetadata = (): Promise<Metadata> => seoMeta({ title: HOME_TITLE, description: HOME_DESC, path: "/", absolute: true });
 
 export default async function Home() {
   const { projects, team: TEAM, contact } = await getContent();

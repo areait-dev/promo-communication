@@ -5,9 +5,9 @@ import { Star } from "@/components/Star";
 import { Cta } from "@/components/blocks";
 import { getContent } from "@/lib/content";
 import { PageFx } from "@/components/PageFx";
-import { pageMeta } from "@/lib/seo";
+import { seoMeta } from "@/lib/seo";
 
-export const metadata: Metadata = pageMeta({
+export const generateMetadata = (): Promise<Metadata> => seoMeta({
   title: "Portfolio",
   path: "/portfolio",
   description:

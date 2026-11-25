@@ -3,9 +3,9 @@ import Link from "next/link";
 import { PageFx } from "@/components/PageFx";
 import { getContent } from "@/lib/content";
 import { vars } from "@/lib/ui";
-import { pageMeta } from "@/lib/seo";
+import { seoMeta } from "@/lib/seo";
 
-export const metadata: Metadata = pageMeta({
+export const generateMetadata = (): Promise<Metadata> => seoMeta({
   title: "Privacy e Cookie Policy",
   path: "/privacy",
   description:

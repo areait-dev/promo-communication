@@ -88,21 +88,30 @@ e vanno identiche su Vercel (`PREVIEW_SECRET`, `REVALIDATE_TOKEN`), poi un nuovo
 
 ## Yoast SEO
 
-- **Titolo**: modello predefinito di Yoast `%%title%% %%page%% %%sep%% %%sitename%%`, separatore `—` (Yoast → Impostazioni →
-  Informazioni di base del sito). Il mu-plugin fa valere `%%sitename%%` = "PromoCommunication", quindi: "Chi siamo — PromoCommunication".
-  Il nome del sito per Yoast (Open Graph, dati strutturati) è "PromoCommunication". Il sito usa il titolo di Yoast così com'è;
-  per la home il titolo dei risultati di ricerca è in "Impostazioni del sito" → Sito e ricerca.
-- **Descrizione e immagine social**: nel riquadro Yoast di ogni contenuto. Se mancano, il sito usa quelle di riserva
-  ("Impostazioni del sito" → Sito e ricerca).
-- **Semafori**: SEO e leggibilità leggono i campi ACF della pagina (plugin ACF Content Analysis for Yoast SEO). La parola chiave
-  si sceglie nel riquadro Yoast.
-- **Indirizzi**: il mu-plugin riscrive canonical e `og:url` verso il sito pubblico (pagina → il suo percorso, progetto →
-  `/portfolio/slug`, servizio → `/servizi/slug`). Gli altri indirizzi dentro `yoast_head_json` (schema) restano quelli di
-  WordPress: il sito usa solo titolo, descrizione e immagine.
+Quello che si scrive nel riquadro Yoast di una **pagina** (Home, Chi siamo, Servizi, Portfolio, Team, Contatti,
+Lavora con noi, Privacy), di un **progetto** o di un **servizio** va sul sito. Il mu-plugin lo espone nel campo REST
+`pc_seo`, con le variabili (`%%title%%`, `%%sep%%`, `%%sitename%%`…) già sostituite; `src/lib/content.ts` lo legge e
+`pageMeta()` in `src/lib/seo.ts` lo usa al posto dei testi del codice.
+
+| Riquadro Yoast | Sul sito | Se è vuoto |
+| --- | --- | --- |
+| Titolo SEO | `<title>` completo, così com'è (nessun " \| PromoCommunication" aggiunto) | "Titolo \| PromoCommunication" del codice |
+| Meta descrizione | `description` | testo del codice (servizi e progetti: inizio della descrizione) |
+| Social → Titolo / Descrizione | `og:` e Twitter | titolo e descrizione qui sopra |
+| Social → Immagine | `og:image` | `/og.png` |
+| Avanzate → "Consentire ai motori di ricerca di mostrare…?" = No | `noindex, follow` e fuori da `sitemap.xml` | indicizzata |
+
+- Conta solo quello che è **scritto** nel riquadro: i modelli automatici di Yoast non sostituiscono i testi del sito.
+- Dopo **Aggiorna** il sito si aggiorna subito (vedi Aggiornamento immediato).
+- Team e posizioni aperte non hanno una pagina loro: il loro riquadro Yoast non va sul sito.
+- **Separatore**: il sito usa `|`. Conviene lo stesso in Yoast → Impostazioni → Informazioni di base del sito, così
+  l'anteprima di Google in WordPress coincide con il sito. Il mu-plugin fa valere `%%sitename%%` = "PromoCommunication".
+- **Semafori**: SEO e leggibilità leggono i campi ACF della pagina (plugin ACF Content Analysis for Yoast SEO). La parola
+  chiave si sceglie nel riquadro Yoast; serve solo ai semafori.
+- **Indirizzi**: il mu-plugin riscrive canonical e `og:url` di Yoast verso il sito pubblico (serve `PC_FRONTEND_URL` in
+  `wp-config.php`). Il canonical del sito lo scrive comunque Next.js.
 - **Mappa del sito di Yoast**: spenta (Yoast → Impostazioni → Funzionalità del sito → Sitemaps XML). La sitemap la pubblica il sito Next.js.
-- **Indirizzi verso il sito pubblico**: funzionano solo se in `wp-config.php` c'è `PC_FRONTEND_URL` (vedi Installazione, passo 7).
-- `yoast_head_json.robots` riflette le impostazioni di Yoast per il contenuto (di solito `index, follow`): è quello che vale per il
-  sito pubblico. Il dominio di WordPress resta comunque fuori da Google grazie all'intestazione `X-Robots-Tag` del mu-plugin.
+- Il dominio di WordPress resta fuori da Google grazie all'intestazione `X-Robots-Tag` del mu-plugin.
 
 ## Collegamento del sito Next.js
 
@@ -116,6 +125,7 @@ Il sito legge da WordPress con `src/lib/content.ts` (REST nativa, `acf_format=st
 | Posizioni aperte | Posizioni aperte (anche zero) | `careers.ts` |
 | Aree del modulo candidature | Pagina `lavora-con-noi` → Aree di interesse | `careers.ts` |
 | Recapiti, orari, mappa, social | Pagina `impostazioni` → Recapiti e Social | `contact.ts` |
+| Titolo, descrizione, immagine social, noindex | Riquadro Yoast di pagine, progetti e servizi (`pc_seo`) | testi in `src/app/**/page.tsx` |
 
 - Se WordPress non risponde o una raccolta è vuota, il sito usa la riserva: il build non si rompe mai.
 - **Aggiornamento immediato** (come Cultivar): quando un contenuto pubblicato cambia, il mu-plugin chiama `POST /api/revalidate`
