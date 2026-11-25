@@ -14,24 +14,28 @@ export function TeamScroll({ team: TEAM }: { team: Member[] }) {
 
   useEffect(() => {
     const check = () => {
-      const mid = window.innerHeight * 0.5;
-      let best = 0, bd = 1e9;
-      items.current.forEach((it, k) => {
-        if (!it) return;
-        const r = it.getBoundingClientRect();
-        const d = Math.abs(r.top + r.height / 2 - mid);
-        if (d < bd) { bd = d; best = k; }
-      });
-      setCur(best);
+      const el = sec.current;
+      if (!el || window.innerWidth <= 900) return; // mobile: elenco normale
+      const r = el.getBoundingClientRect();
+      const span = r.height - window.innerHeight;
+      const p = span > 0 ? Math.min(1, Math.max(0, -r.top / span)) : 0;
+      setCur(Math.min(n, Math.floor(p * (n + 1))));
     };
-    window.addEventListener("scroll", check, { passive: true });
+    let raf = 0;
+    const onScroll = () => {
+      if (raf) return;
+      raf = requestAnimationFrame(() => { raf = 0; check(); });
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
     check();
-    return () => window.removeEventListener("scroll", check);
-  }, []);
+    return () => { window.removeEventListener("resize", onScroll); window.removeEventListener("scroll", onScroll); if (raf) cancelAnimationFrame(raf); };
+  }, [n]);
 
   const on = (i: number) => (i === cur ? " is-on" : "");
   return (
-    <section className="ssr" data-tone={cur % 5} ref={sec}>
+    <section className="ssr" data-tone={cur % 5} ref={sec} style={{ ["--n" as string]: n + 1 }}>
+      <div className="ssr-stage">
       <div className="wrap ssr-grid">
         <div className="ssr-text">
           {TEAM.map((m, i) => (
@@ -86,6 +90,7 @@ export function TeamScroll({ team: TEAM }: { team: Member[] }) {
             </div>
           </div>
         </div>
+      </div>
       </div>
     </section>
   );
