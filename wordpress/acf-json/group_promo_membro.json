@@ -80,6 +80,26 @@
             "graphql_field_name": "ordine"
         },
         {
+            "key": "field_promo_membro_linkedin",
+            "label": "LinkedIn",
+            "name": "linkedin",
+            "aria-label": "",
+            "type": "url",
+            "instructions": "Indirizzo del profilo LinkedIn (facoltativo). Se vuoto, il link non compare.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "https://www.linkedin.com/in/…",
+            "allow_in_bindings": 0,
+            "show_in_graphql": 1,
+            "graphql_field_name": "linkedin"
+        },
+        {
             "key": "field_promo_membro_foto",
             "label": "Foto",
             "name": "foto",

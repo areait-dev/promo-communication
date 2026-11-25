@@ -109,7 +109,7 @@ type ServizioAcf = {
   intro_cosa_facciamo: string;
 } & Record<`voce_${number}`, VoceAcf | undefined>;
 
-type MembroAcf = { ruolo: string; colore: "b" | "r"; ordine: number | string; foto: WpImage; descrizione: string };
+type MembroAcf = { ruolo: string; colore: "b" | "r"; ordine: number | string; foto: WpImage; descrizione: string; linkedin?: string };
 type PosizioneAcf = { area: string; sede: string; descrizione: string; ordine: number | string };
 
 type ImpostazioniAcf = {
@@ -209,7 +209,7 @@ function toServices(posts: WpPost<ServizioAcf>[]): Services {
 
 function toMember(p: WpPost<MembroAcf>): Member & { o: number } {
   const a = acfOf(p);
-  return { n: decode(p.title.rendered), r: a.ruolo || "", c: a.colore === "r" ? "r" : "b", img: imgUrl(a.foto), b: a.descrizione || "", o: num(a.ordine, 99) };
+  return { n: decode(p.title.rendered), r: a.ruolo || "", c: a.colore === "r" ? "r" : "b", img: imgUrl(a.foto), b: a.descrizione || "", li: (a.linkedin || "").trim() || undefined, o: num(a.ordine, 99) };
 }
 
 function toRole(p: WpPost<PosizioneAcf>): Role & { o: number } {
@@ -299,7 +299,7 @@ async function load(draft: boolean): Promise<Content> {
     // Una raccolta vuota in WordPress (ancora da riempire) non svuota il sito: restano i dati locali.
     projects: fromWp.length ? fromWp.sort((a, b) => b.o - a.o) : LOCAL.projects,
     services: services && services.list.length ? services : LOCAL.services,
-    team: team.length ? team.map((m) => ({ n: m.n, r: m.r, c: m.c, img: m.img, b: m.b })) : LOCAL.team,
+    team: team.length ? team.map((m) => ({ n: m.n, r: m.r, c: m.c, img: m.img, b: m.b, li: m.li })) : LOCAL.team,
     // Le posizioni aperte possono essere davvero zero: se WordPress risponde, vale la sua lista.
     roles: posizioni ? roles.map((r) => ({ title: r.title, area: r.area, where: r.where, desc: r.desc })) : LOCAL.roles,
     areas: aree.length ? aree : LOCAL.areas,

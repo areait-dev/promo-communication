@@ -6,7 +6,7 @@ import { useEffect, useRef, useState } from "react";
 import { initials, type Member } from "@/data/team";
 
 /** Sezione Team: il testo scorre, la card a lato cambia con il membro al centro dello schermo. */
-export function TeamScroll({ team: TEAM }: { team: Member[] }) {
+export function TeamScroll({ team: TEAM, linkedin }: { team: Member[]; linkedin?: string }) {
   const sec = useRef<HTMLElement>(null);
   const items = useRef<(HTMLElement | null)[]>([]);
   const [cur, setCur] = useState(0);
@@ -65,8 +65,8 @@ export function TeamScroll({ team: TEAM }: { team: Member[] }) {
             </div>
           </article>
         </div>
-        <div className="ssr-side" aria-hidden="true">
-          <div className="ssr-card">
+        <div className="ssr-side">
+          <div className="ssr-card" aria-hidden="true">
             {TEAM.map((m, i) => (
               <div key={m.n} className={`ssr-ph ph ph-${m.c}${on(i)}${m.img ? " has-img" : ""}`} data-i={i}>
                 {m.img ? (
@@ -89,6 +89,17 @@ export function TeamScroll({ team: TEAM }: { team: Member[] }) {
               <small>Posizioni aperte e candidature spontanee</small>
             </div>
           </div>
+          {TEAM.map((m, i) =>
+            m.li || linkedin ? (
+              <a key={m.n} className={"ssr-in" + on(i)} href={m.li || linkedin} target="_blank" rel="noopener noreferrer" tabIndex={i === cur ? 0 : -1} aria-hidden={i === cur ? undefined : true} aria-label={m.li ? `${m.n} su LinkedIn` : "Promo Communication su LinkedIn"}>
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+                  <rect x="2" y="9" width="4" height="12" />
+                  <circle cx="4" cy="4" r="2" />
+                </svg>
+              </a>
+            ) : null,
+          )}
         </div>
       </div>
       </div>

@@ -15,7 +15,8 @@ export const generateMetadata = (): Promise<Metadata> => seoMeta({
 });
 
 export default async function Team() {
-  const { team } = await getContent();
+  const { team, contact } = await getContent();
+  const linkedin = contact.socials.find((s) => s.id === "linkedin")?.href;
   return (
     <>
       <Stickers />
@@ -31,7 +32,7 @@ export default async function Team() {
         </div>
         <PageFx />
       </section>
-      <TeamScroll team={team} />
+      <TeamScroll team={team} linkedin={linkedin} />
       <Cta />
     </>
   );

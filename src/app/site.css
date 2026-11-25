@@ -1372,8 +1372,8 @@ html:not([data-theme="dark"]) #main .ssr-name { color: var(--blu-700); }
 .ssr-side { position: sticky; top: calc(50vh - 230px); height: 460px; }
 .ssr-card { position: relative; height: 100%; }
 .ssr-ph { border-radius: 0 var(--radius-bubble-lg) var(--radius-bubble-lg) 0; }
-.ssr-card .ssr-ph { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; opacity: 0; transform: translateY(10px) scale(.99); transition: opacity .15s linear, transform .2s var(--ease-out); will-change: opacity, transform; }
-.ssr-card .ssr-ph.is-on { opacity: 1; transform: none; transition: opacity .25s var(--ease-out), transform .3s var(--ease-out); }
+.ssr-card .ssr-ph { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; opacity: 0; }
+.ssr-card .ssr-ph.is-on { opacity: 1; }
 .ssr-card .ssr-ph::after { content: ""; position: absolute; left: 0; bottom: -40px; width: 56px; height: 40px; background: inherit; clip-path: polygon(0 0, 100% 0, 0 100%); }
 .ssr-card .ssr-ph span { font: 700 96px/1 var(--font-display); }
 .ssr-card .ssr-ph small { font: 500 14px/1 var(--font-body); opacity: .7; }
@@ -1390,9 +1390,17 @@ html:not([data-theme="dark"]) #main .ssr-name { color: var(--blu-700); }
   .ssr-stage { position: sticky; top: 0; height: 100vh; display: flex; align-items: center; }
   .ssr-stage > .ssr-grid { width: 100%; align-items: center; }
   .ssr-text { position: relative; height: 460px; }
-  .ssr-item { position: absolute; inset: 0; min-height: 0; opacity: 0; pointer-events: none; transform: translateY(12px); transition: opacity .18s linear, transform .25s var(--ease-out); }
-  .ssr-item.is-on { opacity: 1; pointer-events: auto; transform: none; transition: opacity .25s var(--ease-out), transform .3s var(--ease-out); }
-  .ssr-side { position: relative; top: auto; }
+  .ssr-item { position: absolute; inset: 0; min-height: 0; justify-content: flex-start; padding-top: 72px; opacity: 0; pointer-events: none; transition: none; }
+  .ssr-item.is-on { opacity: 1; pointer-events: auto; }
+  .ssr-grid { grid-template-columns: 1fr 1fr; }
+  .ssr-side { position: relative; top: auto; display: grid; grid-template-columns: 3fr 1fr; column-gap: clamp(16px, 2vw, 32px); }
+  .ssr-side > .ssr-card { grid-area: 1 / 1; }
+  .ssr-in { grid-area: 1 / 2; align-self: end; justify-self: start; display: grid; place-items: center; width: 40px; height: 40px; border: 2px solid currentColor; border-radius: 50%; font-size: 0; color: var(--blu-700); text-decoration: none; opacity: 0; pointer-events: none; transition: none; }
+  .ssr-in.is-on { opacity: 1; pointer-events: auto; }
+  .ssr-in svg { width: 18px; height: 18px; overflow: visible; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  .ssr-in:hover, .ssr-in:focus-visible { background: var(--blu-700); color: #fff; }
+  html[data-theme="dark"] .ssr-in { color: #fff; }
+  html[data-theme="dark"] .ssr-in:hover, html[data-theme="dark"] .ssr-in:focus-visible { background: #fff; color: var(--blu-700); }
 }
 [data-theme="dark"] .ssr[data-tone] { background: var(--surface); }
 

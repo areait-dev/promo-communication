@@ -1,4 +1,4 @@
-export type Member = { n: string; r: string; c: 'b' | 'r'; img?: string; b: string };
+export type Member = { n: string; r: string; c: 'b' | 'r'; img?: string; li?: string; b: string };
 export const TEAM: Member[] = [
  {
   "n": "Antonio Caputo",
