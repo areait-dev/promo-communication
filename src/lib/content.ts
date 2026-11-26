@@ -148,11 +148,19 @@ const SOCIAL_NAMES: Record<Social["id"], string> = {
 function toProject(p: WpPost<ProgettoAcf>, terms: Map<number, string>): Project {
   const a = acfOf(p);
   const blocks: Block[] = [];
+  const dims: Record<string, [number, number]> = {};
+  const misura = (i: WpImage) => {
+    if (i && i.url && i.width && i.height) dims[i.url] = [i.width, i.height];
+  };
+  misura(a.anteprima);
+  misura(a.copertina);
   for (let i = 1; i <= 8; i++) {
     const b = a[`blocco_${i}`];
     const one = imgUrl(b?.immagine);
     const two = imgUrl(b?.immagine_2);
     if (!one && !two) continue;
+    misura(b?.immagine);
+    misura(b?.immagine_2);
     const block: Block = two && one ? { imgs: [one, two] } : { img: (one || two)! };
     if (b?.didascalia) block.cap = b.didascalia;
     if (b?.adattamento === "contain") block.fit = "contain";
@@ -177,6 +185,7 @@ function toProject(p: WpPost<ProgettoAcf>, terms: Map<number, string>): Project 
     work: a.lavoro || undefined,
     tags: lines(a.etichette),
     blocks: blocks.length ? blocks : undefined,
+    dims,
     soon: !!a.in_arrivo,
     o: num(a.ordine),
   };

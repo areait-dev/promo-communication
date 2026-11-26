@@ -10,7 +10,7 @@
 4. **Proposta di valore poco chiara in home** (B-01) e title poco descrittivi (S-04).
 5. **Accessibilità**: accordion con struttura ARIA non valida (A-01, *critical* axe), contrasto del rosso (A-02), H1 rotante con live region (A-03), titoli che saltano livello (A-04).
 6. **Design**: hero di `/servizi` troppo alto (D-01), lista del portfolio senza immagini su desktop (D-02).
-7. **404 non deterministico** per slug sconosciuti (T-04) e immagini dei progetti non ottimizzate (T-05).
+7. **404 non deterministico** per slug sconosciuti (T-04).
 
 ## Risolto dall'audit precedente
 
@@ -38,6 +38,60 @@ immagini e JSON-LD identici (cambiano solo gli indirizzi delle immagini, ora su 
 sbagliato, 307 verso la pagina con quello giusto, barra solo in anteprima, uscita funzionante.
 **Ancora nel codice**: i testi delle pagine (titoli, frasi, fumetti, footer, banner cookie, testi dei moduli). I campi esistono già
 in WordPress (Pagine), vanno collegati.
+
+## Prestazioni mobile (26/11/2026)
+
+Branch `ottimizzazione-mobile` (non ancora unito a `main`). Aspetto e contenuti invariati.
+
+### Misure prima/dopo
+
+Lighthouse 13.6, mediana di 3 passate, build di produzione locale di `main` contro quella del branch, stesso computer,
+Google Tag Manager spento. Valgono per il confronto: **vanno confermate su PageSpeed**. Home e /team sono misurate sul codice
+finale; le altre pagine prima delle correzioni a team e titolo della home, che non le riguardano.
+
+| Pagina | Modo | Punteggio | LCP (s) | Speed Index (s) | TBT (ms) | Peso (KB) |
+|---|---|---|---|---|---|---|
+| `/` | mobile | 100 → 100 | 1,21 → 1,21 | 1,62 → 1,69 | 44 → 49 | 919 → 475 |
+| `/` | desktop | 100 → 100 | 0,33 → 0,33 | 0,54 → 0,55 | 0 → 0 | 965 → 613 |
+| `/team` | mobile | 88 → 91 | 3,80 → 3,50 | 1,25 → 1,66 | 88 → 57 | 857 → 494 |
+| `/team` | desktop | 97 → 99 | 1,28 → 0,86 | 0,38 → 0,42 | 0 → 0 | 921 → 582 |
+| `/portfolio/pure-red` | mobile | 88 → 90 | 3,91 → 3,63 | 1,45 → 1,62 | 84 → 54 | 1715 → 617 |
+| `/portfolio/pure-red` | desktop | 99 → 100 | 0,97 → 0,75 | 0,48 → 0,45 | 0 → 0 | 1755 → 820 |
+| `/portfolio` | mobile | 100 → 100 | 1,21 → 1,21 | 1,60 → 1,49 | 61 → 52 | 1353 → 433 |
+| `/portfolio` | desktop | 98 → 99 | 1,17 → 0,94 | 0,48 → 0,52 | 0 → 0 | 1285 → 570 |
+| `/servizi/social-media` | mobile | 100 → 100 | 1,21 → 1,21 | 1,75 → 1,77 | 55 → 56 | 1464 → 817 |
+| `/servizi/social-media` | desktop | 100 → 100 | 0,33 → 0,33 | 0,45 → 0,51 | 0 → 0 | 1624 → 942 |
+
+### Fatto
+
+| Intervento | Commit |
+|---|---|
+| Foto del team con `next/image` (qualità 85), lazy; solo la prima di /team ad alta priorità. Non si scaricano più sulle pagine che non le mostrano. | `76e03dc`, `1a6acae` |
+| Immagini dei progetti con `next/image`; copertina ad alta priorità (chiude **T-05**). | `e39f5b3`, `05e6dc1` |
+| Anteprime al passaggio del mouse ottimizzate e lazy. | `0696dc9` |
+| Cache di 31 giorni per immagini ottimizzate e `public/img`; font Caveat con `next/font/local`. | `d0081ae` |
+| Foto del team in home caricate una schermata prima di comparire. | `ba0affc` |
+| **Errore React #418 su /team** (anche online): la descrizione di WordPress, già in `<p>`, finiva in un altro `<p>`. | `bead67e` |
+| **Titolo "Boost" instabile in home** (anche online, 124 o 150px a 1440): la home rigenerata usciva con `data-view="index"` e perdeva tutti gli stili `[data-view="home"]`. | `3c53261` |
+
+WordPress: se si sostituisce un'immagine, caricarla con un nome nuovo (altrimenti resta in cache fino a 31 giorni).
+
+### LCP mobile di /team e pure-red
+
+L'elemento è la foto del primo membro e la copertina del progetto. Sono scoperte subito (HTML), con `fetchPriority="high"`,
+senza animazioni d'ingresso. La misura simulata (circa 3,5 s) è più severa di quella con rete e CPU rallentate davvero
+(`--throttling-method=devtools`): **2,16 s** su /team e **2,28 s** su pure-red, quasi tutti spesi a scaricare l'immagine
+mentre condivide la banda con font (50 KB) e CSS (33 KB). Nessuna correzione applicata: quelle possibili tolgono poco o
+cambiano la resa.
+
+### Provato e scartato
+
+- `experimental.inlineCss`: peggiora (TBT in home mobile 45 → 202 ms, LCP fino a +0,33 s, circa 66 KB in più per pagina).
+- Escludere i polyfill di Next (14 KiB): richiederebbe un alias e toglierebbe supporto a browser dichiarati.
+
+### Ancora aperto
+
+Richieste CSS che bloccano il rendering (`site.css`), JavaScript legacy, peso di Google Tag Manager.
 
 ## 1. Riepilogo e voti
 
@@ -96,7 +150,6 @@ Impegno: **S** = poche ore · **M** = 1–2 giorni · **L** = più giorni.
 | S-06 | SEO | Tutte | **Dati strutturati assenti** (0 blocchi JSON-LD). | `layout.tsx`, `portfolio/[slug]/page.tsx` | `Organization` + `LocalBusiness` (Vittoria, RG), `BreadcrumbList`, `CreativeWork` per i progetti, `Service` per i servizi; solo dati reali e visibili. | M |
 | S-07 | SEO/Contenuti | Progetti, Contatti | **Contenuti sottili:** `/contatti` ≈132 parole; pagine progetto ≈230 parole, senza risultati misurabili. | `src/data/projects.ts` | Obiettivo → azioni → risultato e una frase del cliente. | M–L |
 | T-04 | Tecnico | Slug sconosciuti/non pubblicati | **404 non deterministico, riverificato:** `/portfolio/cultivar` risponde **200** alla prima richiesta e 404 alle successive; **`/servizi/xyz` risponde 200** (pagina not-found con `noindex`, ma stato 200 = soft-404). `/pagina-inesistente` è corretta (404). | `portfolio/[slug]/page.tsx`, `servizi/[slug]/page.tsx` | Verificare in produzione reale con Cache Components; valutare un controllo dello slug prima di qualsiasi accesso dinamico. | M |
-| T-05 | Tecnico/Prestazioni | Pagine progetto | **Immagini senza `width`/`height`**, `<img>` diretto, nessun `srcset`: `/portfolio/pure-red` ≈ 1 MB per 9 immagini; `public/img/pf` pesa 9,5 MB. CLS misurato 0 in locale. | `portfolio/[slug]/page.tsx` | `next/image` con dimensioni, `sizes`, priorità solo per la cover. | M |
 | B-02 | Brand | Home, progetti | **Mancano prove:** nessun numero, risultato o logo cliente in evidenza; claim "centinaia di organizzazioni" non documentato. | `page.tsx` | Dimostrarlo o riformulare. | S |
 
 ### Priorità BASSA

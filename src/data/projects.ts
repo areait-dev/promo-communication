@@ -17,6 +17,8 @@ export type Project = {
   blocks?: Block[];
   soon?: boolean;
   o: number;
+  /** Larghezza e altezza dei file immagine, per indirizzo: servono a next/image (le dà WordPress). */
+  dims?: Record<string, [number, number]>;
   [k: string]: unknown;
 };
 /** Tutti i progetti, anche quelli non ancora pubblicati. */

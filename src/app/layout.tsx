@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Funnel_Display, Outfit } from "next/font/google";
+import localFont from "next/font/local";
 import "./site.css";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
@@ -14,6 +15,8 @@ import { isPreview } from "@/lib/env";
 
 const outfit = Outfit({ subsets: ["latin"], variable: "--f-outfit", display: "swap" });
 const funnel = Funnel_Display({ subsets: ["latin"], variable: "--f-funnel", display: "swap" });
+// Scritta a mano degli sticker (pagina Team): niente preload, si scarica solo dove serve.
+const caveat = localFont({ src: "./fonts/caveat-700.woff2", weight: "700", variable: "--f-caveat", display: "block", preload: false, adjustFontFallback: false });
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -67,7 +70,7 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
         {withGtm && <script dangerouslySetInnerHTML={{ __html: gtmScript }} />}
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: ORG_JSONLD }} />
       </head>
-      <body className={`pc ${outfit.variable} ${funnel.variable}`}>
+      <body className={`pc ${outfit.variable} ${funnel.variable} ${caveat.variable}`}>
         <svg width="0" height="0" style={{ position: "absolute" }} aria-hidden="true">
           <defs>
             <clipPath id="pc-pitto-clip" clipPathUnits="objectBoundingBox">

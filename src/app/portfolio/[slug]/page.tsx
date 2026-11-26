@@ -3,10 +3,10 @@ import Link from "next/link";
 import { ViewTransition } from "react";
 import { notFound } from "next/navigation";
 import { Cta, Pager } from "@/components/blocks";
-import { pImg } from "@/data/projects";
 import { getContent, getPublishedContent, projectById } from "@/lib/content";
 import { projHref, vars } from "@/lib/ui";
 import { PageFx } from "@/components/PageFx";
+import { ProjectImage } from "@/components/ProjectImage";
 import { pageMeta, snip } from "@/lib/seo";
 
 // Solo i progetti pubblicati (con anteprima): gli altri danno 404.
@@ -58,6 +58,17 @@ export default async function Progetto({ params }: { params: Promise<{ slug: str
       </div>
     </dl>
   );
+  // Copertina: riquadro largo circa il 90% dello schermo, 4/3 fino a 900px e 16/7 oltre, con ritaglio "cover".
+  // L'immagine va quindi chiesta piu' larga del riquadro quando e' piu' panoramica di lui, per non sgranarla.
+  const dim = (s: string) => p.dims?.[s];
+  const coverDim = dim(p.cover!);
+  const ratio = coverDim ? coverDim[0] / coverDim[1] : 1;
+  const coverSizes = `(max-width: 900px) ${Math.ceil(90 * Math.max(1, ratio * (3 / 4)))}vw, ${Math.ceil(90 * Math.max(1, ratio * (7 / 16)))}vw`;
+  // Immagini che tengono la loro larghezza naturale (CSS width: auto): "sizes" non deve superare quella del file.
+  const natural = (s: string, max = "100vw") => {
+    const d = dim(s);
+    return d ? `min(${d[0]}px, ${max})` : undefined;
+  };
   const back = (
     <Link className="pj-back pc-reveal" href="/portfolio">
       ← Tutti i progetti
@@ -79,8 +90,7 @@ export default async function Progetto({ params }: { params: Promise<{ slug: str
         <div className="wrap">
           <div className="pj-cover">
             <ViewTransition name={`pf-img-${p.id}`} share="pc-morph" default="none">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={pImg(p.cover!)} alt={p.name} />
+              <ProjectImage src={p.cover!} dim={coverDim} alt={p.name} sizes={coverSizes} loading="eager" fetchPriority="high" />
             </ViewTransition>
           </div>
         </div>
@@ -116,8 +126,15 @@ export default async function Progetto({ params }: { params: Promise<{ slug: str
                   <figure key={k} className={"pj-blk pj-blk--row" + (b.pair ? " pj-blk--pair" : "") + " pc-reveal"}>
                     <div className="pj-row">
                       {b.imgs.map((s) => (
-                        // eslint-disable-next-line @next/next/no-img-element
-                        <img key={s} src={pImg(s)} alt={alt} loading="lazy" />
+                        <ProjectImage
+                          key={s}
+                          src={s}
+                          dim={dim(s)}
+                          alt={alt}
+                          natural={!b.pair}
+                          sizes={b.pair ? "(max-width: 760px) 90vw, 45vw" : `(max-width: 600px) ${natural(s)}, ${natural(s, "560px")}`}
+                          loading="lazy"
+                        />
                       ))}
                     </div>
                     {cap}
@@ -125,8 +142,7 @@ export default async function Progetto({ params }: { params: Promise<{ slug: str
                 );
               return (
                 <figure key={k} className={"pj-blk pc-reveal" + (b.fit === "contain" ? " pj-blk--contain" : "")}>
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={pImg(b.img!)} alt={alt} loading="lazy" />
+                  <ProjectImage src={b.img!} dim={dim(b.img!)} alt={alt} natural={b.fit === "contain"} sizes={b.fit === "contain" ? natural(b.img!) : "90vw"} loading="lazy" />
                   {cap}
                 </figure>
               );
@@ -138,8 +154,7 @@ export default async function Progetto({ params }: { params: Promise<{ slug: str
           <div className="wrap">
             <div className="pj-grid">
               <div className="pj-img pc-reveal">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={pImg(p.img!)} alt="" />
+                <ProjectImage src={p.img!} dim={dim(p.img!)} alt="" sizes="(max-width: 460px) 90vw, 420px" loading="lazy" />
               </div>
             </div>
           </div>
