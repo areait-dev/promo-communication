@@ -1,12 +1,13 @@
+import { validateContact } from "@/lib/contact-form";
 import { MailConfigError, sendMail, type MailAttachment } from "@/lib/mail";
 
 /**
  * POST /api/invia  (multipart/form-data)
- * Riceve i tre form del sito (campo `tipo`: "contatti" | "home" | "candidatura"), controlla i dati lato server
+ * Riceve i form del sito (campo `tipo`: "contatti" | "candidatura"), controlla i dati lato server
  * e inoltra tutto a MAIL_TO con Resend. Chi ha scritto finisce in Reply-To.
  */
 
-const MAX_FILES_MB = 10; // totale allegati (Resend arriva a 40 MB: qui restiamo larghi)
+const MAX_FILES_MB = 10; // CV (Resend arriva a 40 MB: qui restiamo larghi)
 const CV_EXT = [".pdf", ".doc", ".docx"];
 const MAIL_RE = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
 
@@ -40,19 +41,26 @@ export async function POST(req: Request) {
   if (field(fd, "sito")) return Response.json({ ok: true });
 
   const tipo = field(fd, "tipo");
-  if (tipo !== "contatti" && tipo !== "home" && tipo !== "candidatura") return fail("Richiesta non valida.");
+  if (tipo !== "contatti" && tipo !== "candidatura") return fail("Richiesta non valida.");
 
-  // la home usa i nomi corti n/c/e/t/m, gli altri form i nomi estesi
-  const home = tipo === "home";
-  const nome = home ? `${field(fd, "n", 80)} ${field(fd, "c", 80)}`.trim() : field(fd, "nome", 160);
-  const email = field(fd, home ? "e" : "email", 200);
-  const telefono = field(fd, home ? "t" : "telefono", 40);
-  const messaggio = field(fd, home ? "m" : "messaggio");
+  const nome = field(fd, "nome", 160);
+  const email = field(fd, "email", 200);
+  const telefono = field(fd, "telefono", 40);
+  const messaggio = field(fd, "messaggio");
+  const privacy = fd.get("privacy") === "on";
+  const files = fd.getAll("f").filter((f): f is File => f instanceof File && f.size > 0);
 
-  if (!nome) return fail("Ci dici come ti chiami?");
-  if (!MAIL_RE.test(email)) return fail("Controlla l’indirizzo email: manca qualcosa.");
-  if (telefono && telefono.replace(/\D/g, "").length < 6) return fail("Controlla il numero di telefono.");
-  if (!home && fd.get("privacy") !== "on") return fail("Serve il consenso al trattamento dei dati.");
+  if (tipo === "contatti") {
+    // stesse regole e stessi messaggi del modulo nel browser
+    const allegati = files.reduce((tot, f) => tot + f.size, 0);
+    const errore = Object.values(validateContact({ nome, email, telefono, privacy, allegati }))[0];
+    if (errore) return fail(errore);
+  } else {
+    if (!nome) return fail("Ci dici come ti chiami?");
+    if (!MAIL_RE.test(email)) return fail("Controlla l’indirizzo email: manca qualcosa.");
+    if (telefono && telefono.replace(/\D/g, "").length < 6) return fail("Controlla il numero di telefono.");
+    if (!privacy) return fail("Serve il consenso al trattamento dei dati.");
+  }
 
   const rows: [string, string][] = [
     ["Nome", nome],
@@ -71,18 +79,10 @@ export async function POST(req: Request) {
     rows.push(["Area", field(fd, "area", 200) || "-"], ["Link", field(fd, "link", 400) || "-"]);
     subject = `Candidatura: ${oneLine(nome)}`;
   } else {
-    if (tipo === "contatti") {
-      const servizi = fd.getAll("servizi").map((x) => String(x).slice(0, 80)).slice(0, 12);
-      rows.push(["Servizi", servizi.join(", ") || "-"]);
-    } else {
-      let total = 0;
-      for (const f of fd.getAll("f")) {
-        if (!(f instanceof File) || f.size === 0) continue;
-        total += f.size;
-        if (total > MAX_FILES_MB * 1024 * 1024) return fail(`Gli allegati superano i ${MAX_FILES_MB} MB in totale.`);
-        attachments.push({ filename: safeName(f.name), content: Buffer.from(await f.arrayBuffer()) });
-      }
-    }
+    const servizi = fd.getAll("servizi").map((x) => String(x).slice(0, 80)).slice(0, 12);
+    rows.push(["Servizi", servizi.join(", ") || "-"]);
+    for (const f of files) attachments.push({ filename: safeName(f.name), content: Buffer.from(await f.arrayBuffer()) });
+    rows.push(["Allegati", attachments.map((a) => a.filename).join(", ") || "-"]);
     subject = `Nuova richiesta dal sito: ${oneLine(nome)}`;
   }
   rows.push(["Messaggio", messaggio || "-"]);

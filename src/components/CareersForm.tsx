@@ -200,7 +200,7 @@ export function CareersForm({ areas: AREAS, phone: PHONE }: { areas: readonly st
       <div className="ct-status" aria-live="polite">
         {status === "sending" && <span className="sr-only">Invio in corso</span>}
         {status === "sent" && (
-          <div className="ct-done">
+          <div className="ct-done" ref={(el) => el?.scrollIntoView({ block: "nearest" })}>
             <span className="ct-done__ic" aria-hidden="true">
               <svg viewBox="0 0 24 24">
                 <path d="M5 12.5l4.5 4.5L19 7.5" />

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { ContactPageForm } from "@/components/ContactPageForm";
+import { ContactForm } from "@/components/ContactForm";
 import { ContactPanel } from "@/components/ContactPanel";
 import { PageFx } from "@/components/PageFx";
 import { CONTACT_LEAD } from "@/data/contact";
@@ -32,7 +32,7 @@ export default async function Contatti() {
 
       <section className="sec ct-sec">
         <div className="wrap ct-grid">
-          <ContactPageForm services={services.list} phone={contact.phone} />
+          <ContactForm services={services.list} phone={contact.phone} />
           <ContactPanel />
         </div>
       </section>
