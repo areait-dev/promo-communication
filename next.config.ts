@@ -10,6 +10,9 @@ const nextConfig: NextConfig = {
   images: {
     // 80 per foto del team e immagini dei progetti, 75 (default) per le miniature
     qualities: [75, 80],
+    // Le immagini ottimizzate restano in cache 31 giorni (WordPress non manda header di cache). I file sostituiti su
+    // WordPress vanno caricati con un nome nuovo, altrimenti resta visibile la versione vecchia fino alla scadenza.
+    minimumCacheTTL: 2678400,
     remotePatterns: [
       {
         protocol: "https",
@@ -18,9 +21,13 @@ const nextConfig: NextConfig = {
       },
     ],
   },
-  // Stage (Preview di Vercel): header noindex su ogni risposta, oltre a robots.txt
   async headers() {
-    return isPreview ? [{ source: "/:path*", headers: [{ key: "X-Robots-Tag", value: "noindex, nofollow" }] }] : [];
+    return [
+      // Immagini in public/img: nome senza hash, quindi 31 giorni e non "immutable" (/_next/static lo e' gia')
+      { source: "/img/:path*", headers: [{ key: "Cache-Control", value: "public, max-age=2678400, stale-while-revalidate=86400" }] },
+      // Stage (Preview di Vercel): header noindex su ogni risposta, oltre a robots.txt
+      ...(isPreview ? [{ source: "/:path*", headers: [{ key: "X-Robots-Tag", value: "noindex, nofollow" }] }] : []),
+    ];
   },
   turbopack: {
     rules: {

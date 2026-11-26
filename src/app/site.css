@@ -957,9 +957,7 @@ main { min-height: 60vh; position: relative; }
 
 /* barra servizi: 0,5s più lenta */
 :root { --dur-marquee: 32.8s; }
-.stk-hand { font: 700 66px/1 "Caveat", "Segoe Print", "Bradley Hand", cursive; }
-
-@font-face { font-family: "Caveat"; font-weight: 700; font-display: block; src: url(/fonts/font-1.woff2) format("woff2"); }
+.stk-hand { font: 700 66px/1 var(--f-caveat), "Segoe Print", "Bradley Hand", cursive; }
 
 /* home: stella dell'hero, un giro ogni 10 secondi */
 
