@@ -152,7 +152,9 @@ function toProject(p: WpPost<ProgettoAcf>, terms: Map<number, string>): Project 
   const a = acfOf(p);
   const blocks: Block[] = [];
   const dims: Record<string, [number, number]> = {};
+  const alts: Record<string, string> = {};
   const misura = (i: WpImage) => {
+    if (i && i.url && i.alt?.trim()) alts[i.url] = i.alt.trim();
     if (i && i.url && i.width && i.height) dims[i.url] = [i.width, i.height];
   };
   misura(a.anteprima);
@@ -189,6 +191,7 @@ function toProject(p: WpPost<ProgettoAcf>, terms: Map<number, string>): Project 
     tags: lines(a.etichette),
     blocks: blocks.length ? blocks : undefined,
     dims,
+    alts,
     soon: !!a.in_arrivo,
     o: num(a.ordine),
   };

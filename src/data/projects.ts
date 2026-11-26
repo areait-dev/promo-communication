@@ -19,6 +19,8 @@ export type Project = {
   o: number;
   /** Larghezza e altezza dei file immagine, per indirizzo: servono a next/image (le dà WordPress). */
   dims?: Record<string, [number, number]>;
+  /** Testo alternativo scritto nella libreria media di WordPress, per indirizzo. */
+  alts?: Record<string, string>;
   [k: string]: unknown;
 };
 /** Tutti i progetti, anche quelli non ancora pubblicati. */
