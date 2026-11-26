@@ -22,7 +22,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const c = await getContent();
   const p = projectById(c, (await params).slug);
   return p
-    ? pageMeta({ title: p.name, path: `/portfolio/${p.id}`, description: snip(p.intro || `${p.name}: un progetto di Promo Communication.`), seo: c.seo[`/portfolio/${p.id}`] })
+    ? pageMeta({ title: p.name, path: `/portfolio/${p.id}`, description: snip(p.intro || `${p.name}: un progetto di Promo Communication.`), seo: c.seo[`/portfolio/${p.id}`], image: p.cover ? { url: `/portfolio/${p.id}/og.jpg`, width: 1200, height: 630, alt: `${p.name}${p.kind ? `: ${p.kind}` : ""}` } : undefined })
     : { title: "Pagina non trovata" };
 }
 

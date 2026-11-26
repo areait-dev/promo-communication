@@ -29,7 +29,7 @@ export const metadata: Metadata = {
   // Verifica della proprietà su Google Search Console (metodo Tag HTML)
   verification: { google: "96CK2-UBw7kbHE8MaKWSuxgPEJO4UrmfSeMkA9DNdIo" },
   openGraph: { type: "website", siteName: SITE_NAME, locale: "it_IT", title: HOME_TITLE, description: HOME_DESC, images: [OG_IMAGE] },
-  twitter: { card: "summary_large_image", title: HOME_TITLE, description: HOME_DESC, images: [OG_IMAGE.url] },
+  twitter: { card: "summary_large_image", title: HOME_TITLE, description: HOME_DESC, images: [{ url: OG_IMAGE.url, alt: OG_IMAGE.alt }] },
 };
 
 // Dati strutturati: l'agenzia come organizzazione, parte di Promotergroup S.p.A. Recapiti da WordPress.
