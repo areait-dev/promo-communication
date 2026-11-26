@@ -7,10 +7,10 @@ const WEBSITE_ID = `${SITE_URL}/#website`;
 const ALT_NAME = "PromoCommunication";
 
 /**
- * Giorni di apertura (nomi inglesi di schema.org, es. "Monday"). Vuoto = gli orari non vengono pubblicati.
- * TODO: da confermare con l'agenzia; le fasce orarie arrivano da WordPress.
+ * Giorni di apertura, confermati dall'agenzia il 26/11/2026 (nomi inglesi di schema.org). Le fasce orarie arrivano da
+ * WordPress: qui si cambiano solo i giorni.
  */
-const OPENING_DAYS: string[] = [];
+const OPENING_DAYS = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
 
 export const AREA_SERVED = [
   { "@type": "City", name: "Vittoria" },
