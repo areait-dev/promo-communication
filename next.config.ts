@@ -8,8 +8,8 @@ const nextConfig: NextConfig = {
   cacheComponents: true,
   partialPrefetching: true,
   images: {
-    // 80 per foto del team e immagini dei progetti, 75 (default) per le miniature
-    qualities: [75, 80],
+    // 85 per le foto del team, 80 per le immagini dei progetti, 75 (default) per le miniature
+    qualities: [75, 80, 85],
     // Le immagini ottimizzate restano in cache 31 giorni (WordPress non manda header di cache). I file sostituiti su
     // WordPress vanno caricati con un nome nuovo, altrimenti resta visibile la versione vecchia fino alla scadenza.
     minimumCacheTTL: 2678400,

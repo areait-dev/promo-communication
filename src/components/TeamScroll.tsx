@@ -10,7 +10,7 @@ import { initials, type Member } from "@/data/team";
 const foto = (i: number) => ({
   width: 1200,
   height: 1000,
-  quality: 80,
+  quality: 85,
   sizes: "(max-width: 900px) 308px, (max-width: 1200px) 45vw, 548px",
   loading: i === 0 ? ("eager" as const) : ("lazy" as const),
   fetchPriority: i === 0 ? ("high" as const) : undefined,
