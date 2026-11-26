@@ -29,6 +29,35 @@ function openingHours(hours: readonly string[] | null) {
   return slots.length ? slots : undefined;
 }
 
+/** Percorso "Home → sezione → pagina" di una scheda: [nome, indirizzo]. */
+export function breadcrumbs(items: [string, string][]) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [["Home", "/"] as [string, string], ...items].map(([name, path], i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      name,
+      item: SITE_URL + (path === "/" ? "" : path),
+    })),
+  };
+}
+
+export function serviceSchema(s: { id: string; name: string; p1: string }) {
+  const url = `${SITE_URL}/servizi/${s.id}`;
+  return {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "@id": `${url}#service`,
+    name: s.name,
+    serviceType: s.name,
+    description: s.p1 || undefined,
+    url,
+    provider: { "@id": AGENCY_ID },
+    areaServed: AREA_SERVED,
+  };
+}
+
 /** L'agenzia e il sito: presenti in tutte le pagine. */
 export function siteGraph({ email, phone, address, socials, hours, mapPoint }: Contact) {
   return {

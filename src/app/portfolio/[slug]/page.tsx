@@ -8,6 +8,8 @@ import { projHref, vars } from "@/lib/ui";
 import { PageFx } from "@/components/PageFx";
 import { ProjectImage } from "@/components/ProjectImage";
 import { pageMeta, snip } from "@/lib/seo";
+import { JsonLd } from "@/components/JsonLd";
+import { breadcrumbs } from "@/lib/structured-data";
 
 // Solo i progetti pubblicati (con anteprima): gli altri danno 404.
 // Tutti gli slug sono noti in fase di build (generateStaticParams): la pagina e' statica, niente Suspense con fallback
@@ -162,6 +164,7 @@ export default async function Progetto({ params }: { params: Promise<{ slug: str
       ) : null}
       {pager}
       <Cta />
+      <JsonLd data={breadcrumbs([["Portfolio", "/portfolio"], [p.name, `/portfolio/${p.id}`]])} />
     </>
   );
 }

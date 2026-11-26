@@ -9,6 +9,8 @@ import { getContent, getPublishedContent, serviceById } from "@/lib/content";
 import { vars } from "@/lib/ui";
 import { PageFx } from "@/components/PageFx";
 import { pageMeta, snip } from "@/lib/seo";
+import { JsonLd } from "@/components/JsonLd";
+import { breadcrumbs, serviceSchema } from "@/lib/structured-data";
 
 // Tutti gli slug sono noti in fase di build (generateStaticParams): la pagina e' statica, niente Suspense con fallback
 // (farebbe comparire un fallback prima del contenuto e romperebbe l'elemento condiviso voce -> hero).
@@ -73,6 +75,8 @@ export default async function Servizio({ params }: { params: Promise<{ slug: str
           <ContactPanel />
         </div>
       </section>
+      <JsonLd data={serviceSchema(s)} />
+      <JsonLd data={breadcrumbs([["Servizi", "/servizi"], [s.name, `/servizi/${s.id}`]])} />
     </>
   );
 }
