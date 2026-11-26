@@ -137,6 +137,9 @@ export function initReveal(): () => void {
     const vh = window.innerHeight;
     mediaPending.forEach((el) => {
       const r = el.getBoundingClientRect();
+      // Card del team: il clip-path chiuso blocca anche il lazy loading del browser. Si avvia il download quando la
+      // card e' a meno di una schermata di distanza, cosi' la foto c'e' gia' quando compare.
+      if (r.top < vh * 2 && el.matches(".pc-team")) el.querySelectorAll<HTMLImageElement>('img[loading="lazy"]').forEach((i) => (i.loading = "eager"));
       if (r.top < vh * 0.9 && r.bottom > 0) {
         el.classList.add("is-in");
         mediaPending.delete(el);
