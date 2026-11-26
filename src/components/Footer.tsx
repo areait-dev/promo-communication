@@ -19,9 +19,9 @@ export async function Footer() {
       <div className="pc-footer__cols">
         <div>
           <h4 className="ft-brand">Promo Communication</h4>
-          Promo Communication è un brand di Promotergroup S.p.a.
+          Un brand di Promotergroup S.p.A.
           <br />
-          Promotergroup S.p.A. · P.IVA 13178771005
+          P.IVA 13178771005
         </div>
         <div>
           <h4>Servizi</h4>
