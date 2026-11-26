@@ -99,7 +99,7 @@ export function Header() {
             Chiudi ✕
           </button>
         </div>
-        <nav>
+        <nav aria-label="Menu mobile">
           <Link href="/" onClick={() => pathname === "/" && setMenuAt(null)}>Home</Link>
           {NAV.map(([key, label]) => (
             <Link key={key} href={"/" + key} onClick={() => pathname === "/" + key && setMenuAt(null)}>
