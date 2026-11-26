@@ -50,11 +50,11 @@ export default async function Home() {
             <p className="q">
               La nostra storia comincia <em>inside</em>
             </p>
-            <p className="q-sub">Nati dentro Promotergroup S.p.a., al fianco delle imprese ogni giorno.</p>
+            <p className="q-sub">Nati dentro Promotergroup S.p.A., al fianco delle imprese ogni giorno.</p>
           </div>
           <div className="pc-reveal" style={vars({ "--i": 1 })}>
             <p className="p-lg">
-              Prima di raccontarle le imprese, le abbiamo viste lavorare. Arriviamo da <strong>Promotergroup Spa.</strong>, un gruppo
+              Prima di raccontarle le imprese, le abbiamo viste lavorare. Arriviamo da <strong>Promotergroup S.p.A.</strong>, un gruppo
               di consulenza che ogni giorno affianca centinaia di organizzazioni, e da lì ci portiamo dietro una cosa preziosa:
               sappiamo quanta fatica c’è dietro un buon risultato. Nel 2026 abbiamo deciso di metterla in vetrina.
             </p>

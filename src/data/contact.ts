@@ -1,5 +1,5 @@
 /**
- * Privacy e Cookie Policy: pagina del sito (src/app/privacy), adattata dall'informativa di Promotergroup S.p.a.
+ * Privacy e Cookie Policy: pagina del sito (src/app/privacy), adattata dall'informativa di Promotergroup S.p.A.
  * (PromoCommunication e' la sua divisione marketing e non ha una P.IVA propria).
  */
 export const PRIVACY_URL = "/privacy";

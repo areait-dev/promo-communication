@@ -26,7 +26,7 @@ export default function ChiSiamo() {
             Tutto è cominciato dentro un’impresa
           </h1>
           <p className="lead pc-reveal" style={vars({ "--i": 2 })}>
-            La nostra storia comincia <em>inside</em>: siamo la Unit di Comunicazione &amp; Marketing di Promotergroup. Da lì abbiamo
+            La nostra storia comincia <em>inside</em>: siamo la Unit di Comunicazione &amp; Marketing di Promotergroup S.p.A. Da lì abbiamo
             imparato a <strong>guardare le imprese da vicino, molto da vicino</strong>.
           </p>
           <p className="lead pc-reveal" style={vars({ "--i": 3, marginTop: "20px" })}>

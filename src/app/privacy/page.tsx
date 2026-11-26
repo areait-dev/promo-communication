@@ -14,8 +14,8 @@ export const generateMetadata = (): Promise<Metadata> => seoMeta({
 
 /**
  * Privacy e Cookie Policy di PromoCommunication.
- * Adattata dall'informativa di Promotergroup S.p.a. (promotergroup.eu, ultimo aggiornamento 10/01/2022): PromoCommunication è la
- * divisione marketing di Promotergroup e non ha una P.IVA propria, quindi il Titolare resta Promotergroup S.p.a.
+ * Adattata dall'informativa di Promotergroup S.p.A. (promotergroup.eu, ultimo aggiornamento 10/01/2022): PromoCommunication è la
+ * divisione marketing di Promotergroup e non ha una P.IVA propria, quindi il Titolare resta Promotergroup S.p.A.
  * Sono state tolte le parti che riguardano funzioni che questo sito non ha (commenti, account, login, Gravatar) e descritto ciò che
  * il sito fa davvero: form di contatto e candidatura, localStorage per il tema, mappa di Google nella pagina Contatti.
  * NB: con Google Tag Manager (GTM-N49MLKQV) attivo in produzione, se nel container si aggiungono tag di analisi o marketing serve un banner di consenso e va aggiornato l’elenco qui sotto.
@@ -47,18 +47,18 @@ export default async function Privacy() {
 
           <h3>Introduzione</h3>
           <p>
-            PromoCommunication è la Unit di Comunicazione &amp; Marketing di Promotergroup S.p.a. e non vuole in alcun modo contribuire al
+            PromoCommunication è la Unit di Comunicazione &amp; Marketing di Promotergroup S.p.A. e non vuole in alcun modo contribuire al
             dilagante fenomeno dello spamming su internet. I tuoi dati non verranno diffusi in rete né ceduti a terzi, fatti salvi gli
             obblighi di legge e le necessità tecniche legate all’erogazione del servizio.
           </p>
 
           <h3>Titolare del trattamento</h3>
           <p>
-            Il Titolare del trattamento è Promotergroup S.p.a., nella persona del suo legale rappresentante. PromoCommunication è un
-            brand di Promotergroup S.p.a. e non ha una partita IVA propria.
+            Il Titolare del trattamento è Promotergroup S.p.A., nella persona del suo legale rappresentante. PromoCommunication è un
+            brand di Promotergroup S.p.A. e non ha una partita IVA propria.
           </p>
           <p>
-            Promotergroup S.p.a., {ADDRESS[0]}, {/^\d{5}/.test(ADDRESS[1]) ? ADDRESS[1] : "97019 " + ADDRESS[1]}
+            Promotergroup S.p.A., {ADDRESS[0]}, {/^\d{5}/.test(ADDRESS[1]) ? ADDRESS[1] : "97019 " + ADDRESS[1]}
             <br />
             Tel. <a href={PHONE.href}>{PHONE.label}</a>
             {EMAIL && (

@@ -104,7 +104,7 @@ export async function ContactPanel() {
           <SocialLinks />
         </Item>
       </ul>
-      <p className="ct-brand">PromoCommunication è un brand di Promotergroup S.p.a.</p>
+      <p className="ct-brand">PromoCommunication è un brand di Promotergroup S.p.A.</p>
     </aside>
   );
 }
