@@ -54,6 +54,8 @@ export type Content = {
   contact: Contact;
   /** Testi SEO scritti in Yoast, per percorso pubblico ("/", "/chi-siamo", "/portfolio/pure-red"…). */
   seo: Record<string, WpSeo>;
+  /** Data dell'ultima modifica in WordPress per percorso pubblico (sitemap). Solo dove il contenuto viene da li'. */
+  modified: Record<string, string>;
 };
 
 /* ---------------------------------------------------------------------------------------------------------------
@@ -75,6 +77,7 @@ const LOCAL: Content = {
     socials: SOCIALS.map((s) => ({ ...s })),
   },
   seo: {},
+  modified: {},
 };
 
 /* ---------------------------------------------------------------------------------------------------------------
@@ -149,7 +152,9 @@ function toProject(p: WpPost<ProgettoAcf>, terms: Map<number, string>): Project 
   const a = acfOf(p);
   const blocks: Block[] = [];
   const dims: Record<string, [number, number]> = {};
+  const alts: Record<string, string> = {};
   const misura = (i: WpImage) => {
+    if (i && i.url && i.alt?.trim()) alts[i.url] = i.alt.trim();
     if (i && i.url && i.width && i.height) dims[i.url] = [i.width, i.height];
   };
   misura(a.anteprima);
@@ -186,6 +191,7 @@ function toProject(p: WpPost<ProgettoAcf>, terms: Map<number, string>): Project 
     tags: lines(a.etichette),
     blocks: blocks.length ? blocks : undefined,
     dims,
+    alts,
     soon: !!a.in_arrivo,
     o: num(a.ordine),
   };
@@ -271,10 +277,10 @@ async function load(draft: boolean): Promise<Content> {
   cacheTag("wp");
 
   const [progetti, termini, servizi, membri, posizioni, pagine] = await Promise.all([
-    wpGet<WpPost<ProgettoAcf>[]>("progetti", { ...LIST, _fields: "id,slug,status,title,acf,categorie-progetto,pc_seo" }, draft),
+    wpGet<WpPost<ProgettoAcf>[]>("progetti", { ...LIST, _fields: "id,slug,status,modified_gmt,title,acf,categorie-progetto,pc_seo" }, draft),
     wpGet<WpTerm[]>("categorie-progetto", { ...LIST, _fields: "id,name,slug" }),
-    wpGet<WpPost<ServizioAcf>[]>("servizi", { ...LIST, _fields: "id,slug,status,title,acf,pc_seo" }, draft),
-    wpGet<WpPost<MembroAcf>[]>("membri", { ...LIST, _fields: "id,slug,status,title,acf" }, draft),
+    wpGet<WpPost<ServizioAcf>[]>("servizi", { ...LIST, _fields: "id,slug,status,modified_gmt,title,acf,pc_seo" }, draft),
+    wpGet<WpPost<MembroAcf>[]>("membri", { ...LIST, _fields: "id,slug,status,modified_gmt,title,acf" }, draft),
     wpGet<WpPost<PosizioneAcf>[]>("posizioni", { ...LIST, _fields: "id,slug,status,title,acf" }, draft),
     wpGet<WpPost<unknown>[]>("pages", { ...LIST, _fields: "id,slug,status,title,acf,pc_seo" }, draft),
   ]);
@@ -296,6 +302,20 @@ async function load(draft: boolean): Promise<Content> {
     if (s) seo[`/servizi/${p.slug}`] = s;
   }
 
+  const modified: Record<string, string> = {};
+  const segna = (path: string, data: string | undefined) => {
+    if (data && !(modified[path] >= data + "Z")) modified[path] = data + "Z"; // resta la piu' recente
+  };
+  for (const p of progetti || []) {
+    segna(`/portfolio/${p.slug}`, p.modified_gmt);
+    segna("/portfolio", p.modified_gmt);
+  }
+  for (const p of servizi || []) {
+    segna(`/servizi/${p.slug}`, p.modified_gmt);
+    segna("/servizi", p.modified_gmt);
+  }
+  for (const p of membri || []) segna("/team", p.modified_gmt);
+
   const terms = new Map((termini || []).map((t) => [t.id, decode(t.name)]));
   const fromWp = (progetti || []).map((p) => toProject(p, terms)).filter((p) => p.published);
   const services = servizi && servizi.length ? toServices(servizi) : null;
@@ -314,6 +334,7 @@ async function load(draft: boolean): Promise<Content> {
     areas: aree.length ? aree : LOCAL.areas,
     contact: toContact(settings),
     seo,
+    modified,
   };
 }
 

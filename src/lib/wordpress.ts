@@ -57,6 +57,8 @@ export type WpPost<A> = {
   id: number;
   slug: string;
   status: string;
+  /** Ultima modifica, UTC senza fuso ("2026-11-25T10:00:00"). */
+  modified_gmt?: string;
   title: { rendered: string };
   acf: A | [];
   /** Categorie progetto: la REST usa il rest_base della tassonomia come nome del campo. */

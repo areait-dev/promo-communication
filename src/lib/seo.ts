@@ -31,23 +31,25 @@ type PageMetaInput = {
   absolute?: boolean;
   /** Testi scritti in Yoast per questa pagina: dove ci sono, prendono il posto di quelli del codice. */
   seo?: WpSeo;
+  /** Immagine di condivisione propria della pagina (quella scelta in Yoast ha comunque la precedenza). */
+  image?: { url: string; width: number; height: number; alt: string };
 };
 
 /** Metadati di una pagina: titolo, descrizione, canonical, Open Graph, Twitter card e, se scelto in Yoast, noindex. */
-export function pageMeta({ title, description, path, absolute, seo }: PageMetaInput): Metadata {
+export function pageMeta({ title, description, path, absolute, seo, image: own }: PageMetaInput): Metadata {
   // Il titolo di Yoast è già completo (di solito "Titolo | Promo Communication"): niente template.
   const full = seo?.title || (absolute ? title : `${title} | ${SITE_NAME}`);
   const desc = seo?.description || description;
   const ogTitle = seo?.og_title || full;
   const ogDesc = seo?.og_description || desc;
-  const image = seo?.og_image ? { url: seo.og_image.url, width: seo.og_image.width, height: seo.og_image.height, alt: ogTitle } : OG_IMAGE;
+  const image = seo?.og_image ? { url: seo.og_image.url, width: seo.og_image.width, height: seo.og_image.height, alt: ogTitle } : (own ?? OG_IMAGE);
   return {
     title: (seo?.title || absolute) ? { absolute: full } : title,
     description: desc,
     alternates: { canonical: path },
     ...(seo?.noindex ? { robots: { index: false, follow: true } } : {}),
     openGraph: { type: "website", siteName: SITE_NAME, locale: "it_IT", url: path, title: ogTitle, description: ogDesc, images: [image] },
-    twitter: { card: "summary_large_image", title: ogTitle, description: ogDesc, images: [image.url] },
+    twitter: { card: "summary_large_image", title: ogTitle, description: ogDesc, images: [{ url: image.url, alt: image.alt }] },
   };
 }
 

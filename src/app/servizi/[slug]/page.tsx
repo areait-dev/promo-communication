@@ -9,6 +9,8 @@ import { getContent, getPublishedContent, serviceById } from "@/lib/content";
 import { vars } from "@/lib/ui";
 import { PageFx } from "@/components/PageFx";
 import { pageMeta, snip } from "@/lib/seo";
+import { JsonLd } from "@/components/JsonLd";
+import { breadcrumbs, serviceSchema } from "@/lib/structured-data";
 
 // Tutti gli slug sono noti in fase di build (generateStaticParams): la pagina e' statica, niente Suspense con fallback
 // (farebbe comparire un fallback prima del contenuto e romperebbe l'elemento condiviso voce -> hero).
@@ -21,7 +23,7 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const c = await getContent();
   const s = serviceById(c, (await params).slug);
-  return s ? pageMeta({ title: s.name, path: `/servizi/${s.id}`, description: snip(s.p1), seo: c.seo[`/servizi/${s.id}`] }) : {};
+  return s ? pageMeta({ title: s.name, path: `/servizi/${s.id}`, description: snip(s.p1), seo: c.seo[`/servizi/${s.id}`] }) : { title: "Pagina non trovata" };
 }
 
 export default async function Servizio({ params }: { params: Promise<{ slug: string }> }) {
@@ -73,6 +75,8 @@ export default async function Servizio({ params }: { params: Promise<{ slug: str
           <ContactPanel />
         </div>
       </section>
+      <JsonLd data={serviceSchema(s)} />
+      <JsonLd data={breadcrumbs([["Servizi", "/servizi"], [s.name, `/servizi/${s.id}`]])} />
     </>
   );
 }

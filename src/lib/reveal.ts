@@ -85,6 +85,8 @@ function split(h: HTMLElement): string {
       inner.style.setProperty("--l", String(k));
       inner.textContent = l.join(" ");
       mask.appendChild(inner);
+      // tra una riga e l'altra resta uno spazio: tra blocchi non si vede, ma il testo del titolo non si incolla ("cheabbiamo")
+      if (k) h.appendChild(document.createTextNode(" "));
       h.appendChild(mask);
     });
   h.setAttribute("aria-label", tokens.filter(Boolean).join(" "));

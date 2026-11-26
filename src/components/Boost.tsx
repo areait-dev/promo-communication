@@ -92,10 +92,11 @@ export function Boost({
   const style: CSSProperties | undefined = size ? vars({ "--boost-size": size }) : undefined;
   const phrase = "Boost your " + words.map((w) => w.toLowerCase()).join(", ");
   return (
-    <Tag className="pc-boost" style={style} ref={root}>
-      <span className="sr-only">{phrase}</span>
+    <Tag className="pc-boost" style={style} ref={root} aria-label={phrase}>
+      {/* il testo del titolo nell'HTML e' una frase sola ("Boost your Brand, Reputation, …"): spazio e virgole
+          stanno in span invisibili e fuori dal flusso, quindi l'aspetto non cambia */}
       <span className="pc-boost__fixed" aria-hidden="true">
-        Boost your
+        Boost your<span className="sr-only"> </span>
       </span>
       <span
         className="pc-boost__slot"
@@ -120,6 +121,7 @@ export function Boost({
             ) : (
               w
             )}
+            {i < last && <span className="sr-only">, </span>}
           </span>
         ))}
       </span>

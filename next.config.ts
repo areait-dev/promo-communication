@@ -21,8 +21,28 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  // L'indirizzo *.vercel.app mostrava una copia dell'intero sito: rimanda in modo permanente al dominio vero.
+  async redirects() {
+    return [
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "promo-communication.vercel.app" }],
+        destination: "https://www.promocommunication.it/:path*",
+        permanent: true,
+      },
+    ];
+  },
   async headers() {
     return [
+      // Intestazioni di sicurezza di base (HSTS lo mette gia' Vercel)
+      {
+        source: "/:path*",
+        headers: [
+          { key: "X-Content-Type-Options", value: "nosniff" },
+          { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
+          { key: "X-Frame-Options", value: "SAMEORIGIN" },
+        ],
+      },
       // Immagini in public/img: nome senza hash, quindi 31 giorni e non "immutable" (/_next/static lo e' gia')
       { source: "/img/:path*", headers: [{ key: "Cache-Control", value: "public, max-age=2678400, stale-while-revalidate=86400" }] },
       // Stage (Preview di Vercel): header noindex su ogni risposta, oltre a robots.txt

@@ -8,6 +8,8 @@ import { projHref, vars } from "@/lib/ui";
 import { PageFx } from "@/components/PageFx";
 import { ProjectImage } from "@/components/ProjectImage";
 import { pageMeta, snip } from "@/lib/seo";
+import { JsonLd } from "@/components/JsonLd";
+import { breadcrumbs } from "@/lib/structured-data";
 
 // Solo i progetti pubblicati (con anteprima): gli altri danno 404.
 // Tutti gli slug sono noti in fase di build (generateStaticParams): la pagina e' statica, niente Suspense con fallback
@@ -22,8 +24,8 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const c = await getContent();
   const p = projectById(c, (await params).slug);
   return p
-    ? pageMeta({ title: p.name, path: `/portfolio/${p.id}`, description: snip(p.intro || `${p.name}: un progetto di Promo Communication.`), seo: c.seo[`/portfolio/${p.id}`] })
-    : {};
+    ? pageMeta({ title: p.name, path: `/portfolio/${p.id}`, description: snip(p.intro || `${p.name}: un progetto di Promo Communication.`), seo: c.seo[`/portfolio/${p.id}`], image: p.cover ? { url: `/portfolio/${p.id}/og.jpg`, width: 1200, height: 630, alt: `${p.name}${p.kind ? `: ${p.kind}` : ""}` } : undefined })
+    : { title: "Pagina non trovata" };
 }
 
 export default async function Progetto({ params }: { params: Promise<{ slug: string }> }) {
@@ -69,6 +71,19 @@ export default async function Progetto({ params }: { params: Promise<{ slug: str
     const d = dim(s);
     return d ? `min(${d[0]}px, ${max})` : undefined;
   };
+  // Testi alternativi: quello di WordPress se compilato, altrimenti "Progetto – didascalia"; le immagini che
+  // avrebbero lo stesso testo (coppie, blocchi senza didascalia) vengono numerate.
+  const base = (cap?: string) => p.name + (cap ? " – " + cap : "");
+  const immagini = (p.blocks ?? []).flatMap((b) => (b.imgs ?? [b.img!]).map((src) => ({ src, testo: base(b.cap) })));
+  const quante = new Map<string, number>([[p.name, 1]]); // la copertina usa il solo nome
+  for (const x of immagini) quante.set(x.testo, (quante.get(x.testo) ?? 0) + 1);
+  const viste = new Map<string, number>([[p.name, 1]]);
+  const alternativi = new Map<string, string>();
+  for (const { src, testo } of immagini) {
+    const n = (viste.get(testo) ?? 0) + 1;
+    viste.set(testo, n);
+    alternativi.set(src, p.alts?.[src] ?? (quante.get(testo)! > 1 ? `${testo} (${n})` : testo));
+  }
   const back = (
     <Link className="pj-back pc-reveal" href="/portfolio">
       ← Tutti i progetti
@@ -90,7 +105,7 @@ export default async function Progetto({ params }: { params: Promise<{ slug: str
         <div className="wrap">
           <div className="pj-cover">
             <ViewTransition name={`pf-img-${p.id}`} share="pc-morph" default="none">
-              <ProjectImage src={p.cover!} dim={coverDim} alt={p.name} sizes={coverSizes} loading="eager" fetchPriority="high" />
+              <ProjectImage src={p.cover!} dim={coverDim} alt={p.alts?.[p.cover!] ?? p.name} sizes={coverSizes} loading="eager" fetchPriority="high" />
             </ViewTransition>
           </div>
         </div>
@@ -119,7 +134,6 @@ export default async function Progetto({ params }: { params: Promise<{ slug: str
         <section className="sec pj-blocks" style={{ paddingTop: 0 }}>
           <div className="wrap">
             {p.blocks.map((b, k) => {
-              const alt = p.name + (b.cap ? " – " + b.cap : "");
               const cap = b.cap ? <figcaption>{b.cap}</figcaption> : null;
               if (b.imgs)
                 return (
@@ -130,7 +144,7 @@ export default async function Progetto({ params }: { params: Promise<{ slug: str
                           key={s}
                           src={s}
                           dim={dim(s)}
-                          alt={alt}
+                          alt={alternativi.get(s)!}
                           natural={!b.pair}
                           sizes={b.pair ? "(max-width: 760px) 90vw, 45vw" : `(max-width: 600px) ${natural(s)}, ${natural(s, "560px")}`}
                           loading="lazy"
@@ -142,7 +156,7 @@ export default async function Progetto({ params }: { params: Promise<{ slug: str
                 );
               return (
                 <figure key={k} className={"pj-blk pc-reveal" + (b.fit === "contain" ? " pj-blk--contain" : "")}>
-                  <ProjectImage src={b.img!} dim={dim(b.img!)} alt={alt} natural={b.fit === "contain"} sizes={b.fit === "contain" ? natural(b.img!) : "90vw"} loading="lazy" />
+                  <ProjectImage src={b.img!} dim={dim(b.img!)} alt={alternativi.get(b.img!)!} natural={b.fit === "contain"} sizes={b.fit === "contain" ? natural(b.img!) : "90vw"} loading="lazy" />
                   {cap}
                 </figure>
               );
@@ -162,6 +176,7 @@ export default async function Progetto({ params }: { params: Promise<{ slug: str
       ) : null}
       {pager}
       <Cta />
+      <JsonLd data={breadcrumbs([["Portfolio", "/portfolio"], [p.name, `/portfolio/${p.id}`]])} />
     </>
   );
 }

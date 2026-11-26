@@ -23,7 +23,7 @@ export default async function Portfolio() {
         <Star className="pc-star--spin bigstar" />
         <div className="wrap" style={{ position: "relative" }}>
           <h1 className="pc-reveal pf-title2">
-            <span>Progetti che abbiamo fatto</span>
+            <span>Progetti che abbiamo fatto</span>{" "}
             <br />
             <span>(e che rifaremmo domani)</span>
           </h1>
