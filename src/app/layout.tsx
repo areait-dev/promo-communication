@@ -10,7 +10,9 @@ import { CookieBanner } from "@/components/CookieBanner";
 import { PreviewBar } from "@/components/PreviewBar";
 import { Suspense } from "react";
 import { HOME_DESC, HOME_TITLE, OG_IMAGE, SITE_NAME, SITE_URL } from "@/lib/seo";
-import { getContent, type Contact } from "@/lib/content";
+import { getContent } from "@/lib/content";
+import { siteGraph } from "@/lib/structured-data";
+import { JsonLd } from "@/components/JsonLd";
 import { isPreview } from "@/lib/env";
 
 const outfit = Outfit({ subsets: ["latin"], variable: "--f-outfit", display: "swap" });
@@ -32,21 +34,6 @@ export const metadata: Metadata = {
   twitter: { card: "summary_large_image", title: HOME_TITLE, description: HOME_DESC, images: [{ url: OG_IMAGE.url, alt: OG_IMAGE.alt }] },
 };
 
-// Dati strutturati: l'agenzia come organizzazione, parte di Promotergroup S.p.A. Recapiti da WordPress.
-const orgJsonLd = ({ email: EMAIL, phone: PHONE, address: ADDRESS, socials: SOCIALS }: Contact) => JSON.stringify({
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  name: SITE_NAME,
-  url: SITE_URL,
-  logo: `${SITE_URL}/icon.png`,
-  description: HOME_DESC,
-  email: EMAIL ?? undefined,
-  telephone: PHONE.label,
-  address: { "@type": "PostalAddress", streetAddress: ADDRESS[0], postalCode: "97019", addressLocality: "Vittoria", addressRegion: "RG", addressCountry: "IT" },
-  parentOrganization: { "@type": "Organization", name: "Promotergroup S.p.A.", url: "https://www.promotergroup.eu" },
-  sameAs: SOCIALS.map((x) => x.href),
-}).replace(/</g, "\\u003c");
-
 export const viewport: Viewport = {
   themeColor: "#001a6f",
 };
@@ -62,13 +49,13 @@ const withGtm = process.env.NODE_ENV === "production" && !isPreview;
 const initScript = `var d=document.documentElement;d.classList.add('js');setTimeout(function(){if(!window.__pcReveal)d.classList.add('no-reveal')},5000);try{var t=localStorage.getItem('pc-theme');if(t)d.setAttribute('data-theme',t);}catch(e){}if(matchMedia('(prefers-reduced-motion: reduce)').matches)d.classList.add('motion-off')`;
 
 export default async function RootLayout({ children }: LayoutProps<"/">) {
-  const ORG_JSONLD = orgJsonLd((await getContent()).contact);
+  const { contact } = await getContent();
   return (
     <html lang="it" data-theme="light" suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: initScript }} />
         {withGtm && <script dangerouslySetInnerHTML={{ __html: gtmScript }} />}
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: ORG_JSONLD }} />
+        <JsonLd data={siteGraph(contact)} />
       </head>
       <body className={`pc ${outfit.variable} ${funnel.variable} ${caveat.variable}`}>
         <svg width="0" height="0" style={{ position: "absolute" }} aria-hidden="true">
