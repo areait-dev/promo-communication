@@ -15,14 +15,15 @@ const THUMB_H = 97;
 
 const alt = (p: Project) => `Anteprima del progetto ${p.name}`;
 
+// anteprima al passaggio del mouse (320px, ingrandita di 1.12): lazy, cosi' su touch (dove e' nascosta) non si scarica
+const PREVIEW = { width: 320, height: 320, sizes: "360px", quality: 80 } as const;
+
 function Preview({ p, i }: { p: Project; i: number }) {
   return (
     <div className="pl-img" data-i={i}>
       {/* sfondo sfocato: decorativo, l'alt descrittivo sta sull'immagine in primo piano */}
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img className="pl-img-bg" src={pImg(p.img!)} alt="" />
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img className="pl-img-fg" src={pImg(p.img!)} alt={alt(p)} />
+      <Image className="pl-img-bg" src={pImg(p.img!)} alt="" {...PREVIEW} />
+      <Image className="pl-img-fg" src={pImg(p.img!)} alt={alt(p)} {...PREVIEW} />
     </div>
   );
 }
