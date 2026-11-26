@@ -2067,6 +2067,7 @@ html:not([data-theme="dark"]) .hdr .sw:hover .sw-i { stroke: #fff; }
 .ct-form { --ct-r: 28px; --ct-err: #c20000; border: 1px solid color-mix(in srgb, var(--ink) 16%, transparent); border-radius: var(--ct-r); padding: clamp(22px, 3.2vw, 44px); background: var(--surface); min-width: 0; }
 [data-theme="dark"] .ct-form { --ct-err: #ff9a9a; background: color-mix(in srgb, #fff 4%, var(--surface)); }
 .ct-form form { display: grid; gap: 22px; }
+.ct-form form[hidden] { display: none; } /* a invio riuscito resta solo la conferma */
 .ct-field { display: grid; gap: 8px; min-width: 0; margin: 0; }
 .ct-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
 @media (max-width: 640px) { .ct-row { grid-template-columns: 1fr; } }
@@ -2169,6 +2170,11 @@ a.ct-v:hover { text-decoration: underline; text-underline-offset: .2em; }
 .ct-file__btn { flex: none; display: inline-flex; align-items: center; min-height: 40px; padding: 0 16px; border-radius: 999px; background: var(--blu-700); color: #fff; font: 500 14px/1 var(--font-body); }
 [data-theme="dark"] .ct-file__btn { background: #fff; color: var(--blu-700); }
 .ct-file__name { min-width: 0; font: 400 15px/1.3 var(--font-body); color: color-mix(in srgb, var(--ink) 80%, transparent); overflow-wrap: anywhere; }
+/* allegati del modulo di contatto: riquadro "trascina o sfoglia" con l'elenco dei file scelti */
+.ct-file--drop { flex-direction: column; align-items: flex-start; justify-content: center; gap: 8px; padding: 14px; }
+.ct-file__list { display: flex; flex-wrap: wrap; gap: 8px; min-width: 0; }
+.ct-file__item { padding: 6px 12px; border-radius: 999px; background: var(--blu-700); color: #fff; font: 500 13px/1.2 var(--font-body); overflow-wrap: anywhere; }
+[data-theme="dark"] .ct-file__item { background: #fff; color: var(--blu-700); }
 
 /* Posizioni aperte (compaiono solo se in src/data/careers.ts c'e' almeno un ruolo) */
 .cr-roles-sec { padding-top: 0; padding-bottom: var(--space-12); }

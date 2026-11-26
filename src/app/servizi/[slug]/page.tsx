@@ -3,7 +3,7 @@ import { ViewTransition } from "react";
 import { notFound } from "next/navigation";
 import { ProjectList } from "@/components/ProjectList";
 import { Head } from "@/components/blocks";
-import { ContactPageForm } from "@/components/ContactPageForm";
+import { ContactForm } from "@/components/ContactForm";
 import { ContactPanel } from "@/components/ContactPanel";
 import { getContent, getPublishedContent, serviceById } from "@/lib/content";
 import { vars } from "@/lib/ui";
@@ -69,7 +69,7 @@ export default async function Servizio({ params }: { params: Promise<{ slug: str
           </p>
         </div>
         <div className="wrap ct-grid">
-          <ContactPageForm defaultService={s.id} services={c.services.list} phone={c.contact.phone} />
+          <ContactForm defaultService={s.id} services={c.services.list} phone={c.contact.phone} />
           <ContactPanel />
         </div>
       </section>

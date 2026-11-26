@@ -1,4 +1,4 @@
-import type { ReactNode } from "react";
+import { Fragment, type ReactNode } from "react";
 import { SocialLinks } from "./SocialLinks";
 import { getContent, mapsLink } from "@/lib/content";
 
@@ -75,8 +75,11 @@ export async function ContactPanel() {
         <Item icon="clock" label="Orari di apertura">
           {HOURS ? (
             <p className="ct-v ct-hours">
+              {/* lo spazio tra le fasce evita "13:0014:00" quando il testo e' letto o copiato senza stili */}
               {HOURS.map((h) => (
-                <span key={h}>{h}</span>
+                <Fragment key={h}>
+                  <span>{h}</span>{" "}
+                </Fragment>
               ))}
             </p>
           ) : (

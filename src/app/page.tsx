@@ -17,7 +17,7 @@ import { HOME_DESC, HOME_TITLE, seoMeta } from "@/lib/seo";
 export const generateMetadata = (): Promise<Metadata> => seoMeta({ title: HOME_TITLE, description: HOME_DESC, path: "/", absolute: true });
 
 export default async function Home() {
-  const { projects, team: TEAM, contact } = await getContent();
+  const { projects, services, team: TEAM, contact } = await getContent();
   const { email: EMAIL, phone: PHONE, address: ADDRESS } = contact;
   return (
     <>
@@ -117,7 +117,7 @@ export default async function Home() {
             </ul>
           </div>
           <div className="form">
-            <ContactForm kind="home" />
+            <ContactForm services={services.list} phone={PHONE} />
           </div>
         </div>
       </section>

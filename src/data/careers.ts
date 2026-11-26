@@ -33,5 +33,5 @@ export const AREAS = [
 ] as const;
 
 /** Allegato CV: formati e peso massimo. */
-export const CV_MAX_MB = 5;
+export const CV_MAX_MB = 4; // Vercel rifiuta le richieste oltre 4,5 MB
 export const CV_EXT = [".pdf", ".doc", ".docx"] as const;
