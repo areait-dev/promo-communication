@@ -25,10 +25,10 @@ export const metadata: Metadata = {
     template: "%s | Promo Communication",
   },
   description: HOME_DESC,
-  alternates: { canonical: "/" },
+  // canonical e og:url li scrive ogni pagina (pageMeta): qui li erediterebbero anche le 404
   // Verifica della proprietà su Google Search Console (metodo Tag HTML)
   verification: { google: "96CK2-UBw7kbHE8MaKWSuxgPEJO4UrmfSeMkA9DNdIo" },
-  openGraph: { type: "website", siteName: SITE_NAME, locale: "it_IT", url: "/", title: HOME_TITLE, description: HOME_DESC, images: [OG_IMAGE] },
+  openGraph: { type: "website", siteName: SITE_NAME, locale: "it_IT", title: HOME_TITLE, description: HOME_DESC, images: [OG_IMAGE] },
   twitter: { card: "summary_large_image", title: HOME_TITLE, description: HOME_DESC, images: [OG_IMAGE.url] },
 };
 

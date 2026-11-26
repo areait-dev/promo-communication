@@ -23,7 +23,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const p = projectById(c, (await params).slug);
   return p
     ? pageMeta({ title: p.name, path: `/portfolio/${p.id}`, description: snip(p.intro || `${p.name}: un progetto di Promo Communication.`), seo: c.seo[`/portfolio/${p.id}`] })
-    : {};
+    : { title: "Pagina non trovata" };
 }
 
 export default async function Progetto({ params }: { params: Promise<{ slug: string }> }) {

@@ -21,7 +21,7 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const c = await getContent();
   const s = serviceById(c, (await params).slug);
-  return s ? pageMeta({ title: s.name, path: `/servizi/${s.id}`, description: snip(s.p1), seo: c.seo[`/servizi/${s.id}`] }) : {};
+  return s ? pageMeta({ title: s.name, path: `/servizi/${s.id}`, description: snip(s.p1), seo: c.seo[`/servizi/${s.id}`] }) : { title: "Pagina non trovata" };
 }
 
 export default async function Servizio({ params }: { params: Promise<{ slug: string }> }) {
