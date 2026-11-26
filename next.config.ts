@@ -21,6 +21,17 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  // L'indirizzo *.vercel.app mostrava una copia dell'intero sito: rimanda in modo permanente al dominio vero.
+  async redirects() {
+    return [
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "promo-communication.vercel.app" }],
+        destination: "https://www.promocommunication.it/:path*",
+        permanent: true,
+      },
+    ];
+  },
   async headers() {
     return [
       // Immagini in public/img: nome senza hash, quindi 31 giorni e non "immutable" (/_next/static lo e' gia')
