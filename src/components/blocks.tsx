@@ -1,4 +1,4 @@
-/* eslint-disable @next/next/no-img-element */
+import Image from "next/image";
 import Link from "next/link";
 import { MarqueeScroll } from "./MarqueeScroll";
 import { Star } from "./Star";
@@ -81,7 +81,7 @@ export function TeamCard({ t, i }: { t: Member; i: number }) {
         </svg>
         <div className="pc-team__photo">
           <div className={`pc-team__ph ph ph-${t.c}`}>
-            {t.img ? <img className="tm-cut" src={t.img} alt={t.n} /> : <span className="tm-initials" aria-hidden="true">{initials(t.n)}</span>}
+            {t.img ? <Image className="tm-cut" src={t.img} alt={t.n} width={1200} height={1000} quality={80} sizes="(max-width: 700px) 45vw, 29vw" /> : <span className="tm-initials" aria-hidden="true">{initials(t.n)}</span>}
           </div>
         </div>
       </div>

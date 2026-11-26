@@ -1,9 +1,20 @@
 "use client";
-/* eslint-disable @next/next/no-img-element */
 
+import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { initials, type Member } from "@/data/team";
+
+// Stessi attributi per le due copie della foto (elenco mobile e card desktop): il browser la scarica una volta sola.
+// Solo la prima e' l'immagine LCP della pagina; le altre si caricano quando servono.
+const foto = (i: number) => ({
+  width: 1200,
+  height: 1000,
+  quality: 80,
+  sizes: "(max-width: 900px) 308px, (max-width: 1200px) 45vw, 548px",
+  loading: i === 0 ? ("eager" as const) : ("lazy" as const),
+  fetchPriority: i === 0 ? ("high" as const) : undefined,
+});
 
 /** Sezione Team: il testo scorre, la card a lato cambia con il membro al centro dello schermo. */
 export function TeamScroll({ team: TEAM, linkedin }: { team: Member[]; linkedin?: string }) {
@@ -53,7 +64,7 @@ export function TeamScroll({ team: TEAM, linkedin }: { team: Member[]; linkedin?
               ) : null}
               <p className="ssr-desc" dangerouslySetInnerHTML={{ __html: m.b }} />
               <div className={`ssr-ph ssr-ph--m ph ph-${m.c}${m.img ? " has-img" : ""}`} aria-hidden="true">
-                {m.img ? <img src={m.img} alt="" /> : initials(m.n)}
+                {m.img ? <Image src={m.img} alt="" {...foto(i)} /> : initials(m.n)}
               </div>
             </article>
           ))}
@@ -80,7 +91,7 @@ export function TeamScroll({ team: TEAM, linkedin }: { team: Member[]; linkedin?
               <div key={m.n} className={`ssr-ph ph ph-${m.c}${on(i)}${m.img ? " has-img" : ""}`} data-i={i}>
                 {m.img ? (
                  
-                  <img src={m.img} alt={m.n} />
+                  <Image src={m.img} alt={m.n} {...foto(i)} />
                 ) : (
                   <>
                     <span>{initials(m.n)}</span>
