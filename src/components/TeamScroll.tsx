@@ -16,6 +16,15 @@ const foto = (i: number) => ({
   fetchPriority: i === 0 ? ("high" as const) : undefined,
 });
 
+/**
+ * Descrizione del membro. L'editor di WordPress la manda gia' dentro <p>…</p>: dentro un altro <p> il browser spezzerebbe
+ * l'HTML del server e React segnalerebbe un errore di idratazione (#418). In quel caso il contenitore e' un <div>.
+ */
+function Desc({ html }: { html: string }) {
+  const Tag = /^\s*<p[\s>]/i.test(html) ? "div" : "p";
+  return <Tag className="ssr-desc" dangerouslySetInnerHTML={{ __html: html }} />;
+}
+
 /** Sezione Team: il testo scorre, la card a lato cambia con il membro al centro dello schermo. */
 export function TeamScroll({ team: TEAM, linkedin }: { team: Member[]; linkedin?: string }) {
   const sec = useRef<HTMLElement>(null);
@@ -62,7 +71,7 @@ export function TeamScroll({ team: TEAM, linkedin }: { team: Member[]; linkedin?
                   </svg>
                 </a>
               ) : null}
-              <p className="ssr-desc" dangerouslySetInnerHTML={{ __html: m.b }} />
+              <Desc html={m.b} />
               <div className={`ssr-ph ssr-ph--m ph ph-${m.c}${m.img ? " has-img" : ""}`} aria-hidden="true">
                 {m.img ? <Image src={m.img} alt="" {...foto(i)} /> : initials(m.n)}
               </div>
