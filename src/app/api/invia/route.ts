@@ -1,3 +1,4 @@
+import { CV_EXT, CV_MAX_MB } from "@/data/careers";
 import { validateContact } from "@/lib/contact-form";
 import { MailConfigError, sendMail, type MailAttachment } from "@/lib/mail";
 
@@ -7,8 +8,6 @@ import { MailConfigError, sendMail, type MailAttachment } from "@/lib/mail";
  * e inoltra tutto a MAIL_TO con Resend. Chi ha scritto finisce in Reply-To.
  */
 
-const MAX_FILES_MB = 10; // CV (Resend arriva a 40 MB: qui restiamo larghi)
-const CV_EXT = [".pdf", ".doc", ".docx"];
 const MAIL_RE = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
 
 const esc = (s: string) =>
@@ -74,7 +73,7 @@ export async function POST(req: Request) {
     const cv = fd.get("cv");
     if (!(cv instanceof File) || cv.size === 0) return fail("Allega il tuo CV.");
     if (!CV_EXT.some((x) => cv.name.toLowerCase().endsWith(x))) return fail("Il CV deve essere un PDF o un documento Word.");
-    if (cv.size > MAX_FILES_MB * 1024 * 1024) return fail(`Il file supera i ${MAX_FILES_MB} MB.`);
+    if (cv.size > CV_MAX_MB * 1024 * 1024) return fail(`Il file supera i ${CV_MAX_MB} MB.`);
     attachments.push({ filename: safeName(cv.name), content: Buffer.from(await cv.arrayBuffer()) });
     rows.push(["Area", field(fd, "area", 200) || "-"], ["Link", field(fd, "link", 400) || "-"]);
     subject = `Candidatura: ${oneLine(nome)}`;

@@ -164,7 +164,7 @@ export function ContactForm({
           <label className="ct-check">
             <input id="ct-p" type="checkbox" name="privacy" required {...invalid("p")} />
             <span>
-              Acconsento al trattamento dei dati personali secondo l’{" "}
+              Acconsento al trattamento dei dati personali secondo l’
               <a href={PRIVACY_URL} target="_blank" rel="noopener noreferrer">
                 informativa privacy
               </a>
