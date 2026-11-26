@@ -131,6 +131,7 @@ export default async function Progetto({ params }: { params: Promise<{ slug: str
                           src={s}
                           dim={dim(s)}
                           alt={alt}
+                          natural={!b.pair}
                           sizes={b.pair ? "(max-width: 760px) 90vw, 45vw" : `(max-width: 600px) ${natural(s)}, ${natural(s, "560px")}`}
                           loading="lazy"
                         />
@@ -141,7 +142,7 @@ export default async function Progetto({ params }: { params: Promise<{ slug: str
                 );
               return (
                 <figure key={k} className={"pj-blk pc-reveal" + (b.fit === "contain" ? " pj-blk--contain" : "")}>
-                  <ProjectImage src={b.img!} dim={dim(b.img!)} alt={alt} sizes={b.fit === "contain" ? natural(b.img!) : "90vw"} loading="lazy" />
+                  <ProjectImage src={b.img!} dim={dim(b.img!)} alt={alt} natural={b.fit === "contain"} sizes={b.fit === "contain" ? natural(b.img!) : "90vw"} loading="lazy" />
                   {cap}
                 </figure>
               );
