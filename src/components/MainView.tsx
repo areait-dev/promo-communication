@@ -5,7 +5,8 @@ import { useEffect, useLayoutEffect, useRef, ViewTransition, type ReactNode } fr
 
 function viewOf(pathname: string) {
   const [first, second] = pathname.split("/").filter(Boolean);
-  if (!first) return "home";
+  // "index": cosi' il server chiama la home quando la rigenera su Vercel; senza, la pagina perdeva gli stili [data-view="home"]
+  if (!first || first === "index") return "home";
   if (first === "servizi" && second) return "service";
   if (first === "portfolio" && second) return "project";
   return first;
